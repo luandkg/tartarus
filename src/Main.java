@@ -1,4 +1,4 @@
-import javax.xml.transform.stream.StreamSource;
+import teste.TesteLista;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,6 +23,8 @@ public class Main {
         }
 
         System.out.println("Tamanho : " + l.getQuantidade());
+
+        TesteLista.testar();
 
     }
 }
