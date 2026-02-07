@@ -1,5 +1,3 @@
-import teste.TesteLista;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -17,25 +15,31 @@ public class Main {
         confirmaLista(l,2);
         l.adicionar("terceira");
         confirmaLista(l,3);
-        System.out.println("Tamanho : " + l.getQuantidade()+ "\n");
+        printListaString(l);
 
-        System.out.println("------------------Lista Ligada Simples------------------");
-        for (int i = 0; i < l.getQuantidade(); i++) {
-            String valor = l.get(i);
-            System.out.println("Indice: "+ i + " | Valor: " + valor);
-        }
-        System.out.println("--------------------------------------------------------");
+        System.out.println("NOVA----------Remove o primeiro");
+        l.remover(0);
+        printListaString(l);
 
-        Lista<Integer> l2 =  new Lista<Integer>();
-
-        l2.adicionar(1);
-        confirmaLista(l,1);
-        l2.adicionar(2);
-        confirmaLista(l,2);
-        l2.adicionar(3);
+        System.out.println("NOVA----------Adiciona um depois Remove o ultimo");
+        l.adicionar("quarta");
         confirmaLista(l,3);
-        System.out.println("Tamanho : " + l2.getQuantidade()+ "\n");
+        printListaString(l);
+        l.remover(2);
+        printListaString(l);
+
+
+        System.out.println("NOVA----------Adiciona um depois Remove o do meio");
+        l.adicionar("quinta");
+        confirmaLista(l,3);
+        printListaString(l);
+        l.remover(1);
+        printListaString(l);
+
         //TesteLista.testar();
+
+
+
     }
 
     public static  void confirmaLista(Lista l, int valor){
@@ -44,6 +48,15 @@ public class Main {
         }else{
             System.out.println("A Lista esta corrompida!");
         }
+    }
+
+    public static  void printListaString(Lista<String> l){
+        System.out.println("------------------Lista Ligada Simples------------------");
+        for (int i = 0; i < l.getQuantidade(); i++) {
+            String valor = l.get(i);
+            System.out.println("Indice: "+ i + " | Valor: " + valor);
+        }
+        System.out.println("--------------------------------------------------------");
     }
 
 
