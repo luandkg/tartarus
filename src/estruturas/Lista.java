@@ -1,3 +1,5 @@
+package estruturas;
+
 public class Lista<T> {
 
     private No<T> inicio = null;

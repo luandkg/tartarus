@@ -1,3 +1,5 @@
+package estruturas;
+
 public class No<T> {
 
     private T valor;
