@@ -81,4 +81,19 @@ public class Lista<T> {
             noCorrente = noCorrente.getProximo();
         }
     }
+
+    public void removerReferencia(T valor) {
+        int posicaoCorrente = 0;
+        No<T> noCorrente = inicio;
+        No<T> noAnterior = null;
+        while (posicaoCorrente < quantidade) {
+            if (noCorrente.getValor() == valor) {
+                remover(posicaoCorrente);
+                break;
+            }
+            noAnterior = noCorrente;
+            posicaoCorrente++;
+            noCorrente = noCorrente.getProximo();
+        }
+    }
 }
