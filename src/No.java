@@ -1,25 +1,26 @@
-public class No {
-    private String valor;
-    private No proximo;
+public class No<T> {
 
-    public No(String valor) {
+    private T valor;
+    private No<T> proximo;
+
+    public No(T valor) {
         this.valor = valor;
         this.proximo = null;
     }
 
-    public String getValor() {
+    public T getValor() {
         return valor;
     }
 
-    public No getProximo() {
+    public No<T> getProximo() {
         return proximo;
     }
 
-    public void setProximo(No proximo) {
+    public void setProximo(No<T> proximo) {
         this.proximo = proximo;
     }
 
-    public void setValor(String valor) {
+    public void setValor(T valor) {
         this.valor = valor;
     }
 

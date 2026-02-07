@@ -8,7 +8,7 @@ public class Main {
         // deve ter as funções getQuantidade() e adicionar()
 
 
-        Lista l =  new Lista();
+        Lista<String> l =  new Lista<String>();
         confirmaLista(l,0);
 
         l.adicionar("primeira");
@@ -25,6 +25,16 @@ public class Main {
             System.out.println("Indice: "+ i + " | Valor: " + valor);
         }
         System.out.println("--------------------------------------------------------");
+
+        Lista<Integer> l2 =  new Lista<Integer>();
+
+        l2.adicionar(1);
+        confirmaLista(l,1);
+        l2.adicionar(2);
+        confirmaLista(l,2);
+        l2.adicionar(3);
+        confirmaLista(l,3);
+        System.out.println("Tamanho : " + l2.getQuantidade()+ "\n");
         //TesteLista.testar();
     }
 
