@@ -129,6 +129,21 @@ public class Lista<T> {
         }
     }
 
+    public boolean existeValor(T valor, Igualdade<T> igualdade) {
+        int posicaoCorrente = 0;
+        No<T> noCorrente = inicio;
+        No<T> noAnterior = null;
+        while (posicaoCorrente < quantidade) {
+            if (igualdade.igual(noCorrente.getValor(), valor)) {
+                return true;
+            }
+            noAnterior = noCorrente;
+            posicaoCorrente++;
+            noCorrente = noCorrente.getProximo();
+        }
+        return false;
+    }
+
     public int contarValor(T valor, Igualdade<T> igualdade) {
         int contValor = 0;
         int posicaoCorrente = 0;

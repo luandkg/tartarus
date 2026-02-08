@@ -30,6 +30,8 @@ public class TesteLista {
 
         lista_set_posicao_invalida();
 
+        lista_existe_valor();
+
         lista_contagem_valor();
     }
 
@@ -228,6 +230,35 @@ public class TesteLista {
         Ferramenta.printListaPontos(l);
         System.out.println("\n\n\n\n");
 
+    }
+
+    public static void lista_existe_valor(){
+        System.out.println("\nTeste: Conta item da lista por valor\n");
+        Lista<Ponto> l = new Lista<Ponto>();
+
+        l.adicionar(new Ponto(0,6));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(2,4));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(4,2));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(4,5));
+        l.adicionar(new Ponto(4,2));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(3,5));
+
+        Ferramenta.confirmaLista(l,12);
+        Ferramenta.printListaPontos(l);
+
+        boolean valor_1_5 = l.existeValor(new Ponto(1,5), new PontoIgualdade());
+        System.out.println("A lista possui Ponto(1,5) :" + valor_1_5);
+
+        boolean valor_8_2 = l.existeValor(new Ponto(8,2), new PontoIgualdade());
+        System.out.println("A lista possui Ponto(8,2) :" + valor_8_2);
+
+        System.out.println("\n\n\n\n");
     }
 
     public static void lista_contagem_valor(){
