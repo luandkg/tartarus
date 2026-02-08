@@ -128,4 +128,20 @@ public class Lista<T> {
             noCorrente = noCorrente.getProximo();
         }
     }
+
+    public int contarValor(T valor, Igualdade<T> igualdade) {
+        int contValor = 0;
+        int posicaoCorrente = 0;
+        No<T> noCorrente = inicio;
+        No<T> noAnterior = null;
+        while (posicaoCorrente < quantidade) {
+            if (igualdade.igual(noCorrente.getValor(), valor)) {
+                contValor++;
+            }
+            noAnterior = noCorrente;
+            posicaoCorrente++;
+            noCorrente = noCorrente.getProximo();
+        }
+        return contValor;
+    }
 }

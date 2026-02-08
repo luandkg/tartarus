@@ -29,6 +29,8 @@ public class TesteLista {
         lista_set();
 
         lista_set_posicao_invalida();
+
+        lista_contagem_valor();
     }
 
     public static void lista_criar() {
@@ -178,6 +180,8 @@ public class TesteLista {
         System.out.println("NOVA-- Remove valor Ponto(6,0) ");
         l.removerValor(new Ponto(6,0), new PontoIgualdade());
         Ferramenta.printListaPontos(l);
+        System.out.println("\n\n\n\n");
+
     }
 
     public static void lista_set(){
@@ -197,6 +201,8 @@ public class TesteLista {
         System.out.println("NOVA-- Altera valor da posicao 0 ");
         l.set(0, new Ponto(9,9));
         Ferramenta.printListaPontos(l);
+        System.out.println("\n\n\n\n");
+
     }
 
     public static void lista_set_posicao_invalida(){
@@ -220,5 +226,36 @@ public class TesteLista {
             System.out.println("Erro esperado: "+ e.getMessage());
         }
         Ferramenta.printListaPontos(l);
+        System.out.println("\n\n\n\n");
+
+    }
+
+    public static void lista_contagem_valor(){
+        System.out.println("\nTeste: Conta item da lista por valor\n");
+        Lista<Ponto> l = new Lista<Ponto>();
+
+        l.adicionar(new Ponto(0,6));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(2,4));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(4,2));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(4,5));
+        l.adicionar(new Ponto(4,2));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(3,5));
+
+        Ferramenta.confirmaLista(l,12);
+        Ferramenta.printListaPontos(l);
+
+        int quantidade_1_5 = l.contarValor(new Ponto(1,5), new PontoIgualdade());
+        System.out.println("A lista possui Ponto(1,5) " + quantidade_1_5 +" vezes!");
+
+        int quantidade_4_2 = l.contarValor(new Ponto(4,2), new PontoIgualdade());
+        System.out.println("A lista possui Ponto(4,2) " + quantidade_4_2 +" vezes!");
+
+        System.out.println("\n\n\n\n");
     }
 }
