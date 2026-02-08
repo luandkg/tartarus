@@ -43,6 +43,10 @@ public class Lista<T> {
         return quantidade;
     }
 
+    public boolean estaVazia() {
+        return quantidade == 0;
+    }
+
     private void condicaoParaRemover(No<T> noCorrente, No<T> noAnterior) {
         if (noCorrente == inicio && noCorrente == fim) {
             inicio = null;
