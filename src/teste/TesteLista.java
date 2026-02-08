@@ -1,6 +1,9 @@
 package teste;
 
+import auxiliar.Ponto;
+import auxiliar.PontoIgualdade;
 import estruturas.Lista;
+import utils.Ferramenta;
 
 import static utils.Ferramenta.confirmaLista;
 import static utils.Ferramenta.printListaString;
@@ -11,6 +14,8 @@ public class TesteLista {
 
         lista_criar();
 
+        lista_esta_vazia();
+
         lista_inserir();
 
         lista_quantidade();
@@ -18,12 +23,30 @@ public class TesteLista {
         lista_remover_por_posicao();
 
         lista_remover_por_referencia();
+
+        lista_remover_por_valor();
+
+        lista_set();
+
+        lista_set_posicao_invalida();
     }
 
     public static void lista_criar() {
         System.out.println("\nTeste: Criar lista\n");
         Lista<String> l = new Lista<String>();
         confirmaLista(l, 0);
+        System.out.println("\n\n\n\n");
+    }
+
+    public static void lista_esta_vazia(){
+        System.out.println("\nTeste: Verifica se lista esta vazia\n");
+        Lista<String> l = new Lista<String>();
+        confirmaLista(l, 0);
+        if(l.estaVazia() == true){
+            System.out.println("A lista esta vazia!");
+        }else{
+            System.out.println("A lista nao esta vazia!");
+        }
         System.out.println("\n\n\n\n");
     }
 
@@ -60,7 +83,7 @@ public class TesteLista {
     }
 
     public static void lista_remover_por_posicao() {
-        System.out.println("\nTeste: Remover na lista por posicao\n");
+        System.out.println("\nTeste: Remover item da lista por posicao\n");
         Lista<String> l = new Lista<String>();
         confirmaLista(l, 0);
 
@@ -72,11 +95,11 @@ public class TesteLista {
         confirmaLista(l, 3);
         printListaString(l);
 
-        System.out.println("NOVA----------Remove o primeiro");
+        System.out.println("NOVA--Remove o primeiro");
         l.remover(0);
         printListaString(l);
 
-        System.out.println("NOVA----------Adiciona um depois Remove o ultimo");
+        System.out.println("NOVA--Adiciona um depois Remove o ultimo");
         l.adicionar("quarta");
         confirmaLista(l, 3);
         printListaString(l);
@@ -84,7 +107,7 @@ public class TesteLista {
         printListaString(l);
 
 
-        System.out.println("NOVA----------Adiciona um depois Remove o do meio");
+        System.out.println("NOVA--Adiciona um depois Remove o do meio");
         l.adicionar("quinta");
         confirmaLista(l, 3);
         printListaString(l);
@@ -94,7 +117,7 @@ public class TesteLista {
     }
 
     public static void lista_remover_por_referencia() {
-        System.out.println("\nTeste: Remover na lista por Referencia\n");
+        System.out.println("\nTeste: Remover item da lista por referencia\n");
         Lista<String> l = new Lista<String>();
         confirmaLista(l, 0);
 
@@ -106,11 +129,11 @@ public class TesteLista {
         confirmaLista(l, 3);
         printListaString(l);
 
-        System.out.println("NOVA----------Remove o valor primeiro");
+        System.out.println("NOVA---Remove o valor primeiro");
         l.removerReferencia("primeira");
         printListaString(l);
 
-        System.out.println("NOVA----------Adiciona um depois Remove o valor quarta");
+        System.out.println("NOVA--Adiciona um depois Remove o valor quarta");
         l.adicionar("quarta");
         confirmaLista(l, 3);
         printListaString(l);
@@ -118,12 +141,84 @@ public class TesteLista {
         printListaString(l);
 
 
-        System.out.println("NOVA----------Adiciona um depois Remove o valor terceira");
+        System.out.println("NOVA--Adiciona um depois Remove o valor terceira");
         l.adicionar("quinta");
         confirmaLista(l, 3);
         printListaString(l);
         l.removerReferencia("terceira");
         printListaString(l);
         System.out.println("\n\n\n\n");
+    }
+
+    public static void lista_remover_por_valor() {
+        System.out.println("\nTeste: Remover item da lista por valor\n");
+
+        Ponto teste = new Ponto(1,5);
+
+        Lista<Ponto> l = new Lista<Ponto>();
+
+        l.adicionar(new Ponto(0,6));
+        l.adicionar(teste);
+        l.adicionar(new Ponto(2,4));
+        l.adicionar(new Ponto(3,3));
+        l.adicionar(new Ponto(4,2));
+        l.adicionar(new Ponto(5,1));
+        l.adicionar(new Ponto(6,0));
+        Ferramenta.confirmaLista(l,7);
+        Ferramenta.printListaPontos(l);
+
+        System.out.println("NOVA-- Remove posoicao 4");
+        l.remover(4);
+        Ferramenta.printListaPontos(l);
+
+        System.out.println("NOVA-- Remove referencia teste");
+        l.removerReferencia(teste);
+        Ferramenta.printListaPontos(l);
+
+        System.out.println("NOVA-- Remove valor Ponto(6,0) ");
+        l.removerValor(new Ponto(6,0), new PontoIgualdade());
+        Ferramenta.printListaPontos(l);
+    }
+
+    public static void lista_set(){
+        System.out.println("\nTeste: Altera item da lista por posicao\n");
+        Lista<Ponto> l = new Lista<Ponto>();
+
+        l.adicionar(new Ponto(0,6));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(2,4));
+        l.adicionar(new Ponto(3,3));
+        l.adicionar(new Ponto(4,2));
+        l.adicionar(new Ponto(5,1));
+        l.adicionar(new Ponto(6,0));
+        Ferramenta.confirmaLista(l,7);
+        Ferramenta.printListaPontos(l);
+
+        System.out.println("NOVA-- Altera valor da posicao 0 ");
+        l.set(0, new Ponto(9,9));
+        Ferramenta.printListaPontos(l);
+    }
+
+    public static void lista_set_posicao_invalida(){
+        System.out.println("\nTeste: Altera item da lista por posicao\n");
+        Lista<Ponto> l = new Lista<Ponto>();
+
+        l.adicionar(new Ponto(0,6));
+        l.adicionar(new Ponto(1,5));
+        l.adicionar(new Ponto(2,4));
+        l.adicionar(new Ponto(3,3));
+        l.adicionar(new Ponto(4,2));
+        l.adicionar(new Ponto(5,1));
+        l.adicionar(new Ponto(6,0));
+        Ferramenta.confirmaLista(l,7);
+        Ferramenta.printListaPontos(l);
+
+        System.out.println("NOVA-- Altera valor da posicao 0 ");
+        try {
+            l.set(8, new Ponto(9,9));
+        }catch (Exception e){
+            System.out.println("Erro esperado: "+ e.getMessage());
+        }
+        Ferramenta.printListaPontos(l);
     }
 }

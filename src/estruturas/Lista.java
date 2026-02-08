@@ -2,6 +2,8 @@ package estruturas;
 
 import utils.Igualdade;
 
+import java.sql.SQLOutput;
+
 public class Lista<T> {
 
     private No<T> inicio = null;
@@ -37,6 +39,20 @@ public class Lista<T> {
             noCorrente = noCorrente.getProximo();
         }
         return null;
+    }
+
+    public void set( int posicao, T valor) {
+        int posicaoCorrente = 0;
+        No<T> noCorrente = inicio;
+        while (posicaoCorrente < quantidade) {
+            if (posicaoCorrente == posicao) {
+                noCorrente.setValor(valor);
+                return;
+            }
+            posicaoCorrente++;
+            noCorrente = noCorrente.getProximo();
+        }
+        throw new RuntimeException("Erro: Posicao nao encontrada!");
     }
 
     public int getQuantidade() {
