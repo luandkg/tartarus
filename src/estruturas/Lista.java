@@ -43,40 +43,39 @@ public class Lista<T> {
         return quantidade;
     }
 
+    private void condicaoParaRemover(No<T> noCorrente, No<T> noAnterior) {
+        if (noCorrente == inicio && noCorrente == fim) {
+            inicio = null;
+            fim = null;
+            quantidade--;
+            System.out.println("Removeu pq so tem um elemento!");
+        } else if (noCorrente == inicio) {
+            inicio = noCorrente.getProximo();
+            quantidade--;
+            System.out.println("Removeu o primeiro elemento!");
+        } else if (noCorrente == fim) {
+            if (noAnterior != null) {
+                noAnterior.setProximo(null);
+                fim = noAnterior;
+            }
+            quantidade--;
+            System.out.println("Removeu o ultimo elemento!");
+        } else {
+            if (noAnterior != null) {
+                noAnterior.setProximo(noCorrente.getProximo());
+            }
+            quantidade--;
+            System.out.println("Removeu o elemento que esta entre o meio!");
+        }
+    }
     public void remover(int posicao) {
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
         No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
             if (posicaoCorrente == posicao) {
-                if (noCorrente == inicio && noCorrente == fim) {
-                    inicio = null;
-                    fim = null;
-                    quantidade--;
-                    System.out.println("Removeu pq so tem um elemento!");
-                    break;
-                } else if (noCorrente == inicio) {
-                    inicio = noCorrente.getProximo();
-                    quantidade--;
-                    System.out.println("Removeu o primeiro elemento!");
-                    break;
-                } else if (noCorrente == fim) {
-                    if (noAnterior != null) {
-                        noAnterior.setProximo(null);
-                        fim = noAnterior;
-                    }
-                    quantidade--;
-                    System.out.println("Removeu o ultimo elemento!");
-                    break;
-                } else {
-                    if (noAnterior != null) {
-                        noAnterior.setProximo(noCorrente.getProximo());
-                    }
-                    quantidade--;
-                    System.out.println("Removeu o elemento que esta entre o meio!");
-                    break;
-                }
-
+                condicaoParaRemover(noCorrente, noAnterior);
+                break;
             }
             noAnterior = noCorrente;
             posicaoCorrente++;
@@ -90,7 +89,7 @@ public class Lista<T> {
         No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
             if (noCorrente.getValor() == referencia) {
-                remover(posicaoCorrente);
+                condicaoParaRemover(noCorrente, noAnterior);
                 break;
             }
             noAnterior = noCorrente;
@@ -105,7 +104,7 @@ public class Lista<T> {
         No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
             if (igualdade.igual(noCorrente.getValor(), valor)) {
-                remover(posicaoCorrente);
+                condicaoParaRemover(noCorrente, noAnterior);
                 break;
             }
             noAnterior = noCorrente;
