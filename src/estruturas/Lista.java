@@ -48,24 +48,20 @@ public class Lista<T> {
             inicio = null;
             fim = null;
             quantidade--;
-            System.out.println("Removeu pq so tem um elemento!");
         } else if (noCorrente == inicio) {
             inicio = noCorrente.getProximo();
             quantidade--;
-            System.out.println("Removeu o primeiro elemento!");
         } else if (noCorrente == fim) {
             if (noAnterior != null) {
                 noAnterior.setProximo(null);
                 fim = noAnterior;
             }
             quantidade--;
-            System.out.println("Removeu o ultimo elemento!");
         } else {
             if (noAnterior != null) {
                 noAnterior.setProximo(noCorrente.getProximo());
             }
             quantidade--;
-            System.out.println("Removeu o elemento que esta entre o meio!");
         }
     }
     public void remover(int posicao) {
