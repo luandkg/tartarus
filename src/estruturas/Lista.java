@@ -1,5 +1,7 @@
 package estruturas;
 
+import utils.Igualdade;
+
 public class Lista<T> {
 
     private No<T> inicio = null;
@@ -82,12 +84,27 @@ public class Lista<T> {
         }
     }
 
-    public void removerReferencia(T valor) {
+    public void removerReferencia(T referencia) {
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
         No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
-            if (noCorrente.getValor() == valor) {
+            if (noCorrente.getValor() == referencia) {
+                remover(posicaoCorrente);
+                break;
+            }
+            noAnterior = noCorrente;
+            posicaoCorrente++;
+            noCorrente = noCorrente.getProximo();
+        }
+    }
+
+    public void removerValor(T valor, Igualdade<T> igualdade) {
+        int posicaoCorrente = 0;
+        No<T> noCorrente = inicio;
+        No<T> noAnterior = null;
+        while (posicaoCorrente < quantidade) {
+            if (igualdade.igual(noCorrente.getValor(), valor)) {
                 remover(posicaoCorrente);
                 break;
             }
