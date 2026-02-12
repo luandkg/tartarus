@@ -1,8 +1,6 @@
-import auxiliar.Ponto;
-import auxiliar.PontoIgualdade;
 import estruturas.Lista;
-import teste.TesteLista;
-import utils.Ferramenta;
+import libs.teste.TesteExecutor;
+import testes.TesteLista;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,9 +9,12 @@ public class Main {
         // O nome da classe deve ser estruturas.Lista
         // deve ter as funções getQuantidade() e adicionar()
 
-        TesteLista.testar();
+        // TesteLista.testar();
 
+        Lista<Class<?>> testarClasses = new Lista<Class<?>>();
+        testarClasses.adicionar(TesteLista.class);
 
+        TesteExecutor.TESTAR(testarClasses);
 
     }
 }

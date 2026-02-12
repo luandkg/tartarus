@@ -1,22 +1,26 @@
-package teste;
+package testes;
 
 import auxiliar.Ponto;
 import auxiliar.PontoIgualdade;
 import estruturas.Lista;
+import libs.teste.TestandoCalebe;
+import libs.teste.TesteCalebe;
+import libs.teste.TesteClasseCalebe;
 import utils.Ferramenta;
 
 import static utils.Ferramenta.confirmaLista;
 import static utils.Ferramenta.printListaString;
 
+@TesteClasseCalebe
 public class TesteLista {
 
     public static void testar() {
 
-        lista_criar();
+        //lista_criar();
 
-        lista_esta_vazia();
+        //lista_esta_vazia();
 
-        lista_inserir();
+       // lista_inserir();
 
         lista_quantidade();
 
@@ -35,38 +39,30 @@ public class TesteLista {
         lista_contagem_valor();
     }
 
-    public static void lista_criar() {
-        System.out.println("\nTeste: Criar lista\n");
+    @TesteCalebe
+    public static void lista_criar(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        confirmaLista(l, 0);
-        System.out.println("\n\n\n\n");
+        teste.deveSerIgual(0,l.getQuantidade());
     }
 
-    public static void lista_esta_vazia(){
-        System.out.println("\nTeste: Verifica se lista esta vazia\n");
+    @TesteCalebe
+    public static void lista_esta_vazia(TestandoCalebe teste){
         Lista<String> l = new Lista<String>();
-        confirmaLista(l, 0);
-        if(l.estaVazia() == true){
-            System.out.println("A lista esta vazia!");
-        }else{
-            System.out.println("A lista nao esta vazia!");
-        }
-        System.out.println("\n\n\n\n");
+        teste.deveSerIgual(0,l.getQuantidade());
+        teste.deveSerVerdadeiro(l.estaVazia());
     }
 
-    public static void lista_inserir() {
-        System.out.println("\nTeste: Inserir na lista\n");
+    @TesteCalebe
+    public static void lista_inserir(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        confirmaLista(l, 0);
+        teste.deveSerIgual(0,l.getQuantidade());
 
         l.adicionar("primeira");
-        confirmaLista(l, 1);
+        teste.deveSerIgual(1,l.getQuantidade());
         l.adicionar("segunda");
-        confirmaLista(l, 2);
+        teste.deveSerIgual(2,l.getQuantidade());
         l.adicionar("terceira");
-        confirmaLista(l, 3);
-        printListaString(l);
-        System.out.println("\n\n\n\n");
+        teste.deveSerIgual(3,l.getQuantidade());
     }
 
     public static void lista_quantidade() {
