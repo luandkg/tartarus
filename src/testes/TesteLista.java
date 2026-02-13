@@ -2,11 +2,11 @@ package testes;
 
 import auxiliar.Ponto;
 import auxiliar.PontoIgualdade;
+import estruturas.ItemComPosicao;
 import estruturas.Lista;
 import libs.teste.TestandoCalebe;
 import libs.teste.TesteCalebe;
 import libs.teste.TesteClasseCalebe;
-import utils.Ferramenta;
 
 @TesteClasseCalebe
 public class TesteLista {
@@ -227,5 +227,42 @@ public class TesteLista {
         teste.deveSerIgual(6,l.contarValor(new Ponto(1,5), new PontoIgualdade()));
 
         teste.deveSerIgual(2,l.contarValor(new Ponto(4,2), new PontoIgualdade()));
+    }
+
+    @TesteCalebe
+    public static void lista_percarrendo_itens(TestandoCalebe teste){
+        Lista<Integer> listaInteger  = new Lista<>();
+
+        listaInteger.adicionar(55);
+        listaInteger.adicionar(33);
+        listaInteger.adicionar(22);
+
+        int cont = 0;
+        for (int i : listaInteger) {
+            cont++;
+        }
+        teste.deveSerIgual(3,cont);
+    }
+
+    @TesteCalebe
+    public static void lista_retorna_item_e_posicao(TestandoCalebe teste){
+        Lista<Integer> listaInteger  = new Lista<>();
+
+        listaInteger.adicionar(55);
+        listaInteger.adicionar(33);
+        listaInteger.adicionar(22);
+        teste.deveSerIgual(3, listaInteger.getQuantidade());
+
+        ItemComPosicao<Integer> t1 = listaInteger.getItensComPosicao().get(0);
+        teste.deveSerIgual(55,t1.getItem());
+        teste.deveSerIgual(0,t1.getPosicao());
+
+        ItemComPosicao<Integer> t2 = listaInteger.getItensComPosicao().get(1);
+        teste.deveSerIgual(33,t2.getItem());
+        teste.deveSerIgual(1,t2.getPosicao());
+
+        ItemComPosicao<Integer> t3 = listaInteger.getItensComPosicao().get(2);
+        teste.deveSerIgual(22,t3.getItem());
+        teste.deveSerIgual(2,t3.getPosicao());
     }
 }

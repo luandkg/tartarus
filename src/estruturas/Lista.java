@@ -2,9 +2,9 @@ package estruturas;
 
 import utils.Igualdade;
 
-import java.sql.SQLOutput;
+import java.util.Iterator;
 
-public class Lista<T> {
+public class Lista<T> implements Iterable<T>{
 
     private No<T> inicio = null;
     private No<T> fim = null;
@@ -158,5 +158,46 @@ public class Lista<T> {
             noCorrente = noCorrente.getProximo();
         }
         return contValor;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        Iterator<T> it = new Iterator<T>() {
+
+            int posicaoCorrente = 0;
+            No<T> noCorrente = inicio;
+
+
+            @Override
+            public boolean hasNext() {
+                return posicaoCorrente < quantidade;
+            }
+
+            @Override
+            public T next() {
+                No<T> noTemporario = noCorrente;
+                noCorrente = noCorrente.getProximo();
+                posicaoCorrente++;
+                return noTemporario.getValor();
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+        return it;
+    }
+
+    public Lista<ItemComPosicao<T>> getItensComPosicao(){
+        Lista<ItemComPosicao<T>>  lista = new Lista<ItemComPosicao<T>>();
+        int cont = 0;
+
+        for(T item : this){
+            lista.adicionar(new ItemComPosicao<>(item,cont));
+            cont++;
+        }
+
+        return lista;
     }
 }

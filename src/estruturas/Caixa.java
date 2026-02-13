@@ -2,7 +2,9 @@ package estruturas;
 
 import utils.Igualdade;
 
-public class Caixa<T> {
+import java.util.Iterator;
+
+public class Caixa<T> implements Iterable<T>{
 
     private int tamanhoMaximo;
     private Lista<T> lista;
@@ -62,5 +64,22 @@ public class Caixa<T> {
 
     public boolean estaCheia() {
         return tamanhoMaximo == lista.getQuantidade();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return lista.iterator();
+    }
+
+    public Caixa<ItemComPosicao<T>> getItensComPosicao(){
+        Caixa<ItemComPosicao<T>>  caixa = new Caixa<ItemComPosicao<T>>(tamanhoMaximo);
+        int cont = 0;
+
+        for(T item : this){
+            caixa.adicionar(new ItemComPosicao<>(item,cont));
+            cont++;
+        }
+
+        return caixa;
     }
 }
