@@ -1,5 +1,6 @@
 import estruturas.Lista;
 import libs.teste.TesteExecutor;
+import testes.TesteCaixa;
 import testes.TesteLista;
 
 public class Main {
@@ -13,8 +14,8 @@ public class Main {
 
         Lista<Class<?>> testarClasses = new Lista<Class<?>>();
         testarClasses.adicionar(TesteLista.class);
+        testarClasses.adicionar(TesteCaixa.class);
 
         TesteExecutor.TESTAR(testarClasses);
-
     }
 }

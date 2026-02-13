@@ -32,6 +32,25 @@ public class TestandoCalebe {
         }
     }
 
+    public void deveSerFalso(boolean recebido) {
+        if(recebido){
+            falhou+=1;
+        }else{
+            sucesso+=1;
+        }
+    }
+
+    public void deveSerIgual(String esperado,String recebido){
+        if(esperado.contentEquals(recebido)){
+            sucesso+=1;
+        }else{
+            falhou+=1;
+        }
+    }
+
+    public void falhar(){
+        falhou+=1;
+    }
 
     public int getTotal(){
         return sucesso+falhou;
@@ -44,4 +63,6 @@ public class TestandoCalebe {
     public int getFalhou(){
         return falhou;
     }
+
+
 }
