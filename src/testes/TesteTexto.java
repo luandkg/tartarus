@@ -51,4 +51,13 @@ public class TesteTexto {
         teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "la"));
         teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "ola"));
     }
+
+    @TesteCalebe
+    public static void Texto_compara_se_termina_com(TestandoCalebe teste){
+        teste.deveSerVerdadeiro(Texto.terminaCom("Ola mundo!", "!"));
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "a"));
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "ffffff"));
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "la"));
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "UNDO!"));
+    }
 }

@@ -149,4 +149,25 @@ public class Texto {
         return false;
 
     }
+
+    public static boolean terminaCom(String texto, String termina){
+        int i = texto.length() - 1;
+        int o = 0;
+        String eIgual = "";
+
+        while (i > o) {
+            char letra = texto.charAt(i);
+
+            eIgual = letra + eIgual;
+
+            if(termina.length() == eIgual.length()){
+                return igual(termina,eIgual);
+            }
+
+            i--;
+        }
+
+        return false;
+
+    }
 }
