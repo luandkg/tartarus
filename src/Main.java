@@ -1,4 +1,7 @@
+import auxiliar.Jogador;
+import auxiliar.JogadorSerializavel;
 import auxiliar.StringIgualdade;
+import estruturas.IO;
 import estruturas.ItemComPosicao;
 import estruturas.Lista;
 import estruturas.Texto;
@@ -20,21 +23,23 @@ public class Main {
 
         //TesteExecutor.TESTAR(testarClasses);
 
-        String arquivo = "arquivos/Controle de Empenhos.csv";
 
-        String texto = Texto.ler(arquivo);
+        Lista<Jogador> jogadores = new Lista<Jogador>();
 
-        Lista<String> linhas = Texto.dividirLinhas(texto);
+        jogadores.adicionar(new Jogador("Atacante","Calebe",10));
+        jogadores.adicionar(new Jogador("Meia","Luan",7));
+        jogadores.adicionar(new Jogador("Lateral","Kaio",2));
+        jogadores.adicionar(new Jogador("Zagueiro","Diogo",3));
+        jogadores.adicionar(new Jogador("Goleiro","William",1));
 
-        //Texto.escrever(arquivo, "Calebe e lindo!");
+        IO.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
 
-        for (String linha : linhas){
-            //System.out.println("--->"+linha+"<---");
+        Lista<Jogador> escola = new Lista<>();
 
-            Lista<String> celulas = Texto.dividirPorSimbolo(linha, "\t");
-            for (String celula : celulas){
-                //System.out.println("\t+>"+celula);
-            }
+        escola = IO.abrir("arquivos/ListaDeJogadores.txt", new JogadorSerializavel());
+
+        for (Jogador jogador : escola){
+            System.out.println(jogador.getNome());
         }
 
     }

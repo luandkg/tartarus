@@ -9,7 +9,7 @@ public class Texto {
         String texto = "";
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-            String linha;
+            String linha = "";
             while ((linha = br.readLine()) != null) {
                 texto += linha + "\n";
             }
@@ -24,7 +24,6 @@ public class Texto {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
             bw.write(novoTexto);
-            bw.newLine();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -75,4 +74,6 @@ public class Texto {
         linhas.adicionar(celula);
         return linhas;
     }
+
+
 }
