@@ -75,5 +75,35 @@ public class Texto {
         return linhas;
     }
 
+    public static String minusculo(String texto){
+        int i = 0;
+        int o = texto.length();
+        String textoMinusculo = "";
 
+        while (i < o) {
+            char letra = texto.charAt(i);
+
+            textoMinusculo += Character.toLowerCase(letra);
+
+            i++;
+        }
+
+        return textoMinusculo;
+    }
+
+    public static String maiusculo(String texto){
+        int i = 0;
+        int o = texto.length();
+        String textoMaiusculo = "";
+
+        while (i < o) {
+            char letra = texto.charAt(i);
+
+            textoMaiusculo += Character.toUpperCase(letra);
+
+            i++;
+        }
+
+        return textoMaiusculo;
+    }
 }
