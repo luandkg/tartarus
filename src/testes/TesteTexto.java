@@ -42,4 +42,13 @@ public class TesteTexto {
         teste.deveSerIgual("O GAMBA É FEDORENTO!", textoMaiuscula);
 
     }
+
+    @TesteCalebe
+    public static void Texto_compara_se_comeca_com(TestandoCalebe teste){
+        teste.deveSerVerdadeiro(Texto.comecaCom("Ola mundo!", "Ol"));
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "a"));
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "ffffff"));
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "la"));
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "ola"));
+    }
 }

@@ -1,5 +1,7 @@
 package estruturas;
 
+import auxiliar.StringIgualdade;
+
 import java.io.*;
 
 public class Texto {
@@ -105,5 +107,46 @@ public class Texto {
         }
 
         return textoMaiusculo;
+    }
+
+    public static boolean igual(String t1, String t2) {
+
+        if (t1.length() == t2.length()) {
+            boolean tudoOK = false;
+
+            for (int i = 0; i < t1.length(); i++) {
+                char letraT1  = t1.charAt(i);
+                char letraT2  = t2.charAt(i);
+                if (letraT1 == letraT2) {
+                    tudoOK = true;
+                }else{
+                    tudoOK = false;
+                    break;
+                }
+                return tudoOK;
+            }
+        }
+        return false;
+    }
+
+    public static boolean comecaCom(String texto, String comeco){
+        int i = 0;
+        int o = texto.length();
+        String eIgual = "";
+
+        while (i < o) {
+            char letra = texto.charAt(i);
+
+            eIgual += letra;
+
+            if(comeco.length() == eIgual.length()){
+                return igual(comeco,eIgual);
+            }
+
+            i++;
+        }
+
+        return false;
+
     }
 }
