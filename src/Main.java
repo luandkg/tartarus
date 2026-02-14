@@ -24,9 +24,18 @@ public class Main {
 
         String texto = Texto.ler(arquivo);
 
+        Lista<String> linhas = Texto.dividirLinhas(texto);
+
         //Texto.escrever(arquivo, "Calebe e lindo!");
 
-        System.out.println(texto);
+        for (String linha : linhas){
+            //System.out.println("--->"+linha+"<---");
+
+            Lista<String> celulas = Texto.dividirPorSimbolo(linha, "\t");
+            for (String celula : celulas){
+                //System.out.println("\t+>"+celula);
+            }
+        }
 
     }
 }

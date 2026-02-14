@@ -30,4 +30,49 @@ public class Texto {
         }
     }
 
+    public static Lista<String> dividirLinhas(String texto) {
+        Lista<String> linhas = new Lista<>();
+
+        int i = 0;
+        int o = texto.length();
+        String linha = "";
+
+        while (i < o) {
+            String letra = String.valueOf(texto.charAt(i));
+
+            if (letra.contentEquals("\n")){
+                linhas.adicionar(linha);
+                linha = "";
+            }else{
+                linha += letra;
+            }
+
+            i++;
+        }
+        linhas.adicionar(linha);
+        return linhas;
+    }
+
+    public static Lista<String> dividirPorSimbolo(String linha, String simbolo){
+        Lista<String> linhas = new Lista<>();
+
+        int i = 0;
+        int o = linha.length();
+        String celula = "";
+
+        while (i < o) {
+            String letra = String.valueOf(linha.charAt(i));
+
+            if (letra.contentEquals(simbolo)){
+                linhas.adicionar(celula);
+                celula = "";
+            }else{
+                celula += letra;
+            }
+
+            i++;
+        }
+        linhas.adicionar(celula);
+        return linhas;
+    }
 }
