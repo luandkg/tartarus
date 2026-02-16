@@ -238,4 +238,9 @@ public class Lista<T> implements Iterable<T>{
         return clone;
     }
 
+    public void limpar(){
+        inicio = null;
+        fim = null;
+        quantidade = 0;
+    }
 }

@@ -362,4 +362,23 @@ public class TesteLista {
 
         //Ferramenta.printDuasListas(lInt,clone);
     }
+
+    @TesteCalebe
+    public static void Lista_limpar(TestandoCalebe teste){
+        Lista<Integer> lInt = new Lista<>();
+
+        lInt.adicionar(0);
+        lInt.adicionar(1);
+        lInt.adicionar(2);
+        lInt.adicionar(3);
+        lInt.adicionar(4);
+        lInt.adicionar(5);
+
+        teste.deveSerIgual(6,lInt.getQuantidade());
+
+        lInt.limpar();
+
+        teste.deveSerIgual(0,lInt.getQuantidade());
+
+    }
 }
