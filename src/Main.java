@@ -23,7 +23,9 @@ public class Main {
 
         //TesteExecutor.TESTAR(testarClasses);
 
-        //TesteExecutor.TESTAR_UNICO(TesteLista.class);
+        TesteExecutor.TESTAR_UNICO(TesteLista.class);
+
+
 
 
     }

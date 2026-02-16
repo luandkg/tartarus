@@ -332,4 +332,34 @@ public class TesteLista {
 
         //Ferramenta.printDuasListas(num,lista);
     }
+
+    @TesteCalebe
+    public static void Lista_clonar(TestandoCalebe teste){
+        Lista<Integer> lInt = new Lista<>();
+
+        lInt.adicionar(0);
+        lInt.adicionar(1);
+        lInt.adicionar(2);
+        lInt.adicionar(3);
+        lInt.adicionar(4);
+        lInt.adicionar(5);
+
+        teste.deveSerIgual(6,lInt.getQuantidade());
+
+        Lista<Integer> clone = new Lista<>();
+
+        teste.deveSerIgual(0,clone.getQuantidade());
+
+        clone = lInt.clonar();
+
+        teste.deveSerIgual(clone.getQuantidade(),lInt.getQuantidade());
+
+        if (clone.getQuantidade()==lInt.getQuantidade()){
+            for (int i = 0; i < lInt.getQuantidade(); i++) {
+                teste.deveSerIgual(clone.get(i), lInt.get(i));
+            }
+        }
+
+        //Ferramenta.printDuasListas(lInt,clone);
+    }
 }

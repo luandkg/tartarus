@@ -229,4 +229,13 @@ public class Lista<T> implements Iterable<T>{
         return lista;
     }
 
+    public Lista<T> clonar(){
+        Lista<T> clone = new Lista<>();
+
+        for (T item : this){
+            clone.adicionar(item);
+        }
+        return clone;
+    }
+
 }
