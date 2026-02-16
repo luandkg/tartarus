@@ -2,6 +2,7 @@ package utils;
 
 import auxiliar.Ponto;
 import estruturas.Caixa;
+import estruturas.ItemComPosicao;
 import estruturas.Lista;
 
 public class Ferramenta {
@@ -39,5 +40,27 @@ public class Ferramenta {
             System.out.println("Indice: " + i + " | Valor: " + valor.toString());
         }
         System.out.println("--------------------------------------------------------\n\n");
+    }
+
+    public static <T> void printLista(Lista<T> l1){
+        System.out.println("---Lista Original---");
+        for (ItemComPosicao<T> itemComPosicao : l1.getItensComPosicao()){
+            System.out.println("Index : "+itemComPosicao.getPosicao()+" Valor : "+ itemComPosicao.getItem());
+        }
+        System.out.println("--------------------");
+    }
+
+    public static <T> void printDuasListas(Lista<T> l1, Lista<T> l2){
+        System.out.println("---Lista Original---");
+        for (ItemComPosicao<T> itemComPosicao : l1.getItensComPosicao()){
+            System.out.println("Index : "+itemComPosicao.getPosicao()+" Valor : "+ itemComPosicao.getItem());
+        }
+        System.out.println("--------------------");
+
+        System.out.println("---Lista Filtrada---");
+        for (ItemComPosicao<T> itemComPosicao : l2.getItensComPosicao()){
+            System.out.println("Index : "+itemComPosicao.getPosicao()+" Valor : "+ itemComPosicao.getItem());
+        }
+        System.out.println("--------------------");
     }
 }

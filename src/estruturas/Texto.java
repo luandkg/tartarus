@@ -155,10 +155,11 @@ public class Texto {
         int o = 0;
         String eIgual = "";
 
-        while (i > o) {
+        while (i >= o) {
             char letra = texto.charAt(i);
 
             eIgual = letra + eIgual;
+            //System.out.println("Letra : "+ letra +" | "+ "cTexto : " + eIgual);
 
             if(termina.length() == eIgual.length()){
                 return igual(termina,eIgual);

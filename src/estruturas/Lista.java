@@ -1,5 +1,8 @@
 package estruturas;
 
+import utils.Condicional;
+import utils.CondicionalParametrizado;
+import utils.Ferramenta;
 import utils.Igualdade;
 
 import java.util.Iterator;
@@ -200,4 +203,30 @@ public class Lista<T> implements Iterable<T>{
 
         return lista;
     }
+
+    public Lista<T> filtrar(Condicional<T> condicao, T valor){
+        Lista<T> lista = new Lista<>();
+
+        for (T item : this){
+            if(condicao.condicao(item,valor)){
+                lista.adicionar(item);
+            }
+        }
+
+        return lista;
+    }
+
+
+    public <T2> Lista<T> filtrar(CondicionalParametrizado<T,T2> condicao){
+        Lista<T> lista = new Lista<>();
+
+        for (T item : this){
+            if(condicao.condicao(item)){
+                lista.adicionar(item);
+            }
+        }
+
+        return lista;
+    }
+
 }
