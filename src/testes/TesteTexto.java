@@ -20,7 +20,7 @@ public class TesteTexto {
         listaS.adicionar("Fedorento");
 
         int cont = listaS.contarValor("Fedorento",  new StringIgualdade());
-        teste.deveSerIgual(3, cont);
+        teste.deveSerIgual(3, cont,"Texto_igualdade_entre_Strings -> Teste_1");
     }
 
     @TesteCalebe
@@ -29,7 +29,7 @@ public class TesteTexto {
         String texto = "O GAMBA É FEDORENTO!";
         String textoMinusculo = Texto.minusculo(texto);
 
-        teste.deveSerIgual("o gamba é fedorento!", textoMinusculo);
+        teste.deveSerIgual("o gamba é fedorento!", textoMinusculo,"Texto_transforma_em_minusculo -> Teste_1");
 
     }
 
@@ -39,25 +39,25 @@ public class TesteTexto {
         String texto = "o gamba é fedorento!";
         String textoMaiuscula = Texto.maiusculo(texto);
 
-        teste.deveSerIgual("O GAMBA É FEDORENTO!", textoMaiuscula);
+        teste.deveSerIgual("O GAMBA É FEDORENTO!", textoMaiuscula,"Texto_transforma_em_maiusculo -> Teste_1");
 
     }
 
     @TesteCalebe
     public static void Texto_compara_se_comeca_com(TestandoCalebe teste){
-        teste.deveSerVerdadeiro(Texto.comecaCom("Ola mundo!", "Ol"));
-        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "a"));
-        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "ffffff"));
-        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "la"));
-        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "ola"));
+        teste.deveSerVerdadeiro(Texto.comecaCom("Ola mundo!", "Ol"),"Texto_compara_se_comeca_com -> Teste_1");
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "a"),"Texto_compara_se_comeca_com -> Teste_2");
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "ffffff"),"Texto_compara_se_comeca_com -> Teste_3");
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "la"),"Texto_compara_se_comeca_com -> Teste_4");
+        teste.deveSerFalso(Texto.comecaCom("Ola mundo!", "ola"),"Texto_compara_se_comeca_com -> Teste_5");
     }
 
     @TesteCalebe
     public static void Texto_compara_se_termina_com(TestandoCalebe teste){
-        teste.deveSerVerdadeiro(Texto.terminaCom("Ola mundo!", "!"));
-        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "a"));
-        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "ffffff"));
-        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "la"));
-        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "UNDO!"));
+        teste.deveSerVerdadeiro(Texto.terminaCom("Ola mundo!", "!"),"Texto_compara_se_termina_com -> Teste_1");
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "a"),"Texto_compara_se_termina_com -> Teste_2");
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "ffffff"),"Texto_compara_se_termina_com -> Teste_3");
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "la"),"Texto_compara_se_termina_com -> Teste_4");
+        teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "UNDO!"),"Texto_compara_se_termina_com -> Teste_5");
     }
 }

@@ -24,7 +24,7 @@ public class TesteInteiros {
 
         Lista<Integer> lista = num.filtrar(Inteiros.INTEIRO_MAIOR_QUE(4));
 
-        teste.deveSerIgual(1, lista.getQuantidade());
+        teste.deveSerIgual(1, lista.getQuantidade(),"Inteiros_maior -> Teste_1");
 
         Ferramenta.printDuasListas(num, lista);
     }
@@ -43,7 +43,7 @@ public class TesteInteiros {
 
         Lista<Integer> lista = num.filtrar(Inteiros.INTEIRO_MENOR_QUE(4));
 
-        teste.deveSerIgual(4, lista.getQuantidade());
+        teste.deveSerIgual(4, lista.getQuantidade(),"Inteiros_menor -> Teste_1");
 
         Ferramenta.printDuasListas(num, lista);
     }
@@ -62,7 +62,7 @@ public class TesteInteiros {
 
         Lista<Integer> lista = num.filtrar(Inteiros.INTEIRO_IGUAL(4));
 
-        teste.deveSerIgual(1, lista.getQuantidade());
+        teste.deveSerIgual(1, lista.getQuantidade(),"Inteiros_igual -> Teste_1");
 
         Ferramenta.printDuasListas(num, lista);
     }
@@ -81,7 +81,7 @@ public class TesteInteiros {
 
         Lista<Integer> lista = num.filtrar(Inteiros.INTEIRO_DIFERENTE(4));
 
-        teste.deveSerIgual(5, lista.getQuantidade());
+        teste.deveSerIgual(5, lista.getQuantidade(),"Inteiros_diferente -> Teste_1");
 
         Ferramenta.printDuasListas(num, lista);
     }
@@ -100,7 +100,7 @@ public class TesteInteiros {
 
         Lista<Integer> lista = num.filtrar(Inteiros.INTEIRO_MAIOR_OU_IGUAL(4));
 
-        teste.deveSerIgual(2, lista.getQuantidade());
+        teste.deveSerIgual(2, lista.getQuantidade(),"Inteiros_maior_igual -> Teste_1");
 
         Ferramenta.printDuasListas(num, lista);
     }
@@ -119,7 +119,7 @@ public class TesteInteiros {
 
         Lista<Integer> lista = num.filtrar(Inteiros.INTEIRO_MENOR_OU_IGUAL(4));
 
-        teste.deveSerIgual(5, lista.getQuantidade());
+        teste.deveSerIgual(5, lista.getQuantidade(),"Inteiros_menor_igual -> Teste_1");
 
         Ferramenta.printDuasListas(num, lista);
     }

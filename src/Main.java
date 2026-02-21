@@ -1,11 +1,7 @@
-import estruturas.Inteiros;
+import estruturas.fmt;
 import estruturas.Lista;
-import estruturas.Texto;
 import libs.teste.TesteExecutor;
 import testes.*;
-import utils.Condicional;
-import utils.CondicionalParametrizado;
-import utils.Ferramenta;
 
 
 public class Main {
@@ -20,12 +16,12 @@ public class Main {
         testarClasses.adicionar(TesteHorario.class);
         testarClasses.adicionar(TesteData.class);
         testarClasses.adicionar(TesteInteiros.class);
+        testarClasses.adicionar(TesteFMT.class);
+
 
         //TesteExecutor.TESTAR(testarClasses);
 
-        TesteExecutor.TESTAR_UNICO(TesteLista.class);
-
-
+        TesteExecutor.TESTAR_UNICO(TesteFMT.class);
 
 
     }

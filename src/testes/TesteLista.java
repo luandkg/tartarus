@@ -18,102 +18,102 @@ public class TesteLista {
     @TesteCalebe
     public static void Lista_criar(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        teste.deveSerIgual(0, l.getQuantidade());
+        teste.deveSerIgual(0, l.getQuantidade(),"Lista_criar -> Teste_1");
     }
 
     @TesteCalebe
     public static void Lista_esta_vazia(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        teste.deveSerIgual(0, l.getQuantidade());
-        teste.deveSerVerdadeiro(l.estaVazia());
+        teste.deveSerIgual(0, l.getQuantidade(),"Lista_esta_vazia -> Teste_1");
+        teste.deveSerVerdadeiro(l.estaVazia(),"Lista_esta_vazia -> Teste_2");
     }
 
     @TesteCalebe
     public static void Lista_inserir(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        teste.deveSerIgual(0, l.getQuantidade());
+        teste.deveSerIgual(0, l.getQuantidade(),"Lista_inserir -> Teste_1");
 
         l.adicionar("primeira");
-        teste.deveSerIgual(1, l.getQuantidade());
+        teste.deveSerIgual(1, l.getQuantidade(),"Lista_inserir -> Teste_2");
         l.adicionar("segunda");
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_inserir -> Teste_3");
         l.adicionar("terceira");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_inserir -> Teste_4");
     }
 
     @TesteCalebe
     public static void Lista_quantidade(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        teste.deveSerIgual(0, l.getQuantidade());
+        teste.deveSerIgual(0, l.getQuantidade(),"Lista_quantidade -> Teste_1");
 
         l.adicionar("primeira");
-        teste.deveSerIgual(1, l.getQuantidade());
+        teste.deveSerIgual(1, l.getQuantidade(),"Lista_quantidade -> Teste_2");
 
         l.adicionar("segunda");
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_quantidade -> Teste_3");
 
         l.adicionar("terceira");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_quantidade -> Teste_4");
     }
 
     @TesteCalebe
     public static void Lista_remover_por_posicao(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        teste.deveSerIgual(0, l.getQuantidade());
+        teste.deveSerIgual(0, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_1");
 
         l.adicionar("primeira");
-        teste.deveSerIgual(1, l.getQuantidade());
+        teste.deveSerIgual(1, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_2");
 
         l.adicionar("segunda");
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_3");
 
         l.adicionar("terceira");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_4");
 
         l.remover(0);
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_5");
 
         l.adicionar("quarta");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_6");
 
         l.remover(2);
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_7");
 
         l.adicionar("quinta");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_8");
 
         l.remover(1);
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_posicao -> Teste_9");
     }
 
     @TesteCalebe
     public static void Lista_remover_por_referencia(TestandoCalebe teste) {
         Lista<String> l = new Lista<String>();
-        teste.deveSerIgual(0, l.getQuantidade());
+        teste.deveSerIgual(0, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_1");
 
         l.adicionar("primeira");
-        teste.deveSerIgual(1, l.getQuantidade());
+        teste.deveSerIgual(1, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_2");
 
         l.adicionar("segunda");
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_3");
 
         l.adicionar("terceira");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_4");
 
         l.removerReferencia("primeira");
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_5");
 
         l.adicionar("quarta");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_6");
 
         l.removerReferencia("quarta");
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_7");
 
         l.adicionar("quinta");
-        teste.deveSerIgual(3, l.getQuantidade());
+        teste.deveSerIgual(3, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_8");
 
         l.removerReferencia("terceira");
-        teste.deveSerIgual(2, l.getQuantidade());
+        teste.deveSerIgual(2, l.getQuantidade(),"Lista_remover_por_referencia -> Teste_9");
     }
 
     @TesteCalebe
@@ -130,16 +130,16 @@ public class TesteLista {
         l.adicionar(new Ponto(4, 2));
         l.adicionar(new Ponto(5, 1));
         l.adicionar(new Ponto(6, 0));
-        teste.deveSerIgual(7, l.getQuantidade());
+        teste.deveSerIgual(7, l.getQuantidade(),"Lista_remover_por_valor -> Teste_1");
 
         l.remover(4);
-        teste.deveSerIgual(6, l.getQuantidade());
+        teste.deveSerIgual(6, l.getQuantidade(),"Lista_remover_por_valor -> Teste_2");
 
         l.removerReferencia(ponto);
-        teste.deveSerIgual(5, l.getQuantidade());
+        teste.deveSerIgual(5, l.getQuantidade(),"Lista_remover_por_valor -> Teste_3");
 
         l.removerValor(new Ponto(6, 0), new PontoIgualdade());
-        teste.deveSerIgual(4, l.getQuantidade());
+        teste.deveSerIgual(4, l.getQuantidade(),"Lista_remover_por_valor -> Teste_4");
     }
 
     @TesteCalebe
@@ -153,15 +153,15 @@ public class TesteLista {
         l.adicionar(new Ponto(4, 2));
         l.adicionar(new Ponto(5, 1));
         l.adicionar(new Ponto(6, 0));
-        teste.deveSerIgual(7, l.getQuantidade());
+        teste.deveSerIgual(7, l.getQuantidade(),"Lista_set -> Teste_1");
 
-        teste.deveSerIgual(0, l.get(0).getX());
-        teste.deveSerIgual(6, l.get(0).getY());
+        teste.deveSerIgual(0, l.get(0).getX(),"Lista_set -> Teste_2");
+        teste.deveSerIgual(6, l.get(0).getY(),"Lista_set -> Teste_3");
 
         l.set(0, new Ponto(9, 9));
 
-        teste.deveSerIgual(9, l.get(0).getX());
-        teste.deveSerIgual(9, l.get(0).getY());
+        teste.deveSerIgual(9, l.get(0).getX(),"Lista_set -> Teste_4");
+        teste.deveSerIgual(9, l.get(0).getY(),"Lista_set -> Teste_5");
     }
 
     @TesteCalebe
@@ -175,13 +175,13 @@ public class TesteLista {
         l.adicionar(new Ponto(4, 2));
         l.adicionar(new Ponto(5, 1));
         l.adicionar(new Ponto(6, 0));
-        teste.deveSerIgual(7, l.getQuantidade());
+        teste.deveSerIgual(7, l.getQuantidade(),"Lista_set_posicao_invalida -> Teste_1");
 
         try {
             l.set(8, new Ponto(9, 9));
-            teste.falhar();
+            teste.falhar("Lista_set_posicao_invalida -> Teste_2");
         } catch (Exception e) {
-            teste.deveSerIgual("Erro: Posicao nao encontrada!", e.getMessage());
+            teste.deveSerIgual("Erro: Posicao nao encontrada!", e.getMessage(),"Lista_set_posicao_invalida -> Teste_3");
         }
     }
 
@@ -202,11 +202,11 @@ public class TesteLista {
         l.adicionar(new Ponto(1, 5));
         l.adicionar(new Ponto(3, 5));
 
-        teste.deveSerIgual(12, l.getQuantidade());
+        teste.deveSerIgual(12, l.getQuantidade(),"Lista_existe_valor -> Teste_1");
 
-        teste.deveSerVerdadeiro(l.existeValor(new Ponto(1, 5), new PontoIgualdade()));
+        teste.deveSerVerdadeiro(l.existeValor(new Ponto(1, 5), new PontoIgualdade()),"Lista_existe_valor -> Teste_2");
 
-        teste.deveSerFalso(l.existeValor(new Ponto(8, 2), new PontoIgualdade()));
+        teste.deveSerFalso(l.existeValor(new Ponto(8, 2), new PontoIgualdade()),"Lista_existe_valor -> Teste_3");
     }
 
     @TesteCalebe
@@ -226,11 +226,11 @@ public class TesteLista {
         l.adicionar(new Ponto(1, 5));
         l.adicionar(new Ponto(3, 5));
 
-        teste.deveSerIgual(12, l.getQuantidade());
+        teste.deveSerIgual(12, l.getQuantidade(),"Lista_contagem_valor -> Teste_1");
 
-        teste.deveSerIgual(6, l.contarValor(new Ponto(1, 5), new PontoIgualdade()));
+        teste.deveSerIgual(6, l.contarValor(new Ponto(1, 5), new PontoIgualdade()),"Lista_contagem_valor -> Teste_2");
 
-        teste.deveSerIgual(2, l.contarValor(new Ponto(4, 2), new PontoIgualdade()));
+        teste.deveSerIgual(2, l.contarValor(new Ponto(4, 2), new PontoIgualdade()),"Lista_contagem_valor -> Teste_3");
     }
 
     @TesteCalebe
@@ -245,7 +245,7 @@ public class TesteLista {
         for (int i : listaInteger) {
             cont++;
         }
-        teste.deveSerIgual(3, cont);
+        teste.deveSerIgual(3, cont,"Lista_percarrendo_itens -> Teste_1");
     }
 
     @TesteCalebe
@@ -255,19 +255,19 @@ public class TesteLista {
         listaInteger.adicionar(55);
         listaInteger.adicionar(33);
         listaInteger.adicionar(22);
-        teste.deveSerIgual(3, listaInteger.getQuantidade());
+        teste.deveSerIgual(3, listaInteger.getQuantidade(),"Lista_retorna_item_e_posicao -> Teste_1");
 
         ItemComPosicao<Integer> t1 = listaInteger.getItensComPosicao().get(0);
-        teste.deveSerIgual(55, t1.getItem());
-        teste.deveSerIgual(0, t1.getPosicao());
+        teste.deveSerIgual(55, t1.getItem(),"Lista_retorna_item_e_posicao -> Teste_2");
+        teste.deveSerIgual(0, t1.getPosicao(),"Lista_retorna_item_e_posicao -> Teste_3");
 
         ItemComPosicao<Integer> t2 = listaInteger.getItensComPosicao().get(1);
-        teste.deveSerIgual(33, t2.getItem());
-        teste.deveSerIgual(1, t2.getPosicao());
+        teste.deveSerIgual(33, t2.getItem(),"Lista_retorna_item_e_posicao -> Teste_4");
+        teste.deveSerIgual(1, t2.getPosicao(),"Lista_retorna_item_e_posicao -> Teste_5");
 
         ItemComPosicao<Integer> t3 = listaInteger.getItensComPosicao().get(2);
-        teste.deveSerIgual(22, t3.getItem());
-        teste.deveSerIgual(2, t3.getPosicao());
+        teste.deveSerIgual(22, t3.getItem(),"Lista_retorna_item_e_posicao -> Teste_6");
+        teste.deveSerIgual(2, t3.getPosicao(),"Lista_retorna_item_e_posicao -> Teste_7");
     }
 
     @TesteCalebe
@@ -289,11 +289,11 @@ public class TesteLista {
             }
         }, 3);
 
-        teste.deveSerIgual(3, lista.getQuantidade());
+        teste.deveSerIgual(3, lista.getQuantidade(),"Lista_filtrar -> Teste_1");
 
-        teste.deveSerIgual(0, lista.get(0));
-        teste.deveSerIgual(1, lista.get(1));
-        teste.deveSerIgual(2, lista.get(2));
+        teste.deveSerIgual(0, lista.get(0),"Lista_filtrar -> Teste_2");
+        teste.deveSerIgual(1, lista.get(1),"Lista_filtrar -> Teste_3");
+        teste.deveSerIgual(2, lista.get(2),"Lista_filtrar -> Teste_4");
 
         //Ferramenta.printDuasListas(num,lista);
     }
@@ -326,9 +326,9 @@ public class TesteLista {
 
         });
 
-        teste.deveSerIgual(1, lista.getQuantidade());
+        teste.deveSerIgual(1, lista.getQuantidade(),"Lista_filtrar_parametrizado -> Teste_1");
 
-        teste.deveSerIgual(2, lista.get(0));
+        teste.deveSerIgual(2, lista.get(0),"Lista_filtrar_parametrizado -> Teste_2");
 
         //Ferramenta.printDuasListas(num,lista);
     }
@@ -344,19 +344,19 @@ public class TesteLista {
         lInt.adicionar(4);
         lInt.adicionar(5);
 
-        teste.deveSerIgual(6,lInt.getQuantidade());
+        teste.deveSerIgual(6,lInt.getQuantidade(),"Lista_clonar -> Teste_1");
 
         Lista<Integer> clone = new Lista<>();
 
-        teste.deveSerIgual(0,clone.getQuantidade());
+        teste.deveSerIgual(0,clone.getQuantidade(),"Lista_clonar -> Teste_2");
 
         clone = lInt.clonar();
 
-        teste.deveSerIgual(clone.getQuantidade(),lInt.getQuantidade());
+        teste.deveSerIgual(clone.getQuantidade(),lInt.getQuantidade(),"Lista_clonar -> Teste_3");
 
         if (clone.getQuantidade()==lInt.getQuantidade()){
             for (int i = 0; i < lInt.getQuantidade(); i++) {
-                teste.deveSerIgual(clone.get(i), lInt.get(i));
+                teste.deveSerIgual(clone.get(i), lInt.get(i),"Lista_clonar -> Teste_4");
             }
         }
 
@@ -374,11 +374,11 @@ public class TesteLista {
         lInt.adicionar(4);
         lInt.adicionar(5);
 
-        teste.deveSerIgual(6,lInt.getQuantidade());
+        teste.deveSerIgual(6,lInt.getQuantidade(),"Lista_limpar -> Teste_1");
 
         lInt.limpar();
 
-        teste.deveSerIgual(0,lInt.getQuantidade());
+        teste.deveSerIgual(0,lInt.getQuantidade(),"Lista_limpar -> Teste_2");
 
     }
 }

@@ -31,10 +31,10 @@ public class TesteIO {
             System.out.println(jogador.getNome());
         }
 
-        teste.deveSerIgual(jogadores.getQuantidade(), escola.getQuantidade());
+        teste.deveSerIgual(jogadores.getQuantidade(), escola.getQuantidade(),"io_ler_arquivo -> Teste_1");
 
         for (int i = 0; i < jogadores.getQuantidade(); i++) {
-            teste.deveSerIgual(jogadores.get(i).getNome(), escola.get(i).getNome());
+            teste.deveSerIgual(jogadores.get(i).getNome(), escola.get(i).getNome(),"io_ler_arquivo -> Teste_2");
         }
     }
 }
