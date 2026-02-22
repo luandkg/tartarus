@@ -1,5 +1,7 @@
 package tempo;
 
+import estruturas.fmt;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -52,6 +54,52 @@ public class Tempo {
     public static long getHorasEntre(Horario h1, Horario h2) {
 
         return getSegundosEntre(h1,h2)/3600;
+
+    }
+
+
+    public static String formatarNanossegundos(long dNano){
+        long dMili = dNano / 1_000_000;
+        long dSegundo = dMili / 1000;
+        long dMinuto =dSegundo/ 60;
+        long dHora = dMinuto/60;
+
+        if(dHora>23){
+            dHora = dHora % 24;
+        }
+        if(dMinuto>60){
+            dMinuto = dMinuto % 60;
+        }
+        if(dSegundo>60){
+            dSegundo = dSegundo % 60;
+        }
+        if(dMili>1000){
+            dMili = dMili % 1000;
+        }
+        if(dNano>1000000){
+            dNano= dNano % 1000000;
+        }
+
+        /*
+        fmt.formatar("Tempo em Nanossegundo : {}", dNano);
+        fmt.formatar("Tempo em Milissegundo : {}", dMili);
+        fmt.formatar("Tempo em Segundo : {}", dSegundo);
+        fmt.formatar("Tempo em Minuto : {}", dMinuto);
+        fmt.formatar("Tempo em Hora : {}", dHora);
+        */
+
+        if(dHora>0){
+
+            return fmt.formatar("{}:{}:{}:{}:{} Horas", dHora, dMinuto, dSegundo, dMili, dNano);
+        }else if(dMinuto>0){
+            return fmt.formatar("{}:{}:{}:{} Minutos",  dMinuto, dSegundo, dMili, dNano);
+        }else if(dSegundo>0){
+            return fmt.formatar("{}:{}:{} Segundos", dSegundo, dMili, dNano);
+        }else if(dMili>0){
+            return fmt.formatar("{}:{} Milissegundos", dMili, dNano);
+        }else {
+            return fmt.formatar("{} Nanossegundos", dNano);
+        }
 
     }
 }

@@ -96,6 +96,10 @@ public class Horario {
         return (horas * (60L * 60L)) + (minutos * 60L) + segundos;
     }
 
+    public long getTotalEmNanoSegundos() {
+        return getTotalEmSegundos()*1_000_000_000;
+    }
+
     public static boolean igual(Horario h1, Horario h2) {
         return h1.getTotalEmSegundos() == h2.getTotalEmSegundos();
     }

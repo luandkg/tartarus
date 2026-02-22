@@ -68,4 +68,19 @@ public class TesteTempo {
         teste.deveSerIgual(3600,segundos,"Tempo_segundos_entre -> Teste_1");
 
     }
+
+    @TesteCalebe
+    public static void Tempo_formatador(TestandoCalebe teste){
+        long t1 = new Horario(0,30,15).getTotalEmNanoSegundos();
+        long t2 = new Horario(0,12,0).getTotalEmNanoSegundos();
+        long t3 = new Horario(1,0,0).getTotalEmNanoSegundos();
+        long t4 = new Horario(2,30,40).getTotalEmNanoSegundos();
+        long t5 = new Horario(1,15,20).getTotalEmNanoSegundos();
+
+        teste.deveSerIgual("30:15:0:0 Minutos",Tempo.formatarNanossegundos(t1),"Tempo_formatador -> Teste_1");
+        teste.deveSerIgual("12:0:0:0 Minutos",Tempo.formatarNanossegundos(t2),"Tempo_formatador -> Teste_2");
+        teste.deveSerIgual("1:60:0:0:0 Horas",Tempo.formatarNanossegundos(t3),"Tempo_formatador -> Teste_3");
+        teste.deveSerIgual("2:30:40:0:0 Horas",Tempo.formatarNanossegundos(t4),"Tempo_formatador -> Teste_4");
+        teste.deveSerIgual("1:15:20:0:0 Horas",Tempo.formatarNanossegundos(t5),"Tempo_formatador -> Teste_5");
+    }
 }

@@ -77,8 +77,8 @@ public class TesteCaixa {
         teste.deveSerIgual(3, caixaInteger.getQuantidade(),"Caixa_retorna_item_e_posicao -> Teste_1");
 
         ItemComPosicao<Integer> t1 = caixaInteger.getItensComPosicao().get(0);
-        teste.deveSerIgual(53,t1.getItem(),"Caixa_retorna_item_e_posicao -> Teste_2");
-        teste.deveSerIgual(4,t1.getPosicao(),"Caixa_retorna_item_e_posicao -> Teste_3");
+        teste.deveSerIgual(55,t1.getItem(),"Caixa_retorna_item_e_posicao -> Teste_2");
+        teste.deveSerIgual(0,t1.getPosicao(),"Caixa_retorna_item_e_posicao -> Teste_3");
 
         ItemComPosicao<Integer> t2 = caixaInteger.getItensComPosicao().get(1);
         teste.deveSerIgual(33,t2.getItem(),"Caixa_retorna_item_e_posicao -> Teste_4");

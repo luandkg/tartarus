@@ -1,10 +1,10 @@
 import estruturas.Lista;
 import estruturas.fmt;
 import libs.teste.TesteExecutor;
-import tempo.Cronometro;
+import tempo.Horario;
+import tempo.Tempo;
 import testes.*;
 
-import java.util.Random;
 
 
 public class Main {
@@ -21,12 +21,12 @@ public class Main {
         testarClasses.adicionar(TesteInteiros.class);
         testarClasses.adicionar(TesteFMT.class);
         testarClasses.adicionar(TesteTempo.class);
+        testarClasses.adicionar(TesteCronometro.class);
 
 
         //TesteExecutor.TESTAR(testarClasses);
 
         TesteExecutor.TESTAR_UNICO(TesteCronometro.class);
-
 
     }
 }
