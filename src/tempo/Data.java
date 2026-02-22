@@ -1,5 +1,8 @@
 package tempo;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class Data {
 
     private int dia;
@@ -18,6 +21,26 @@ public class Data {
 
     public int getDia() {
         return dia;
+    }
+
+    public DiaDaSemana getDiaDaSemana(){
+        // Atenção: fevereiro = 1 (porque janeiro = 0)
+        Calendar calendario = new GregorianCalendar(ano, mes-1, dia);
+
+        // Obter o dia da semana (1 = Domingo, 2 = Segunda, ..., 7 = Sábado)
+        int diaSemana = calendario.get(Calendar.DAY_OF_WEEK);
+
+        return switch (diaSemana) {
+            case 1 -> DiaDaSemana.DOMINGO;
+            case 2 -> DiaDaSemana.SEGUNDA;
+            case 3 -> DiaDaSemana.TERCA;
+            case 4 -> DiaDaSemana.QUARTA;
+            case 5 -> DiaDaSemana.QUINTA;
+            case 6 -> DiaDaSemana.SEXTA;
+            case 7 -> DiaDaSemana.SABADO;
+            default -> null;
+        };
+
     }
 
     public int getMes() {

@@ -24,9 +24,9 @@ public class Main {
         testarClasses.adicionar(TesteCronometro.class);
 
 
-        //TesteExecutor.TESTAR(testarClasses);
+        TesteExecutor.TESTAR(testarClasses);
 
-        TesteExecutor.TESTAR_UNICO(TesteCronometro.class);
+        //TesteExecutor.TESTAR_UNICO(TesteCronometro.class);
 
     }
 }

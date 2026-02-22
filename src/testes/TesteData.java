@@ -91,14 +91,48 @@ public class TesteData {
     @TesteCalebe
     public static void Data_menor_ou_igual(TestandoCalebe teste){
         Data data1 = new Data(1,1,1);
-
         Data data2 = new Data(1,1,1);
-
         Data data3 = new Data(31,12,9999);
 
         teste.deveSerVerdadeiro(Data.igual(data1,data2),"Data_menor_ou_igual -> Teste_1");
         teste.deveSerVerdadeiro(Data.menor(data1,data3),"Data_menor_ou_igual -> Teste_2");
 
         teste.deveSerVerdadeiro(Data.menorOuIgual(data1,data3),"Data_menor_ou_igual -> Teste_3");
+    }
+
+    @TesteCalebe
+    public static void Data_dia_da_semana_simples(TestandoCalebe teste){
+        Data data1 = new Data(1,3,2026);
+        Data data2 = new Data(23,3,2002);
+        Data data3 = new Data(27,7,1992);
+
+        teste.deveSerIgual("Domingo",data1.getDiaDaSemana().diaSimples(),"Data_dia_da_semana -> Teste_1");
+        teste.deveSerIgual("Sabado",data2.getDiaDaSemana().diaSimples(),"Data_dia_da_semana -> Teste_2");
+        teste.deveSerIgual("Segunda",data3.getDiaDaSemana().diaSimples(),"Data_dia_da_semana -> Teste_3");
+
+    }
+
+    @TesteCalebe
+    public static void Data_dia_da_semana_composto(TestandoCalebe teste){
+        Data data1 = new Data(1,3,2026);
+        Data data2 = new Data(23,3,2002);
+        Data data3 = new Data(27,7,1992);
+
+        teste.deveSerIgual("Domingo",data1.getDiaDaSemana().diaComposto(),"Data_dia_da_semana_composto -> Teste_1");
+        teste.deveSerIgual("Sabado",data2.getDiaDaSemana().diaComposto(),"Data_dia_da_semana_composto -> Teste_2");
+        teste.deveSerIgual("Segunda-Feira",data3.getDiaDaSemana().diaComposto(),"Data_dia_da_semana_composto -> Teste_3");
+
+    }
+
+    @TesteCalebe
+    public static void Data_dia_da_semana_sigla(TestandoCalebe teste){
+        Data data1 = new Data(1,3,2026);
+        Data data2 = new Data(23,3,2002);
+        Data data3 = new Data(27,7,1992);
+
+        teste.deveSerIgual("Dom",data1.getDiaDaSemana().diaEmSigla(),"Data_dia_da_semana_sigla -> Teste_1");
+        teste.deveSerIgual("Sab",data2.getDiaDaSemana().diaEmSigla(),"Data_dia_da_semana_sigla -> Teste_2");
+        teste.deveSerIgual("Seg",data3.getDiaDaSemana().diaEmSigla(),"Data_dia_da_semana_sigla -> Teste_3");
+
     }
 }
