@@ -17,11 +17,12 @@ public class Main {
         testarClasses.adicionar(TesteData.class);
         testarClasses.adicionar(TesteInteiros.class);
         testarClasses.adicionar(TesteFMT.class);
+        testarClasses.adicionar(TesteTempo.class);
 
 
         //TesteExecutor.TESTAR(testarClasses);
 
-        TesteExecutor.TESTAR_UNICO(TesteFMT.class);
+        TesteExecutor.TESTAR_UNICO(TesteTempo.class);
 
 
     }

@@ -75,8 +75,8 @@ public class Horario {
 
     public String toString() {
         String sHora = String.valueOf(horas);
-        String sMinuto = String.valueOf(horas);
-        String sSegundo = String.valueOf(horas);
+        String sMinuto = String.valueOf(minutos);
+        String sSegundo = String.valueOf(segundos);
 
 
         if (sHora.length() == 1) {

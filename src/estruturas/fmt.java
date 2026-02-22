@@ -47,6 +47,9 @@ public class fmt {
     public static void println(String texto, Object... argumentos) {
         System.out.println(formatar(texto,argumentos));
     }
+    public static void println(long texto) {
+        System.out.println(texto);
+    }
 
     public static String formatar(String texto, Object... argumentos) {
         int i = 0;

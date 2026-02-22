@@ -29,6 +29,15 @@ public class TestandoCalebe {
         }
     }
 
+    public void deveSerIgual(long esperado,long recebido, String teste){
+        if(esperado==recebido){
+            sucesso+=1;
+        }else{
+            falhou+=1;
+            erros.adicionar(teste);
+        }
+    }
+
     public void deveSerVerdadeiro(boolean recebido, String teste){
         if(recebido){
             sucesso+=1;
