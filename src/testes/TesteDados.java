@@ -1,15 +1,16 @@
 package testes;
 
-import main.libs.auxiliar.Jogador;
-import main.libs.auxiliar.JogadorSerializavel;
-import main.libs.estruturas.IO;
+import main.app.Jogador;
+import main.app.JogadorSerializavel;
+import main.libs.estruturas.Dados;
 import main.libs.estruturas.Lista;
+import main.libs.estruturas.fmt;
 import main.libs.teste.TestandoCalebe;
 import main.libs.teste.TesteCalebe;
 import main.libs.teste.TesteClasseCalebe;
 
 @TesteClasseCalebe
-public class TesteIO {
+public class TesteDados {
 
     @TesteCalebe
     public static void io_ler_arquivo(TestandoCalebe teste){
@@ -21,14 +22,14 @@ public class TesteIO {
         jogadores.adicionar(new Jogador("Zagueiro","Diogo",3));
         jogadores.adicionar(new Jogador("Goleiro","William",1));
 
-        main.libs.estruturas.IO.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
+        Dados.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
 
         Lista<Jogador> escola = new Lista<>();
 
-        escola = IO.abrir("arquivos/ListaDeJogadores.txt", new JogadorSerializavel());
+        escola = Dados.abrir("arquivos/ListaDeJogadores.txt", new JogadorSerializavel());
 
         for (Jogador jogador : escola){
-            System.out.println(jogador.getNome());
+            fmt.println(jogador.getNome());
         }
 
         teste.deveSerIgual(jogadores.getQuantidade(), escola.getQuantidade(),"io_ler_arquivo -> Teste_1");

@@ -1,4 +1,4 @@
-package main.libs.auxiliar;
+package main.app;
 
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;

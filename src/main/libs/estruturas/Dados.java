@@ -1,7 +1,7 @@
 package main.libs.estruturas;
 import main.libs.utils.Serializavel;
 
-public class IO {
+public class Dados {
 
     public static <T> void guardar(String arquivo, Lista<T> lista, Serializavel<T> serializavel){
         String texto = "";
