@@ -1,10 +1,9 @@
 package testes;
 
-import estruturas.Texto;
-import estruturas.fmt;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
+import main.libs.estruturas.fmt;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
 
 @TesteClasseCalebe
 public class TesteFMT {

@@ -1,6 +1,6 @@
 # 🏺 Tartarus
 
-**Tartarus** é uma biblioteca de utilitários de baixo nível focada em estruturas de dados eficientes, manipulação de strings, gerenciamento de tempo e sistemas de entrada/saída (I/O). O projeto prioriza performance e tipagem genérica para facilitar o desenvolvimento de aplicações modulares.
+**Tartarus** é uma biblioteca de utilitários de baixo nível focada em main.libs.estruturas de dados eficientes, manipulação de strings, gerenciamento de main.libs.tempo e sistemas de entrada/saída (I/O). O projeto prioriza performance e tipagem genérica para facilitar o desenvolvimento de aplicações modulares.
 
 Desenvolvido em colaboração por [@luandkg](https://github.com/luandkg) e [@CalebeAF02](https://github.com/CalebeAF02).
 
@@ -21,12 +21,12 @@ Desenvolvido em colaboração por [@luandkg](https://github.com/luandkg) e [@Cal
 * Utilitários para leitura e escrita de dados textuais.
 
 ### ⏱️ Tempo, Datas e Cronometria
-* **Cronômetro:** Medição de tempo precisa com formatação personalizada (`toString`).
+* **Cronômetro:** Medição de main.libs.tempo precisa com formatação personalizada (`toString`).
 * **Data e Horário:** Gerenciamento de calendários, horários e enums para meses e dias da semana.
 * **Formatadores:** Funções dedicadas para formatação de dados temporais.
 
 ### 💾 Entrada e Saída (I/O)
-* Persistência de dados: Classes especializadas para armazenar e recuperar estruturas de `Lista` em arquivos.
+* Persistência de dados: Classes especializadas para armazenar e recuperar main.libs.estruturas de `Lista` em arquivos.
 
 ### 🧪 Framework de Testes
 * **TesteExecutor:** Uma biblioteca interna de testes automatizados criada para garantir a integridade de todas as funções do projeto.

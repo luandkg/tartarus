@@ -1,12 +1,12 @@
 package testes;
 
-import auxiliar.Jogador;
-import auxiliar.JogadorSerializavel;
-import estruturas.IO;
-import estruturas.Lista;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
+import main.libs.auxiliar.Jogador;
+import main.libs.auxiliar.JogadorSerializavel;
+import main.libs.estruturas.IO;
+import main.libs.estruturas.Lista;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
 
 @TesteClasseCalebe
 public class TesteIO {
@@ -21,7 +21,7 @@ public class TesteIO {
         jogadores.adicionar(new Jogador("Zagueiro","Diogo",3));
         jogadores.adicionar(new Jogador("Goleiro","William",1));
 
-        estruturas.IO.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
+        main.libs.estruturas.IO.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
 
         Lista<Jogador> escola = new Lista<>();
 

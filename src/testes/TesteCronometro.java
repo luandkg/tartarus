@@ -1,11 +1,10 @@
 package testes;
 
-import estruturas.Texto;
-import estruturas.fmt;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
-import tempo.Cronometro;
+import main.libs.estruturas.Texto;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
+import main.libs.tempo.Cronometro;
 
 import java.util.Random;
 

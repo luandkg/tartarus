@@ -1,16 +1,15 @@
 package testes;
 
-import auxiliar.Ponto;
-import auxiliar.PontoIgualdade;
-import estruturas.ItemComPosicao;
-import estruturas.Lista;
-import estruturas.Texto;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
-import utils.Condicional;
-import utils.CondicionalParametrizado;
-import utils.Ferramenta;
+import main.libs.auxiliar.Ponto;
+import main.libs.auxiliar.PontoIgualdade;
+import main.libs.estruturas.ItemComPosicao;
+import main.libs.estruturas.Lista;
+import main.libs.estruturas.Texto;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
+import main.libs.utils.Condicional;
+import main.libs.utils.CondicionalParametrizado;
 
 @TesteClasseCalebe
 public class TesteLista {

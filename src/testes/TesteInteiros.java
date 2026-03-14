@@ -1,11 +1,11 @@
 package testes;
 
-import estruturas.Inteiros;
-import estruturas.Lista;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
-import utils.Ferramenta;
+import main.libs.estruturas.Inteiros;
+import main.libs.estruturas.Lista;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
+import main.libs.utils.Ferramenta;
 
 @TesteClasseCalebe
 public class TesteInteiros {

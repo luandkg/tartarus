@@ -1,13 +1,11 @@
 package testes;
 
-import auxiliar.Ponto;
-import estruturas.Caixa;
-import estruturas.ItemComPosicao;
-import estruturas.Lista;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
-import utils.Ferramenta;
+import main.libs.auxiliar.Ponto;
+import main.libs.estruturas.Caixa;
+import main.libs.estruturas.ItemComPosicao;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
 
 @TesteClasseCalebe
 public class TesteCaixa {

@@ -1,11 +1,11 @@
 package testes;
 
-import auxiliar.StringIgualdade;
-import estruturas.Lista;
-import estruturas.Texto;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
+import main.libs.auxiliar.StringIgualdade;
+import main.libs.estruturas.Lista;
+import main.libs.estruturas.Texto;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
 
 @TesteClasseCalebe
 public class TesteTexto {

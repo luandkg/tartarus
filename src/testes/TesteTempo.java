@@ -1,12 +1,12 @@
 package testes;
 
-import estruturas.fmt;
-import libs.teste.TestandoCalebe;
-import libs.teste.TesteCalebe;
-import libs.teste.TesteClasseCalebe;
-import tempo.Data;
-import tempo.Horario;
-import tempo.Tempo;
+import main.libs.estruturas.fmt;
+import main.libs.teste.TestandoCalebe;
+import main.libs.teste.TesteCalebe;
+import main.libs.teste.TesteClasseCalebe;
+import main.libs.tempo.Data;
+import main.libs.tempo.Horario;
+import main.libs.tempo.Tempo;
 
 @TesteClasseCalebe
 public class TesteTempo {
