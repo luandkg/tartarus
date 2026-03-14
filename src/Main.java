@@ -22,6 +22,7 @@ public class Main {
         testarClasses.adicionar(TesteFMT.class);
         testarClasses.adicionar(TesteTempo.class);
         testarClasses.adicionar(TesteCronometro.class);
+        testarClasses.adicionar(TesteTalvez.class);
 
 
         TesteExecutor.TESTAR(testarClasses);
