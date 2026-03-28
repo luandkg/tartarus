@@ -16,7 +16,7 @@ public class GerenciadorDeJogadores {
         this.arquivo = "arquivos/Lista_De_Jogadores.csv";
         try {
             jogadores = Dados.abrir(arquivo, new JogadorSerializavel());
-        }catch (Exception erro){
+        } catch (Exception erro) {
             jogadores = new Lista<>();
         }
 
@@ -26,13 +26,9 @@ public class GerenciadorDeJogadores {
         Dados.guardar(arquivo, jogadores, new JogadorSerializavel());
     }
 
-    public void cadastrar(Jogador jogador) {
+    public void criar(Jogador jogador) {
         this.jogadores.adicionar(jogador);
         salvar();
-    }
-
-    public Lista<Jogador> listar() {
-        return jogadores;
     }
 
     public boolean remover(String nome) {
@@ -46,6 +42,10 @@ public class GerenciadorDeJogadores {
         return false;
     }
 
+    public Lista<Jogador> listar() {
+        return jogadores;
+    }
+
     public Talvez<Jogador> obter(String nome) {
         for (Jogador jogador : jogadores) {
             if (Texto.igual(jogador.getNome(), nome)) {
@@ -53,5 +53,25 @@ public class GerenciadorDeJogadores {
             }
         }
         return Talvez.NADA();
+    }
+
+    public Lista<Jogador> obterJogadoresDoTime(int timeID) {
+        Lista<Jogador> jogadoresDoTime = new Lista<>();
+
+        for (Jogador jogador : jogadores) {
+            if (jogador.getTimeID()==timeID) {
+                jogadoresDoTime.adicionar(jogador);
+            }
+        }
+        return jogadoresDoTime;
+    }
+
+    public boolean existe(String nome) {
+        for (Jogador jogador : jogadores) {
+            if (Texto.igual(nome, jogador.getNome())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

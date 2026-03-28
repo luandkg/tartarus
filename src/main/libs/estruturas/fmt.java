@@ -2,6 +2,12 @@ package main.libs.estruturas;
 
 public class fmt {
 
+    public static void printCaixa(String texto, int tamanhoCaixa){
+        fmt.println(fmt.repete("-", tamanhoCaixa));
+        fmt.println("|{centraliza_"+(tamanhoCaixa-2)+"}|",texto);
+        fmt.println(fmt.repete("-", tamanhoCaixa));
+    }
+
     public static String direita(String texto, int tamanhoFixo) {
         while (texto.length() < tamanhoFixo) {
             texto = " " + texto;
@@ -41,12 +47,13 @@ public class fmt {
     }
 
     public static void print(String texto, Object... argumentos) {
-        System.out.print(formatar(texto,argumentos));
+        System.out.print(formatar(texto, argumentos));
     }
 
     public static void println(String texto, Object... argumentos) {
-        System.out.println(formatar(texto,argumentos));
+        System.out.println(formatar(texto, argumentos));
     }
+
     public static void println(long texto) {
         System.out.println(texto);
     }
@@ -67,34 +74,34 @@ public class fmt {
                 formato = "";
 
             } else if (letra.contentEquals("}")) {
-                if(Texto.comecaCom(formato,"direita_")){
-                    int quantidade = Integer.parseInt(formato.replace("direita_",""));
-                    novoTexto += direita(String.valueOf(argumentos[posicao]),quantidade);
-                }else if(Texto.comecaCom(formato,"esquerda_")){
-                    int quantidade = Integer.parseInt(formato.replace("esquerda_",""));
-                    novoTexto += esquerda(String.valueOf(argumentos[posicao]),quantidade);
-                }else if(Texto.comecaCom(formato,"repete_")){
-                    int quantidade = Integer.parseInt(formato.replace("repete_",""));
-                    novoTexto += repete(String.valueOf(argumentos[posicao]),quantidade);
-                }else if(Texto.comecaCom(formato,"centraliza_")){
-                    int quantidade = Integer.parseInt(formato.replace("centraliza_",""));
+                if (Texto.comecaCom(formato, "direita_")) {
+                    int quantidade = Integer.parseInt(formato.replace("direita_", ""));
+                    novoTexto += direita(String.valueOf(argumentos[posicao]), quantidade);
+                } else if (Texto.comecaCom(formato, "esquerda_")) {
+                    int quantidade = Integer.parseInt(formato.replace("esquerda_", ""));
+                    novoTexto += esquerda(String.valueOf(argumentos[posicao]), quantidade);
+                } else if (Texto.comecaCom(formato, "repete_")) {
+                    int quantidade = Integer.parseInt(formato.replace("repete_", ""));
+                    novoTexto += repete(String.valueOf(argumentos[posicao]), quantidade);
+                } else if (Texto.comecaCom(formato, "centraliza_")) {
+                    int quantidade = Integer.parseInt(formato.replace("centraliza_", ""));
                     int palavra = String.valueOf(argumentos[posicao]).length();
-                    if(palavra%2 == 1){
+                    if (palavra % 2 == 1) {
 
-                        throw new RuntimeException("Erro: A palavra deve ter um quantidade par! Caso necessario adicione um ' ' no final. : "+String.valueOf(argumentos[posicao]));
+                        throw new RuntimeException("Erro: A palavra deve ter um quantidade par! Caso necessario adicione um ' ' no final. : " + String.valueOf(argumentos[posicao]));
                     }
-                    novoTexto += repete(" ",(quantidade/2)-(palavra/2))+ String.valueOf(argumentos[posicao])+repete(" ",(quantidade/2)-(palavra/2));
-                }else{
+                    novoTexto += repete(" ", (quantidade / 2) - (palavra / 2)) + String.valueOf(argumentos[posicao]) + repete(" ", (quantidade / 2) - (palavra / 2));
+                } else {
                     novoTexto += String.valueOf(argumentos[posicao]);
                 }
                 dentroDOFOrmato = false;
                 posicao++;
 
             } else {
-                if(dentroDOFOrmato == false){
-                    novoTexto+=letra;
-                }else{
-                    formato+=letra;
+                if (dentroDOFOrmato == false) {
+                    novoTexto += letra;
+                } else {
+                    formato += letra;
                 }
             }
             i++;

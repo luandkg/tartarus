@@ -1,5 +1,7 @@
 package main.app;
 
+import main.libs.estruturas.Lista;
+import main.libs.estruturas.Texto;
 import main.libs.estruturas.fmt;
 import main.libs.utils.Talvez;
 
@@ -7,21 +9,44 @@ import java.util.Scanner;
 
 public class Futebol {
 
-    private GerenciadorDeJogadores gerenciador;
+    private GerenciadorDeJogadores gerenciadorDeJogadores;
+    private GerenciadorDeTimes gerenciadorDeTimes;
 
     private boolean executando = false;
 
     public Futebol() {
-        this.gerenciador = new GerenciadorDeJogadores();
+        this.gerenciadorDeJogadores = new GerenciadorDeJogadores();
+        this.gerenciadorDeTimes = new GerenciadorDeTimes();
+
     }
 
     public void menu() {
         fmt.println("Menu Futebol");
-        fmt.println("\t1 - Cadastrar Jogador");
-        fmt.println("\t2 - Listar Jogadores");
-        fmt.println("\t3 - Remover Jogador");
-        fmt.println("\t4 - Ver Informacoes do Jogador");
+        menuTime();
+        menuJogador();
         fmt.println("\t0 - Sair\n");
+
+    }
+    public void menuTime() {
+        fmt.println("\t1 - Criar Time");
+        fmt.println("\t2 - Listar Times");
+        fmt.println("\t3 - Remover Time");
+        fmt.println("\t4 - Ver Informacoes do Time");
+        fmt.println("\t5 - Selecionar Time");
+    }
+
+    public void menuJogador() {
+        fmt.println("\t6 - Criar Jogador");
+        fmt.println("\t7 - Listar Jogadores");
+        fmt.println("\t8 - Remover Jogador");
+        fmt.println("\t9 - Ver Informacoes do Jogador");
+    }
+
+    public void menuVincularJogador() {
+        fmt.println("\t1 - Vincular Jogador");
+        fmt.println("\t2 - Desvincular Jogador");
+        fmt.println("\t3 - Listar Jogadores Do Time");
+        fmt.println("\t0 - Voltar");
     }
 
     public void executar() {
@@ -34,13 +59,17 @@ public class Futebol {
 
             Scanner leitor = new Scanner(System.in);
             String opcao = leitor.nextLine();
-            fmt.println("O leitor captou: " + opcao);
 
             switch (opcao) {
-                case "1" -> cadastrarJogador();
-                case "2" -> listarJogadores();
-                case "3" -> removerJogador();
-                case "4" -> verInformacoesDoJogador();
+                case "1" -> cadastrarTime();
+                case "2" -> listarTime();
+                case "3" -> removerTime();
+                case "4" -> verInformacoesDoTime();
+                case "5" -> selecionarTime();
+                case "6" -> cadastrarJogador();
+                case "7" -> listarJogadores();
+                case "8" -> removerJogador();
+                case "9" -> verInformacoesDoJogador();
                 case "0" -> sair();
                 case null, default -> {
                     fmt.println("Opcao invalida!");
@@ -54,22 +83,18 @@ public class Futebol {
     }
 
     private void cadastrarJogador() {
+        fmt.printCaixa("CADASTRAR JOGADOR ",30);
 
         Scanner leitor = new Scanner(System.in);
-
-        fmt.print(">> Digite a posicao: ");
-
-        String posicao = leitor.nextLine();
-        if(!Jogador.validaPosicao(posicao)){
-            fmt.println("Erro: Posicao invalida!");
-            Jogador.listarPosicoes();
-            return;
-        }
 
         fmt.print(">> Digite o nome: ");
         String nome = leitor.nextLine();
         if(nome.length()<3){
             fmt.println("Erro: Nome com tamanho invalido!");
+            return;
+        }
+        if(gerenciadorDeJogadores.existe(nome)){
+            fmt.println("Erro: Ja existe um jogador cadastrado com esse nome!");
             return;
         }
 
@@ -88,38 +113,56 @@ public class Futebol {
             return;
         }
 
-        Jogador jogador = new Jogador(posicao, nome, uniforme);
+        fmt.print(">> Digite a posicao: ");
+        String posicao = leitor.nextLine();
+        if(!Jogador.validaPosicao(posicao)){
+            fmt.println("Erro: Posicao invalida!");
+            Jogador.listarPosicoes();
+            return;
+        }
 
-        gerenciador.cadastrar(jogador);
+        Jogador jogador = new Jogador(nome, uniforme, posicao);
+
+        gerenciadorDeJogadores.criar(jogador);
 
         fmt.println("Jogador cadastrado com sucesso!");
     }
 
     private void listarJogadores() {
-        if(gerenciador.listar().getQuantidade()>0){
-            fmt.println(fmt.repete("-", 73));
-            fmt.println("|{centraliza_73}|", "Lista de Jogadores");
-            fmt.println(fmt.repete("-", 73));
-            fmt.println("| {esquerda_15} | {esquerda_15} | {esquerda_15} | {esquerda_15} |", "JOGADOR", "POSICAO", "NOME", "UNIFORME");
-            fmt.println(fmt.repete("-", 73));
+        if(gerenciadorDeJogadores.listar().getQuantidade()>0){
+            fmt.println(fmt.repete("-", 102));
+            fmt.println("|{centraliza_100}|", "Lista de Jogadores");
+            fmt.println(fmt.repete("-", 102));
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", "JOGADOR","NOME","UNIFORME","POSICAO","TIME");
+            fmt.println(fmt.repete("-", 102));
 
             int cont = 1;
 
-            for (Jogador jogador : gerenciador.listar()){
-                fmt.println("| {esquerda_15} | {esquerda_15} | {esquerda_15} | {esquerda_15} |", cont,jogador.getPosicao(),jogador.getNome(),jogador.getUniforme());
+            for (Jogador jogador : gerenciadorDeJogadores.listar()){
+                String time;
+
+                if(jogador.getTimeID()!=-1){
+                    time = gerenciadorDeTimes.obter(jogador.getTimeID());
+                }else {
+                    time = "";
+                }
+
+                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", cont,jogador.getNome(),jogador.getUniforme(),jogador.getPosicao(),time);
                 cont++;
             }
-            fmt.println(fmt.repete("-", 73));
+            fmt.println(fmt.repete("-", 102));
         }else{
             fmt.println("A lista de jogadores esta vazia!");
         }
     }
 
     private void removerJogador() {
+        fmt.printCaixa("REMOVER JOGADOR ",30);
+
         Scanner leitor = new Scanner(System.in);
         fmt.print(">> Digite o nome do jogador: ");
         String nome = leitor.nextLine();
-        if(gerenciador.remover(nome)){
+        if(gerenciadorDeJogadores.remover(nome)){
             fmt.println("Jogador removido com sucesso!");
         }else{
             fmt.println("Erro: Jogador nao encontrado!");
@@ -127,21 +170,189 @@ public class Futebol {
     }
 
     private void verInformacoesDoJogador() {
+        fmt.printCaixa("DETALHES DO JOGADOR",30);
+
         Scanner leitor = new Scanner(System.in);
         fmt.print(">> Digite o nome do jogador: ");
         String nome = leitor.nextLine();
 
-        Talvez<Jogador> talvez = gerenciador.obter(nome);
+        Talvez<Jogador> talvez = gerenciadorDeJogadores.obter(nome);
         if(talvez.temValor()){
-            fmt.println(fmt.repete("-", 55));
-            fmt.println("| {esquerda_15} | {esquerda_15} | {esquerda_15} |","POSICAO", "NOME", "UNIFORME");
-            fmt.println(fmt.repete("-", 55));
-            fmt.println("| {esquerda_15} | {esquerda_15} | {esquerda_15} |", talvez.getValor().getPosicao(),talvez.getValor().getNome(),talvez.getValor().getUniforme());
-            fmt.println(fmt.repete("-", 55));
+            fmt.println(fmt.repete("-", 65));
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} |","POSICAO", "NOME", "UNIFORME");
+            fmt.println(fmt.repete("-", 65));
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} |", talvez.getValor().getPosicao(),talvez.getValor().getNome(),talvez.getValor().getUniforme());
+            fmt.println(fmt.repete("-", 65));
         }else{
             fmt.println("Erro: Jogador nao encontrado!");
         }
     }
 
+
+    private void cadastrarTime(){
+        fmt.printCaixa("CADASTRAR TIME",30);
+        Scanner leitor = new Scanner(System.in);
+
+        fmt.print(">> Digite o nome: ");
+        String nome = leitor.nextLine();
+        if(nome.length()<3){
+            fmt.println("Erro: Nome com tamanho invalido!");
+            return;
+        }
+        if(gerenciadorDeTimes.existe(nome)){
+            fmt.println("Erro: Ja existe um time cadastrado com esse nome!");
+            return;
+        }
+
+        Time time = new Time(gerenciadorDeTimes.listar().getQuantidade(), nome);
+
+        gerenciadorDeTimes.criar(time);
+
+        fmt.println("Time cadastrado com sucesso!");
+
+    }
+
+    private void removerTime(){
+        fmt.printCaixa("REMOVER TIME",30);
+
+        Scanner leitor = new Scanner(System.in);
+        fmt.print(">> Digite o nome do Time: ");
+        String nome = leitor.nextLine();
+        if(gerenciadorDeTimes.remover(nome)){
+            fmt.println("Time removido com sucesso!");
+        }else{
+            fmt.println("Erro: Time nao encontrado!");
+        }
+    }
+    private void listarTime(){
+        if(gerenciadorDeTimes.listar().getQuantidade()>0){
+            fmt.println(fmt.repete("-", 44));
+            fmt.println("|{centraliza_42}|", "Lista de Times");
+            fmt.println(fmt.repete("-", 44));
+            fmt.println("| {esquerda_5} | {esquerda_15} | {esquerda_14} |", "ID", "TIME", "QUANTIDADE");
+            fmt.println(fmt.repete("-", 44));
+
+            for (Time time : gerenciadorDeTimes.listar()){
+                fmt.println("| {esquerda_5} | {esquerda_15} | {esquerda_14} |",time.getId(),time.getNome(), gerenciadorDeJogadores.obterJogadoresDoTime(time.getId()).getQuantidade());
+            }
+            fmt.println(fmt.repete("-", 44));
+        }else{
+            fmt.println("A lista de times esta vazia!");
+        }
+    }
+
+    private void verInformacoesDoTime(){
+        fmt.printCaixa("DETALHES DO TIME",30);
+
+        Scanner leitor = new Scanner(System.in);
+        fmt.print(">> Digite o nome do Time: ");
+        String nome = leitor.nextLine();
+
+        Talvez<Time> talvez = gerenciadorDeTimes.obter(nome);
+        if(talvez.temValor()){
+            fmt.println(fmt.repete("-", 44));
+            fmt.println("| {esquerda_5} | {esquerda_32} |", "ID", "TIME");
+            fmt.println(fmt.repete("-", 44));
+            fmt.println("| {esquerda_5} | {esquerda_32} |",talvez.getValor().getId(),talvez.getValor().getNome(), talvez.getValor());
+            fmt.println(fmt.repete("-", 44));
+        }else{
+            fmt.println("Erro: Time nao encontrado!");
+        }
+    }
+
+    private void selecionarTime(){
+        fmt.printCaixa("SELECIONAR TIME ",30);
+
+        Scanner leitor = new Scanner(System.in);
+        fmt.print(">> Digite o nome do Time: ");
+        String nome = leitor.nextLine();
+
+        Talvez<Time> talvez = gerenciadorDeTimes.obter(nome);
+
+        if(talvez.temValor()){
+            boolean executandoTime = true;
+            while (executandoTime){
+
+                menuVincularJogador();
+                fmt.print(">> Digite a opcao desejada: ");
+                String opcao = leitor.nextLine();
+
+                switch (opcao) {
+                    case "1" -> vincularJogador(talvez.getValor());
+                    case "2" -> desvincularJogador(talvez.getValor());
+                    case "3" -> listarJogadoresDoTime(talvez.getValor());
+
+                    case "0" -> {
+                        executandoTime = false;
+                        break;
+                    }
+
+                    case null, default -> {
+                        fmt.println("Opcao invalida!");
+                    }
+                }
+            }
+
+        }else{
+            fmt.println("Erro: Time ao encontrado!");
+        }
+    }
+
+    private void vincularJogador(Time time){
+        fmt.println("Digite o nome do jogador: ");
+
+        Scanner leitor = new Scanner(System.in);
+        String nome = leitor.nextLine();
+
+        Talvez<Jogador> talvezJogador = gerenciadorDeJogadores.obter(nome);
+
+        if(talvezJogador.temValor()){
+            talvezJogador.getValor().setTimeID(time.getId());
+            gerenciadorDeJogadores.salvar();
+        }else{
+            fmt.println("Erro: Jogador nao encontrado!");
+        }
+
+    }
+
+    private void desvincularJogador(Time time){
+        fmt.println("Digite o nome do jogador: ");
+
+        Scanner leitor = new Scanner(System.in);
+        String nome = leitor.nextLine();
+
+        Talvez<Jogador> talvezJogador = gerenciadorDeJogadores.obter(nome);
+
+        if(talvezJogador.temValor()){
+            talvezJogador.getValor().setTimeID(-1);
+            gerenciadorDeJogadores.salvar();
+
+        }else{
+            fmt.println("Erro: Jogador nao encontrado!");
+        }
+    }
+
+    private void listarJogadoresDoTime(Time time){
+        Lista<Jogador> jogadores = gerenciadorDeJogadores.obterJogadoresDoTime(time.getId());
+
+        if(jogadores.getQuantidade()>0){
+            fmt.println(fmt.repete("-", 84));
+            fmt.println("|{centraliza_82}|", "Lista de Jogadores Do Time: " + time.getNome());
+            fmt.println(fmt.repete("-", 84));
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_16} |", "JOGADOR","NOME","UNIFORME","POSICAO");
+            fmt.println(fmt.repete("-", 84));
+
+            int cont = 1;
+
+            for (Jogador jogador : jogadores){
+                String nomeTime = gerenciadorDeTimes.obter(jogador.getTimeID());
+                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_16} |", cont,jogador.getNome(),jogador.getUniforme(),jogador.getPosicao());
+                cont++;
+            }
+            fmt.println(fmt.repete("-", 84));
+        }else{
+            fmt.println("A lista de jogadores esta vazia!");
+        }
+    }
 
 }

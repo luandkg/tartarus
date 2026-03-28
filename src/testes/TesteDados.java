@@ -16,11 +16,11 @@ public class TesteDados {
     public static void io_ler_arquivo(TestandoCalebe teste){
         Lista<Jogador> jogadores = new Lista<Jogador>();
 
-        jogadores.adicionar(new Jogador("Atacante","Calebe",10));
-        jogadores.adicionar(new Jogador("Meia","Luan",7));
-        jogadores.adicionar(new Jogador("Lateral","Kaio",2));
-        jogadores.adicionar(new Jogador("Zagueiro","Diogo",3));
-        jogadores.adicionar(new Jogador("Goleiro","William",1));
+        jogadores.adicionar(new Jogador("Calebe",10,"Atacante"));
+        jogadores.adicionar(new Jogador("Luan",7,"Meia"));
+        jogadores.adicionar(new Jogador("Kaio",2,"Lateral"));
+        jogadores.adicionar(new Jogador("Diogo",3,"Zagueiro"));
+        jogadores.adicionar(new Jogador("William",1,"Goleiro"));
 
         Dados.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
 
