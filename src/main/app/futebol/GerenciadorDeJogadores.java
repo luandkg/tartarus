@@ -1,40 +1,31 @@
-package main.app;
+package main.app.futebol;
 
-import main.libs.estruturas.Dados;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
 import main.libs.utils.Talvez;
 
 public class GerenciadorDeJogadores {
 
-    private Lista<Jogador> jogadores;
+    private FutebolDados futebolDados;
 
-    private String arquivo;
-
-    public GerenciadorDeJogadores() {
-        this.jogadores = new Lista<>();
-        this.arquivo = "arquivos/Lista_De_Jogadores.csv";
-        try {
-            jogadores = Dados.abrir(arquivo, new JogadorSerializavel());
-        } catch (Exception erro) {
-            jogadores = new Lista<>();
-        }
+    public GerenciadorDeJogadores(FutebolDados futebolDados) {
+        this.futebolDados = futebolDados;
 
     }
 
     public void salvar() {
-        Dados.guardar(arquivo, jogadores, new JogadorSerializavel());
+        futebolDados.salvar();
     }
 
     public void criar(Jogador jogador) {
-        this.jogadores.adicionar(jogador);
+        futebolDados.getJogadores().adicionar(jogador);
         salvar();
     }
 
     public boolean remover(String nome) {
-        for (Jogador jogador : jogadores) {
+        for (Jogador jogador : futebolDados.getJogadores()) {
             if (Texto.igual(jogador.getNome(), nome)) {
-                jogadores.removerReferencia(jogador);
+                futebolDados.getJogadores().removerReferencia(jogador);
                 salvar();
                 return true;
             }
@@ -43,11 +34,11 @@ public class GerenciadorDeJogadores {
     }
 
     public Lista<Jogador> listar() {
-        return jogadores;
+        return futebolDados.getJogadores();
     }
 
     public Talvez<Jogador> obter(String nome) {
-        for (Jogador jogador : jogadores) {
+        for (Jogador jogador : futebolDados.getJogadores()) {
             if (Texto.igual(jogador.getNome(), nome)) {
                 return Talvez.TALVEZ(jogador);
             }
@@ -58,7 +49,7 @@ public class GerenciadorDeJogadores {
     public Lista<Jogador> obterJogadoresDoTime(int timeID) {
         Lista<Jogador> jogadoresDoTime = new Lista<>();
 
-        for (Jogador jogador : jogadores) {
+        for (Jogador jogador : futebolDados.getJogadores()) {
             if (jogador.getTimeID()==timeID) {
                 jogadoresDoTime.adicionar(jogador);
             }
@@ -67,7 +58,7 @@ public class GerenciadorDeJogadores {
     }
 
     public boolean existe(String nome) {
-        for (Jogador jogador : jogadores) {
+        for (Jogador jogador : futebolDados.getJogadores()) {
             if (Texto.igual(nome, jogador.getNome())) {
                 return true;
             }

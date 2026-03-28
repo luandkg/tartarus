@@ -1,4 +1,4 @@
-package main.app;
+package main.app.futebol;
 
 public class Time {
     private int id;

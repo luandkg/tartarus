@@ -1,7 +1,7 @@
 package testes;
 
-import main.app.Jogador;
-import main.app.JogadorSerializavel;
+import main.app.futebol.Jogador;
+import main.app.futebol.JogadorSerializavel;
 import main.libs.estruturas.Dados;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.fmt;

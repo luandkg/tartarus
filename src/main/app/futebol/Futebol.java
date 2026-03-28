@@ -1,7 +1,6 @@
-package main.app;
+package main.app.futebol;
 
 import main.libs.estruturas.Lista;
-import main.libs.estruturas.Texto;
 import main.libs.estruturas.fmt;
 import main.libs.utils.Talvez;
 
@@ -9,14 +8,18 @@ import java.util.Scanner;
 
 public class Futebol {
 
+    private FutebolDados futebolDados;
     private GerenciadorDeJogadores gerenciadorDeJogadores;
     private GerenciadorDeTimes gerenciadorDeTimes;
 
     private boolean executando = false;
 
     public Futebol() {
-        this.gerenciadorDeJogadores = new GerenciadorDeJogadores();
-        this.gerenciadorDeTimes = new GerenciadorDeTimes();
+        this.futebolDados = new FutebolDados();
+        futebolDados.ler();
+
+        this.gerenciadorDeJogadores = new GerenciadorDeJogadores(futebolDados);
+        this.gerenciadorDeTimes = new GerenciadorDeTimes(futebolDados);
 
     }
 

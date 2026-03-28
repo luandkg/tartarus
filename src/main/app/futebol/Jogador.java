@@ -1,4 +1,4 @@
-package main.app;
+package main.app.futebol;
 
 import main.libs.auxiliar.StringIgualdadeInsensitiva;
 import main.libs.estruturas.Lista;

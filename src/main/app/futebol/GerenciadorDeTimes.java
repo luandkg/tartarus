@@ -1,47 +1,34 @@
-package main.app;
+package main.app.futebol;
 
-import main.libs.estruturas.Dados;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
-import main.libs.estruturas.fmt;
 import main.libs.utils.Talvez;
 
 public class GerenciadorDeTimes {
 
-    private Lista<Time> times;
-    private String arquivo;
+    private FutebolDados futebolDados;
 
-    public GerenciadorDeTimes() {
-        this.times = new Lista<>();
-        this.arquivo = "arquivos/Lista_De_Times.csv";
-        try {
-            times = Dados.abrir(arquivo, new TimeSerealizavel());
-        } catch (Exception erro) {
-            times = new Lista<>();
-        }
+    public GerenciadorDeTimes(FutebolDados futebolDados) {
+        this.futebolDados = futebolDados;
     }
 
     public Lista<Time> getTimes() {
-        return times;
-    }
-
-    public void setTimes(Lista<Time> times) {
-        this.times = times;
+        return futebolDados.getTimes();
     }
 
     public void salvar() {
-        Dados.guardar(arquivo, times, new TimeSerealizavel());
+        futebolDados.salvar();
     }
 
     public void criar(Time time) {
-        this.times.adicionar(time);
+        this.futebolDados.getTimes().adicionar(time);
         salvar();
     }
 
     public boolean remover(String nome) {
-        for (Time time : times) {
+        for (Time time : futebolDados.getTimes()) {
             if (Texto.igual(time.getNome(), nome)) {
-                times.removerReferencia(time);
+                futebolDados.getTimes().removerReferencia(time);
                 salvar();
                 return true;
             }
@@ -50,11 +37,11 @@ public class GerenciadorDeTimes {
     }
 
     public Lista<Time> listar() {
-        return times;
+        return futebolDados.getTimes();
     }
 
     public Talvez<Time> obter(String nome) {
-        for (Time time : times) {
+        for (Time time : futebolDados.getTimes()) {
             if (Texto.igual(time.getNome(), nome)) {
                 return Talvez.TALVEZ(time);
             }
@@ -63,7 +50,7 @@ public class GerenciadorDeTimes {
     }
 
     public String obter(int timeID) {
-        for (Time time : times) {
+        for (Time time : futebolDados.getTimes()) {
             if (time.getId() == timeID) {
                 return time.getNome();
             }
@@ -72,7 +59,7 @@ public class GerenciadorDeTimes {
     }
 
     public boolean existe(String nome) {
-        for (Time time : times) {
+        for (Time time : futebolDados.getTimes()) {
             if (Texto.igual(nome, time.getNome())) {
                 return true;
             }

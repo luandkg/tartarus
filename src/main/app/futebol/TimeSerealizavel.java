@@ -1,4 +1,4 @@
-package main.app;
+package main.app.futebol;
 
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
@@ -8,6 +8,7 @@ public class TimeSerealizavel implements Serializavel<Time> {
 
     @Override
     public String transforma(Time tipo) {
+
         return tipo.getId()+"\t"+tipo.getNome();
     }
 

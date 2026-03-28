@@ -1,8 +1,7 @@
 package main;
 
-import main.app.Futebol;
+import main.app.futebol.Futebol;
 import main.libs.estruturas.Lista;
-import main.libs.teste.TesteExecutor;
 import testes.*;
 
 
