@@ -5,6 +5,7 @@ import main.app.futebol.JogadorSerializavel;
 import main.libs.estruturas.Dados;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.fmt;
+import main.libs.tempo.Tempo;
 import main.libs.teste.TestandoCalebe;
 import main.libs.teste.TesteCalebe;
 import main.libs.teste.TesteClasseCalebe;
@@ -16,11 +17,11 @@ public class TesteDados {
     public static void io_ler_arquivo(TestandoCalebe teste){
         Lista<Jogador> jogadores = new Lista<Jogador>();
 
-        jogadores.adicionar(new Jogador("Calebe",10,"Atacante"));
-        jogadores.adicionar(new Jogador("Luan",7,"Meia"));
-        jogadores.adicionar(new Jogador("Kaio",2,"Lateral"));
-        jogadores.adicionar(new Jogador("Diogo",3,"Zagueiro"));
-        jogadores.adicionar(new Jogador("William",1,"Goleiro"));
+        jogadores.adicionar(new Jogador("Calebe",10,"Atacante", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("Luan",7,"Meia", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("Kaio",2,"Lateral", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("Diogo",3,"Zagueiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("William",1,"Goleiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
 
         Dados.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
 

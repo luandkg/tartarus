@@ -2,6 +2,8 @@ package main.app.futebol;
 
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.fmt;
+import main.libs.tempo.Data;
+import main.libs.tempo.Tempo;
 import main.libs.utils.Talvez;
 
 import java.util.Scanner;
@@ -124,7 +126,7 @@ public class Futebol {
             return;
         }
 
-        Jogador jogador = new Jogador(nome, uniforme, posicao);
+        Jogador jogador = new Jogador(nome, uniforme, posicao, Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora());
 
         gerenciadorDeJogadores.criar(jogador);
 
@@ -207,7 +209,7 @@ public class Futebol {
             return;
         }
 
-        Time time = new Time(gerenciadorDeTimes.listar().getQuantidade(), nome);
+        Time time = new Time(gerenciadorDeTimes.listar().getQuantidade(), nome, Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora());
 
         gerenciadorDeTimes.criar(time);
 
@@ -311,6 +313,9 @@ public class Futebol {
 
         if(talvezJogador.temValor()){
             talvezJogador.getValor().setTimeID(time.getId());
+
+            talvezJogador.getValor().setDataModificada(Tempo.getDataHoje());
+            talvezJogador.getValor().setHorarioModificado(Tempo.getHorarioAgora());
             gerenciadorDeJogadores.salvar();
         }else{
             fmt.println("Erro: Jogador nao encontrado!");
@@ -328,6 +333,9 @@ public class Futebol {
 
         if(talvezJogador.temValor()){
             talvezJogador.getValor().setTimeID(-1);
+
+            talvezJogador.getValor().setDataModificada(Tempo.getDataHoje());
+            talvezJogador.getValor().setHorarioModificado(Tempo.getHorarioAgora());
             gerenciadorDeJogadores.salvar();
 
         }else{

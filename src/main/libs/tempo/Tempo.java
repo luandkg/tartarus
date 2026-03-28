@@ -1,5 +1,7 @@
 package main.libs.tempo;
 
+import main.libs.estruturas.Lista;
+import main.libs.estruturas.Texto;
 import main.libs.estruturas.fmt;
 
 import java.util.Calendar;
@@ -55,6 +57,20 @@ public class Tempo {
 
         return getSegundosEntre(h1,h2)/3600;
 
+    }
+
+    public static Data parseData(String dataString){
+        Lista<String> valores = Texto.dividirPorSimbolo(dataString,"/");
+
+        Data data = new Data(Integer.parseInt(valores.get(0)),Integer.parseInt(valores.get(1)),Integer.parseInt(valores.get(2)));
+        return data;
+    }
+
+    public static Horario parseHorario(String dataString){
+        Lista<String> valores = Texto.dividirPorSimbolo(dataString,":");
+
+        Horario horario = new Horario(Integer.parseInt(valores.get(0)),Integer.parseInt(valores.get(1)),Integer.parseInt(valores.get(2)));
+        return horario;
     }
 
 
