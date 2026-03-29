@@ -9,7 +9,7 @@ public class JogadorSerializavel implements Serializavel<Jogador> {
 
     @Override
     public String transforma(Jogador tipo) {
-        return tipo.getNome()+"\t"+tipo.getTimeID()+"\t"+tipo.getUniforme()+"\t"+tipo.getPosicao();
+        return tipo.getNome()+"\t"+tipo.getTimeID()+"\t"+tipo.getDataNascimento().toString()+"\t"+tipo.getUniforme()+"\t"+tipo.getPosicao()+"\t"+tipo.getDataCriada().toString()+"\t"+tipo.getDataModificada().toString()+"\t"+tipo.getHorarioCriado().toString()+"\t"+tipo.getHorarioModificado().toString();
     }
 
     @Override
