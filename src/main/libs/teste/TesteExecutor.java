@@ -26,6 +26,7 @@ public class TesteExecutor {
 
         Data inicioData = Tempo.getDataHoje();
         Horario inicioHorario = Tempo.getHorarioAgora();
+        long inicioTempo=System.nanoTime();
 
         fmt.println("\n{centraliza_122}\n", "EXECUTOR DE TESTES UNITÁRIOS - CALEBE ");
 
@@ -72,8 +73,11 @@ public class TesteExecutor {
 
         Data fimData = Tempo.getDataHoje();
         Horario fimHorario = Tempo.getHorarioAgora();
+        long fimTempo=System.nanoTime();
 
-        TESTE_HISTORICO(testesRealizados, inicioData, fimData, inicioHorario, fimHorario);
+        String duracao=Tempo.formatarNanossegundos(fimTempo-inicioTempo);
+
+        TESTE_HISTORICO(testesRealizados, inicioData, fimData, inicioHorario, fimHorario,duracao);
 
         EXIBIR_TESTES(testesRealizados);
         SALVAR_RESULTADOS_DOS_TESTES(testesRealizados);
@@ -154,7 +158,7 @@ public class TesteExecutor {
         Texto.escrever("arquivos/Testes_Resultados.tsv", resultado);
     }
 
-    public static void TESTE_HISTORICO(Lista<TestandoCalebe> testesRealizados, Data inicioData, Data fimData, Horario inicioHorario, Horario fimHorario) {
+    public static void TESTE_HISTORICO(Lista<TestandoCalebe> testesRealizados, Data inicioData, Data fimData, Horario inicioHorario, Horario fimHorario,String duracao) {
 
         final String arquivo = "arquivos/Teste_Historico.tsv";
 
@@ -175,7 +179,7 @@ public class TesteExecutor {
         if (conteudo.length() > 0) {
             novoRegistro = conteudo;
         } else {
-            novoRegistro += fmt.formatar("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n", "DATA INICIO", "DATA FIM", "HORARIO INICIO", "HORARIO FIM", "TOTAL EXECUTADOS", "TOTAL DE SUCESSOS", "TOTAL DE FALHAS", "STATUS FINAL");
+            novoRegistro += fmt.formatar("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n", "DATA INICIO", "DATA FIM", "HORARIO INICIO", "HORARIO FIM",  "DURAÇÃO","TOTAL EXECUTADOS", "TOTAL DE SUCESSOS", "TOTAL DE FALHAS", "STATUS FINAL");
         }
 
         for (ItemComPosicao<TestandoCalebe> teste : testesRealizados.getItensComPosicao()) {
@@ -188,7 +192,7 @@ public class TesteExecutor {
             statusFinal = "Falhou";
         }
 
-        novoRegistro += fmt.formatar("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n", inicioData.toString(), fimData.toString(), inicioHorario.toString(), fimHorario.toString(), contTotal, contTotalSucessos, contTotalFalhas, statusFinal);
+        novoRegistro += fmt.formatar("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n", inicioData.toString(), fimData.toString(), inicioHorario.toString(), fimHorario.toString(),duracao, contTotal, contTotalSucessos, contTotalFalhas, statusFinal);
 
         Texto.escrever(arquivo, novoRegistro);
     }

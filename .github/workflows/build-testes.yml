@@ -1,0 +1,41 @@
+name: Build e Testes Java (sem JAR)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-testes:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Checkout do código
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Passo 2: Configurar JDK (Ajustado para v25 se preferir a mais atual)
+      - name: Configurar JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      # Passo 3: Compilar os arquivos .java
+      - name: Compilar classes
+        run: |
+          mkdir -p out
+          # Encontra todos os .java em src e compila para a pasta out
+          find src -name "*.java" > sources.txt
+          javac -d out @sources.txt
+
+      # Passo 4: Criar pasta e Executar a classe principal
+      - name: Rodar testes
+        run: |
+          # Cria a pasta necessária para os testes
+          mkdir -p arquivos
+          
+          # Executa a Main (ajuste o caminho do pacote se houver, ex: main.Main)
+          java -cp out main.Main -testes
+

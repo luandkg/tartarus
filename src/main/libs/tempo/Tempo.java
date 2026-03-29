@@ -101,16 +101,8 @@ public class Tempo {
             dNano= dNano % 1000000;
         }
 
-        /*
-        fmt.formatar("Tempo em Nanossegundo : {}", dNano);
-        fmt.formatar("Tempo em Milissegundo : {}", dMili);
-        fmt.formatar("Tempo em Segundo : {}", dSegundo);
-        fmt.formatar("Tempo em Minuto : {}", dMinuto);
-        fmt.formatar("Tempo em Hora : {}", dHora);
-        */
 
         if(dHora>0){
-
             return fmt.formatar("{}:{}:{}:{}:{} Horas", dHora, dMinuto, dSegundo, dMili, dNano);
         }else if(dMinuto>0){
             return fmt.formatar("{}:{}:{}:{} Minutos",  dMinuto, dSegundo, dMili, dNano);
