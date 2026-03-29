@@ -5,18 +5,22 @@ import main.libs.estruturas.Lista;
 import main.libs.estruturas.fmt;
 import main.libs.tempo.Data;
 import main.libs.tempo.Horario;
+import main.libs.tempo.Tempo;
 
 public class Jogador {
 
     private String nome;
+    private Data dataNascimento;
     private int timeID;
     private int uniforme;
     private String posicao;
+
     private Data dataCriada, dataModificada;
     private Horario horarioCriado, horarioModificado;
 
-    public Jogador(String nome, int uniforme, String posicao, Data dataCriada, Data dataModificada, Horario horarioCriado, Horario horarioModificado) {
+    public Jogador(String nome, Data dataNascimento, int uniforme, String posicao, Data dataCriada, Data dataModificada, Horario horarioCriado, Horario horarioModificado) {
         this.nome = nome;
+        this.dataNascimento = dataNascimento;
         this.timeID = -1;
         this.uniforme = uniforme;
         this.posicao = posicao;
@@ -29,6 +33,14 @@ public class Jogador {
 
     public String getNome() {
         return nome;
+    }
+
+    public Data getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public long getIdade() {
+        return Tempo.getAnosEntre(dataNascimento,Tempo.getDataHoje());
     }
 
     public int getUniforme() {
@@ -61,6 +73,10 @@ public class Jogador {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setDataNascimento(Data dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public void setTimeID(int timeID) {

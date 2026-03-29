@@ -29,6 +29,9 @@ public class Futebol {
         fmt.println("Menu Futebol");
         menuTime();
         menuJogador();
+        fmt.println("\t10 - Exibir Jogadores Mais Velhos");
+        fmt.println("\t11 - Exibir Jogadores Mais Novos");
+
         fmt.println("\t0 - Sair\n");
 
     }
@@ -75,6 +78,9 @@ public class Futebol {
                 case "7" -> listarJogadores();
                 case "8" -> removerJogador();
                 case "9" -> verInformacoesDoJogador();
+                case "10" -> listarJogadoresMaisVelhos();
+                case "11" -> listarJogadoresMaisNovos();
+
                 case "0" -> sair();
                 case null, default -> {
                     fmt.println("Opcao invalida!");
@@ -103,6 +109,21 @@ public class Futebol {
             return;
         }
 
+        fmt.print(">> Digite a data de nascimento: ");
+        String dataNascimento = leitor.nextLine();
+        try{
+            Data data = Tempo.parseData(dataNascimento);
+
+            if(Data.maior(data,Tempo.getDataHoje())){
+                fmt.println("Erro: A pessoa nao pode nascer no futuro!");
+                return;
+            }
+        } catch (Exception erro){
+            fmt.println(erro.toString());
+            return;
+        }
+
+
         fmt.print(">> Digite o uniforme: ");
         String uni = leitor.nextLine();
         int uniforme;
@@ -126,24 +147,24 @@ public class Futebol {
             return;
         }
 
-        Jogador jogador = new Jogador(nome, uniforme, posicao, Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora());
+        Jogador jogador = new Jogador(nome, Tempo.parseData(dataNascimento), uniforme, posicao, Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora());
 
         gerenciadorDeJogadores.criar(jogador);
 
         fmt.println("Jogador cadastrado com sucesso!");
     }
 
-    private void listarJogadores() {
-        if(gerenciadorDeJogadores.listar().getQuantidade()>0){
-            fmt.println(fmt.repete("-", 102));
-            fmt.println("|{centraliza_100}|", "Lista de Jogadores");
-            fmt.println(fmt.repete("-", 102));
-            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", "JOGADOR","NOME","UNIFORME","POSICAO","TIME");
-            fmt.println(fmt.repete("-", 102));
+    private  void exibirJogadores(Lista<Jogador> jogadores){
+        if(jogadores.getQuantidade()>0){
+            fmt.println(fmt.repete("-", 120));
+            fmt.println("|{centraliza_118}|", "Lista de Jogadores");
+            fmt.println(fmt.repete("-", 120));
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", "JOGADOR","NOME","IDADE","UNIFORME","POSICAO","TIME");
+            fmt.println(fmt.repete("-", 120));
 
             int cont = 1;
 
-            for (Jogador jogador : gerenciadorDeJogadores.listar()){
+            for (Jogador jogador : jogadores){
                 String time;
 
                 if(jogador.getTimeID()!=-1){
@@ -152,13 +173,17 @@ public class Futebol {
                     time = "";
                 }
 
-                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", cont,jogador.getNome(),jogador.getUniforme(),jogador.getPosicao(),time);
+                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", cont,jogador.getNome(),jogador.getIdade(),jogador.getUniforme(),jogador.getPosicao(),time);
                 cont++;
             }
-            fmt.println(fmt.repete("-", 102));
+            fmt.println(fmt.repete("-", 120));
         }else{
             fmt.println("A lista de jogadores esta vazia!");
         }
+    }
+
+    private void listarJogadores() {
+        exibirJogadores(gerenciadorDeJogadores.listar());
     }
 
     private void removerJogador() {
@@ -175,7 +200,7 @@ public class Futebol {
     }
 
     private void verInformacoesDoJogador() {
-        fmt.printCaixa("DETALHES DO JOGADOR",30);
+        fmt.printCaixa("DETALHES DO JOGADOR ",30);
 
         Scanner leitor = new Scanner(System.in);
         fmt.print(">> Digite o nome do jogador: ");
@@ -183,11 +208,12 @@ public class Futebol {
 
         Talvez<Jogador> talvez = gerenciadorDeJogadores.obter(nome);
         if(talvez.temValor()){
-            fmt.println(fmt.repete("-", 65));
-            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} |","POSICAO", "NOME", "UNIFORME");
-            fmt.println(fmt.repete("-", 65));
-            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} |", talvez.getValor().getPosicao(),talvez.getValor().getNome(),talvez.getValor().getUniforme());
-            fmt.println(fmt.repete("-", 65));
+            fmt.println(fmt.repete("-", 83));
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} |","POSICAO", "NOME","IDADE", "UNIFORME");
+            fmt.println(fmt.repete("-", 83));
+
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} |", talvez.getValor().getPosicao(),talvez.getValor().getNome(),talvez.getValor().getIdade(),talvez.getValor().getUniforme());
+            fmt.println(fmt.repete("-", 83));
         }else{
             fmt.println("Erro: Jogador nao encontrado!");
         }
@@ -347,23 +373,67 @@ public class Futebol {
         Lista<Jogador> jogadores = gerenciadorDeJogadores.obterJogadoresDoTime(time.getId());
 
         if(jogadores.getQuantidade()>0){
-            fmt.println(fmt.repete("-", 84));
-            fmt.println("|{centraliza_82}|", "Lista de Jogadores Do Time: " + time.getNome());
-            fmt.println(fmt.repete("-", 84));
-            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_16} |", "JOGADOR","NOME","UNIFORME","POSICAO");
-            fmt.println(fmt.repete("-", 84));
+            fmt.println(fmt.repete("-", 102));
+            fmt.println("|{centraliza_100}|", "Lista de Jogadores Do Time: " + time.getNome());
+            fmt.println(fmt.repete("-", 102));
+            fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", "JOGADOR","NOME","IDADE","UNIFORME","POSICAO");
+            fmt.println(fmt.repete("-", 102));
 
             int cont = 1;
 
             for (Jogador jogador : jogadores){
                 String nomeTime = gerenciadorDeTimes.obter(jogador.getTimeID());
-                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_16} |", cont,jogador.getNome(),jogador.getUniforme(),jogador.getPosicao());
+
+                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", cont,jogador.getNome(),jogador.getIdade(),jogador.getUniforme(),jogador.getPosicao());
                 cont++;
             }
-            fmt.println(fmt.repete("-", 84));
+            fmt.println(fmt.repete("-", 102));
         }else{
             fmt.println("A lista de jogadores esta vazia!");
         }
     }
 
+    private void listarJogadoresMaisVelhos(){
+        Lista<Jogador> jogadores = gerenciadorDeJogadores.listar();
+        Lista<Jogador> jVelhos = new Lista<>();
+        long maiorIdade = Long.MIN_VALUE;
+
+        for (Jogador jogador : jogadores){
+
+            if(jogador.getIdade()>maiorIdade){
+                maiorIdade = jogador.getIdade();
+            }
+        }
+
+        for (Jogador jogador : jogadores){
+
+            if(jogador.getIdade() == maiorIdade){
+                jVelhos.adicionar(jogador);
+            }
+        }
+
+        exibirJogadores(jVelhos);
+    }
+
+    private void listarJogadoresMaisNovos(){
+        Lista<Jogador> jogadores = gerenciadorDeJogadores.listar();
+        Lista<Jogador> jNovos = new Lista<>();
+        long menorIdade = Long.MAX_VALUE;
+
+        for (Jogador jogador : jogadores){
+
+            if(jogador.getIdade()<menorIdade){
+                menorIdade = jogador.getIdade();
+            }
+        }
+
+        for (Jogador jogador : jogadores){
+
+            if(jogador.getIdade() == menorIdade){
+                jNovos.adicionar(jogador);
+            }
+        }
+
+        exibirJogadores(jNovos);
+    }
 }

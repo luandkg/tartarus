@@ -42,7 +42,12 @@ public class Tempo {
         return dias;
     }
 
-    public static long getSegundosEntre(Horario h1, Horario h2) {
+    public static long getAnosEntre(Data d1, Data d2) {
+        return Tempo.getDiasEntre(d1,d2)/360;
+    }
+
+
+        public static long getSegundosEntre(Horario h1, Horario h2) {
         long s1 = h1.getTotalEmSegundos();
         long s2 = h2.getTotalEmSegundos();
 

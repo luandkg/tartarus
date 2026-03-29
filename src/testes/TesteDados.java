@@ -17,11 +17,11 @@ public class TesteDados {
     public static void io_ler_arquivo(TestandoCalebe teste){
         Lista<Jogador> jogadores = new Lista<Jogador>();
 
-        jogadores.adicionar(new Jogador("Calebe",10,"Atacante", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
-        jogadores.adicionar(new Jogador("Luan",7,"Meia", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
-        jogadores.adicionar(new Jogador("Kaio",2,"Lateral", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
-        jogadores.adicionar(new Jogador("Diogo",3,"Zagueiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
-        jogadores.adicionar(new Jogador("William",1,"Goleiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("Calebe",Tempo.parseData("23/03/2002"),10,"Atacante", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("Luan",Tempo.parseData("23/03/2002"),7,"Meia", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("Kaio",Tempo.parseData("23/03/2002"),2,"Lateral", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("Diogo",Tempo.parseData("23/03/2002"),3,"Zagueiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
+        jogadores.adicionar(new Jogador("William",Tempo.parseData("23/03/2002"),1,"Goleiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
 
         Dados.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
 
