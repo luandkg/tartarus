@@ -2,8 +2,13 @@ package main.libs.teste;
 
 import main.libs.estruturas.ItemComPosicao;
 import main.libs.estruturas.Lista;
+import main.libs.estruturas.Texto;
 import main.libs.estruturas.fmt;
+import main.libs.tempo.Data;
+import main.libs.tempo.Horario;
+import main.libs.tempo.Tempo;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -12,6 +17,15 @@ import java.util.Comparator;
 public class TesteExecutor {
 
     public static void TESTAR(Lista<Class<?>> classes) {
+
+        File arquivo = new File("arquivos");
+
+        if(!arquivo.exists()){
+            arquivo.mkdir();
+        }
+
+        Data inicioData = Tempo.getDataHoje();
+        Horario inicioHorario = Tempo.getHorarioAgora();
 
         fmt.println("\n{centraliza_122}\n", "EXECUTOR DE TESTES UNITÁRIOS - CALEBE ");
 
@@ -56,11 +70,18 @@ public class TesteExecutor {
             i += 1;
         }
 
+        Data fimData = Tempo.getDataHoje();
+        Horario fimHorario = Tempo.getHorarioAgora();
+
+        TESTE_HISTORICO(testesRealizados, inicioData, fimData, inicioHorario, fimHorario);
+
         EXIBIR_TESTES(testesRealizados);
+        SALVAR_RESULTADOS_DOS_TESTES(testesRealizados);
 
         fmt.println("\n\n");
 
         EXIBIR_ERROS(testesRealizados);
+        SALVAR_ERROS(testesRealizados);
     }
 
     public static void TESTAR_UNICO(Class<?> testandoClasse) {
@@ -121,6 +142,57 @@ public class TesteExecutor {
         fmt.println(fmt.repete("-", 122));
     }
 
+    public static void SALVAR_RESULTADOS_DOS_TESTES(Lista<TestandoCalebe> testesRealizados) {
+
+        String resultado = "";
+
+        resultado += fmt.formatar("{}\t{}\t{}\t{}\t{}\n", "TESTE", "NOME", "TOTAL", "SUCESSO", "FALHOU");
+
+        for (ItemComPosicao<TestandoCalebe> teste : testesRealizados.getItensComPosicao()) {
+            resultado += fmt.formatar("{}\t{}\t{}\t{}\t{}\n", teste.getPosicao() + 1, teste.getItem().getNome(), teste.getItem().getTotal(), teste.getItem().getSucesso(), teste.getItem().getFalhou());
+        }
+        Texto.escrever("arquivos/Testes_Resultados.tsv", resultado);
+    }
+
+    public static void TESTE_HISTORICO(Lista<TestandoCalebe> testesRealizados, Data inicioData, Data fimData, Horario inicioHorario, Horario fimHorario) {
+
+        final String arquivo = "arquivos/Teste_Historico.tsv";
+
+        File registro = new File(arquivo);
+
+        String conteudo = "";
+
+        if (registro.exists()) {
+            conteudo = Texto.ler(arquivo);
+        }
+
+        String novoRegistro = "";
+        int contTotal = 0;
+        int contTotalSucessos = 0;
+        int contTotalFalhas = 0;
+        String statusFinal = "Sucesso";
+
+        if (conteudo.length() > 0) {
+            novoRegistro = conteudo;
+        } else {
+            novoRegistro += fmt.formatar("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n", "DATA INICIO", "DATA FIM", "HORARIO INICIO", "HORARIO FIM", "TOTAL EXECUTADOS", "TOTAL DE SUCESSOS", "TOTAL DE FALHAS", "STATUS FINAL");
+        }
+
+        for (ItemComPosicao<TestandoCalebe> teste : testesRealizados.getItensComPosicao()) {
+            contTotal += teste.getItem().getTotal();
+            contTotalSucessos += teste.getItem().getSucesso();
+            contTotalFalhas += teste.getItem().getFalhou();
+        }
+
+        if (contTotalFalhas > 0) {
+            statusFinal = "Falhou";
+        }
+
+        novoRegistro += fmt.formatar("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n", inicioData.toString(), fimData.toString(), inicioHorario.toString(), fimHorario.toString(), contTotal, contTotalSucessos, contTotalFalhas, statusFinal);
+
+        Texto.escrever(arquivo, novoRegistro);
+    }
+
     public static void EXIBIR_ERROS(Lista<TestandoCalebe> testesRealizados) {
         int totalErros = 0;
         for (TestandoCalebe teste : testesRealizados) {
@@ -147,6 +219,35 @@ public class TesteExecutor {
                 }
             }
             fmt.println(fmt.repete("-", 122));
+        }
+    }
+
+    public static void SALVAR_ERROS(Lista<TestandoCalebe> testesRealizados) {
+        int totalErros = 0;
+        for (TestandoCalebe teste : testesRealizados) {
+            totalErros += teste.getErros().getQuantidade();
+        }
+
+        if (totalErros > 0) {
+            String resultado = "";
+
+            resultado += fmt.formatar("{}\t{}\n", "TESTE", "NOME");
+
+            for (TestandoCalebe teste : testesRealizados) {
+                Lista<String> erros = teste.getErros();
+                if (!erros.estaVazia()) {
+                    for (ItemComPosicao<String> erro : erros.getItensComPosicao()) {
+                        resultado += fmt.formatar("{}\t{}\n", erro.getPosicao() + 1, erro.getItem());
+
+
+                    }
+                }
+            }
+            Texto.escrever("arquivos/Testes_Com_Erros.tsv", resultado);
+            Texto.escrever("arquivos/Teste_Resultado_Status.txt", "PROBLEMA");
+
+        } else {
+            Texto.escrever("arquivos/Teste_Resultado_Status.txt", "SUCESSO");
         }
     }
 }
