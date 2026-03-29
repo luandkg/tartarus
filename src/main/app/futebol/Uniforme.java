@@ -1,24 +1,27 @@
 package main.app.futebol;
 
+import main.libs.estruturas.Caixa;
+import main.libs.estruturas.Lista;
 import main.libs.tempo.Data;
 import main.libs.tempo.Horario;
 
-public class Time {
+public class Uniforme {
+
     private int id;
     private String nome;
+    private Caixa<String> cores;
+
     private Data dataCriada, dataModificada;
     private Horario horarioCriado, horarioModificado;
 
-    private int uniformeID;
-
-    public Time(int id, String nome, Data dataCriada, Data dataModificada, Horario horarioCriado, Horario horarioModificado, int uniformeID) {
+    public Uniforme(int id, String nome, Data dataCriada, Data dataModificada, Horario horarioCriado, Horario horarioModificado) {
         this.id = id;
         this.nome = nome;
+        this.cores = new Caixa<>(3);
         this.dataCriada = dataCriada;
         this.dataModificada = dataModificada;
         this.horarioCriado = horarioCriado;
         this.horarioModificado = horarioModificado;
-        this.uniformeID = uniformeID;
     }
 
     public int getId() {
@@ -27,6 +30,10 @@ public class Time {
 
     public String getNome() {
         return nome;
+    }
+
+    public Caixa<String> getCores() {
+        return cores;
     }
 
     public Data getDataCriada() {
@@ -45,17 +52,12 @@ public class Time {
         return horarioModificado;
     }
 
-    public int getUniformeID() {
-        return uniformeID;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setCores(Caixa<String> cores) {
+        this.cores = cores;
     }
 
     public void setDataCriada(Data dataCriada) {
@@ -76,8 +78,28 @@ public class Time {
         this.horarioModificado = horarioModificado;
     }
 
-    public void setUniformeID(int uniformeID) {
-        this.uniformeID = uniformeID;
+    public void adicionarCor(String cor) {
+        cores.adicionar(cor);
     }
 
+    public static Lista<String> possiveisCores() {
+        Lista<String> cores = new Lista<>();
+
+        cores.adicionar("Branco");
+        cores.adicionar("Preto");
+        cores.adicionar("Vermelho");
+        cores.adicionar("Azul");
+        cores.adicionar("Verde");
+        cores.adicionar("Amarelo");
+        cores.adicionar("Laranja");
+        cores.adicionar("Roxo");
+        cores.adicionar("Rosa");
+        cores.adicionar("Cinza");
+        cores.adicionar("Marrom");
+        cores.adicionar("Ciano");
+        cores.adicionar("Magenta");
+        cores.adicionar("Dourado");
+        cores.adicionar("Prateado");
+        return cores;
+    }
 }
