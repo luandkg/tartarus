@@ -14,7 +14,7 @@ public class FutebolDados {
 
 
     public FutebolDados() {
-        this.arquivo = "arquivos/futebol.tsv";
+        this.arquivo = "arquivos/futebol/futebol.tsv";
 
         this.jogadores = new Lista<>();
         this.times = new Lista<>();

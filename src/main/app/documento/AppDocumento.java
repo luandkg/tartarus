@@ -8,7 +8,7 @@ import main.libs.estruturas.fmt;
 public class AppDocumento {
 
     public static void executarDocumento() {
-        String dados = Texto.ler("arquivos/objetos.calebe");
+        String dados = Texto.ler("arquivos/documentos/objetos.calebe");
 
         fmt.println("------------------------------------------------------");
         fmt.println("{}", dados);
@@ -58,18 +58,18 @@ public class AppDocumento {
 
         fmt.println("Quantidade de Pessoas = {}",doc.objetoUnico("Pessoas").getObjetos().getQuantidade());
 
-        doc.salvar("arquivos/documento_teste.calebe");
+        doc.salvar("arquivos/documentos/documento_teste.calebe");
 
-        System.out.println(Texto.ler("arquivos/documento_teste.calebe"));
+        System.out.println(Texto.ler("arquivos/documentos/documento_teste.calebe"));
         fmt.println("------------------------------------------------------");
 
         CalebeDocumento doc2 = new CalebeDocumento();
 
-        doc2.abrir("arquivos/documento_teste.calebe");
-        doc2.salvar("arquivos/documento_teste_2.calebe");
+        doc2.abrir("arquivos/documentos/documento_teste.calebe");
+        doc2.salvar("arquivos/documentos/documento_teste_2.calebe");
 
         fmt.println("------------------------------------------------------");
-        System.out.println(Texto.ler("arquivos/documento_teste_2.calebe"));
+        System.out.println(Texto.ler("arquivos/documentos/documento_teste_2.calebe"));
 
     }
 }

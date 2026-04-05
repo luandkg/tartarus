@@ -23,11 +23,11 @@ public class TesteDados {
         jogadores.adicionar(new Jogador("Diogo",Tempo.parseData("23/03/2002"),3,"Zagueiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
         jogadores.adicionar(new Jogador("William",Tempo.parseData("23/03/2002"),1,"Goleiro", Tempo.getDataHoje(),Tempo.getDataHoje(),Tempo.getHorarioAgora(),Tempo.getHorarioAgora()));
 
-        Dados.guardar("arquivos/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
+        Dados.guardar("arquivos/futebol/ListaDeJogadores.txt", jogadores, new JogadorSerializavel());
 
         Lista<Jogador> escola = new Lista<>();
 
-        escola = Dados.abrir("arquivos/ListaDeJogadores.txt", new JogadorSerializavel());
+        escola = Dados.abrir("arquivos/futebol/ListaDeJogadores.txt", new JogadorSerializavel());
 
         for (Jogador jogador : escola){
             fmt.println(jogador.getNome());

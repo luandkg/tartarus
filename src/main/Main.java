@@ -1,6 +1,7 @@
 package main;
 
 import main.app.documento.AppDocumento;
+import main.app.editorImagem.AppEditorImagem;
 import main.app.futebol.AppFutebol;
 import main.app.futebol.Futebol;
 import main.app.teste.AppTeste;
@@ -21,16 +22,20 @@ public class Main {
             String comando = args[0];
             switch (comando) {
                 case "-testes":
-                    System.out.println("Executando bateria de testes...");
+                    System.out.println("Executando Bateria de Testes...");
                     AppTeste.executarTestes();
                     break;
                 case "-futebol":
-                    System.out.println("Carregando dados de futebol...");
+                    System.out.println("Carregando Aplicação Futebol...");
                     AppFutebol.executarFutebol();
                     break;
                 case "-documento":
-                    System.out.println("Carregando dados de documento...");
+                    System.out.println("Carregando Dados de Documento...");
                     AppDocumento.executarDocumento();
+                    break;
+                case "-editorDeImagem":
+                    System.out.println("Carregando Editor de Imagem...");
+                    AppEditorImagem.executar();
                     break;
                 default:
                     System.out.println("Comando desconhecido: " + comando);
