@@ -74,6 +74,15 @@ public class TestandoCalebe {
         }
     }
 
+    public void deveSerDiferente(String esperado,String recebido, String teste){
+        if(esperado.contentEquals(recebido)){
+            falhou+=1;
+            erros.adicionar(teste);
+        }else{
+            sucesso+=1;
+        }
+    }
+
     public void falhar(String teste){
         falhou+=1;
         erros.adicionar(teste);

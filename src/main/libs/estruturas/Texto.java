@@ -39,10 +39,10 @@ public class Texto {
         while (i < o) {
             String letra = String.valueOf(texto.charAt(i));
 
-            if (letra.contentEquals("\n")){
+            if (letra.contentEquals("\n")) {
                 linhas.adicionar(linha);
                 linha = "";
-            }else{
+            } else {
                 linha += letra;
             }
 
@@ -52,7 +52,7 @@ public class Texto {
         return linhas;
     }
 
-    public static Lista<String> dividirPorSimbolo(String linha, String simbolo){
+    public static Lista<String> dividirPorSimbolo(String linha, String simbolo) {
         Lista<String> linhas = new Lista<>();
 
         int i = 0;
@@ -62,10 +62,10 @@ public class Texto {
         while (i < o) {
             String letra = String.valueOf(linha.charAt(i));
 
-            if (letra.contentEquals(simbolo)){
+            if (letra.contentEquals(simbolo)) {
                 linhas.adicionar(celula);
                 celula = "";
-            }else{
+            } else {
                 celula += letra;
             }
 
@@ -75,7 +75,7 @@ public class Texto {
         return linhas;
     }
 
-    public static String minusculo(String texto){
+    public static String minusculo(String texto) {
         int i = 0;
         int o = texto.length();
         String textoMinusculo = "";
@@ -91,7 +91,7 @@ public class Texto {
         return textoMinusculo;
     }
 
-    public static String maiusculo(String texto){
+    public static String maiusculo(String texto) {
         int i = 0;
         int o = texto.length();
         String textoMaiusculo = "";
@@ -113,21 +113,20 @@ public class Texto {
             boolean tudoOK = false;
 
             for (int i = 0; i < t1.length(); i++) {
-                char letraT1  = t1.charAt(i);
-                char letraT2  = t2.charAt(i);
+                char letraT1 = t1.charAt(i);
+                char letraT2 = t2.charAt(i);
                 if (letraT1 == letraT2) {
                     tudoOK = true;
-                }else{
-                    tudoOK = false;
-                    break;
+                } else {
+                    return false;
                 }
-                return tudoOK;
             }
+            return tudoOK;
         }
         return false;
     }
 
-    public static boolean comecaCom(String texto, String comeco){
+    public static boolean comecaCom(String texto, String comeco) {
         int i = 0;
         int o = texto.length();
         String eIgual = "";
@@ -137,8 +136,8 @@ public class Texto {
 
             eIgual += letra;
 
-            if(comeco.length() == eIgual.length()){
-                return igual(comeco,eIgual);
+            if (comeco.length() == eIgual.length()) {
+                return igual(comeco, eIgual);
             }
 
             i++;
@@ -148,7 +147,7 @@ public class Texto {
 
     }
 
-    public static boolean terminaCom(String texto, String termina){
+    public static boolean terminaCom(String texto, String termina) {
         int i = texto.length() - 1;
         int o = 0;
         String eIgual = "";
@@ -159,8 +158,8 @@ public class Texto {
             eIgual = letra + eIgual;
             //System.out.println("Letra : "+ letra +" | "+ "cTexto : " + eIgual);
 
-            if(termina.length() == eIgual.length()){
-                return igual(termina,eIgual);
+            if (termina.length() == eIgual.length()) {
+                return igual(termina, eIgual);
             }
 
             i--;
