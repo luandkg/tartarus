@@ -13,7 +13,7 @@ public class AppEditorImagem {
 
         imagem.salvar("arquivos/imagens/img_1.png");
 
-        imagem.setPixel(9,9, Color.WHITE.getRGB());
+        imagem.desenharRetangulo(1,1,8,8, Color.WHITE.getRGB());
 
         imagem.salvar("arquivos/imagens/img_1.png");
 

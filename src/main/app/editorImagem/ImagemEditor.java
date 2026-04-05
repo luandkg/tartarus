@@ -1,7 +1,5 @@
 package main.app.editorImagem;
 
-import main.libs.estruturas.Lista;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -46,4 +44,22 @@ public class ImagemEditor {
         }
     }
 
+    public void pintarRetangulo(int posX, int posY, int largura, int altura, int cor){
+        for (int y = posY; y < (posY+altura); y++) {
+            for (int x = posX; x < (posX+largura); x++) {
+                setPixel(x,y,cor);
+            }
+        }
+    }
+
+    public void desenharRetangulo(int posInicialX, int posInicialY, int posFinalX, int posFinalY, int cor){
+        for (int y = posInicialY; y <= (posFinalY); y++) {
+            setPixel(posInicialX,y,cor);
+            setPixel(posFinalX,y,cor);
+        }
+        for (int x = posInicialX; x <= (posFinalX); x++) {
+            setPixel(x,posInicialY,cor);
+            setPixel(x,posFinalY,cor);
+        }
+    }
 }

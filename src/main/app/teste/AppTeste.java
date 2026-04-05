@@ -20,6 +20,8 @@ public class AppTeste {
         testarClasses.adicionar(TesteCronometro.class);
         testarClasses.adicionar(TesteTalvez.class);
         testarClasses.adicionar(TesteCalebeDocumento.class);
+        testarClasses.adicionar(TesteEditorImagem.class);
+
 
         TesteExecutor.TESTAR(testarClasses);
 
