@@ -1,17 +1,9 @@
 package main;
 
 import main.app.documento.AppDocumento;
-import main.app.editorImagem.AppEditorImagem;
+import main.app.editor.AppEditorImagem;
 import main.app.futebol.AppFutebol;
-import main.app.futebol.Futebol;
 import main.app.teste.AppTeste;
-import main.libs.calebeDocumento.CalebeDocumento;
-import main.libs.calebeDocumento.Objeto;
-import main.libs.estruturas.Lista;
-import main.libs.estruturas.Texto;
-import main.libs.estruturas.fmt;
-import main.libs.teste.TesteExecutor;
-import testes.*;
 
 
 public class Main {

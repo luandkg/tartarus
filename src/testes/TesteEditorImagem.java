@@ -1,6 +1,7 @@
 package testes;
 
-import main.app.editorImagem.ImagemEditor;
+import main.app.editor.Cor;
+import main.app.editor.ImagemEditor;
 import main.libs.estruturas.fmt;
 import main.libs.teste.TestandoCalebe;
 import main.libs.teste.TesteCalebe;
@@ -47,6 +48,22 @@ public class TesteEditorImagem {
         imagem.salvar("arquivos/imagens/img_1.png");
 
         imagem.desenharRetangulo(1,1,8,8, Color.WHITE.getRGB());
+
+        imagem.salvar("arquivos/imagens/img_1.png");
+
+        fmt.println("--------------------------------------------------------------------------------");
+    }
+
+    @TesteCalebe
+    public static void Teste_Desenhar_Retangulo_Com_Cor(TestandoCalebe teste) {
+        fmt.println("----------------------------- EDITOR DE IMAGEM ---------------------------------");
+        ImagemEditor imagem = new ImagemEditor(10,10);
+        Cor cor = new Cor(-12488223);
+        cor.exibeCores();
+
+        imagem.salvar("arquivos/imagens/img_1.png");
+
+        imagem.desenharRetangulo(1,1,8,8, cor.getValor());
 
         imagem.salvar("arquivos/imagens/img_1.png");
 
