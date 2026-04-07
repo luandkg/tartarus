@@ -1,5 +1,6 @@
 package main.app.editor;
 
+import main.libs.estruturas.Lista;
 import main.libs.estruturas.fmt;
 
 public class AppEditorImagem {

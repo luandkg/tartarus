@@ -6,7 +6,7 @@ import main.libs.utils.Igualdade;
 
 import java.util.Iterator;
 
-public class Lista<T> implements Iterable<T>{
+public class Lista<T> implements Iterable<T> {
 
     private No<T> inicio = null;
     private No<T> fim = null;
@@ -30,6 +30,32 @@ public class Lista<T> implements Iterable<T>{
         quantidade++;
     }
 
+    public void inserirAntes(int posicao, T valor) {
+        if (posicao < 0 || posicao > quantidade) return;
+
+        No<T> novoNO = new No<T>(valor);
+
+        if (estaVazia()) {
+            inicio = novoNO;
+            fim = novoNO;
+            quantidade++;
+        } else {
+            int posicaoCorrente = 0;
+            No<T> noAnterior = null;
+            No<T> noCorrente = inicio;
+
+            while (posicaoCorrente < quantidade) {
+                if (posicaoCorrente == posicao) {
+                    break;
+                }
+                noAnterior = noCorrente;
+                noCorrente = noCorrente.getProximo();
+                posicaoCorrente++;
+            }
+            condicaoParaAdicionarAntes(noAnterior, novoNO, noCorrente);
+        }
+    }
+
     public T get(int posicao) {
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
@@ -43,7 +69,7 @@ public class Lista<T> implements Iterable<T>{
         return null;
     }
 
-    public void set( int posicao, T valor) {
+    public void set(int posicao, T valor) {
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
         while (posicaoCorrente < quantidade) {
@@ -63,6 +89,22 @@ public class Lista<T> implements Iterable<T>{
 
     public boolean estaVazia() {
         return quantidade == 0;
+    }
+
+    private void condicaoParaAdicionarAntes(No<T> noAnterior, No<T> novoNO, No<T> noCorrente) {
+
+        if (noAnterior == null) {
+            novoNO.setProximo(inicio);
+            inicio = novoNO;
+
+        } else {
+            noAnterior.setProximo(novoNO);
+            novoNO.setProximo(noCorrente);
+            if (noCorrente == null) {
+                fim = novoNO;
+            }
+        }
+        quantidade++;
     }
 
     private void condicaoParaRemover(No<T> noCorrente, No<T> noAnterior) {
@@ -86,6 +128,8 @@ public class Lista<T> implements Iterable<T>{
             quantidade--;
         }
     }
+
+
     public void remover(int posicao) {
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
@@ -191,23 +235,23 @@ public class Lista<T> implements Iterable<T>{
         return it;
     }
 
-    public Lista<ItemComPosicao<T>> getItensComPosicao(){
-        Lista<ItemComPosicao<T>>  lista = new Lista<ItemComPosicao<T>>();
+    public Lista<ItemComPosicao<T>> getItensComPosicao() {
+        Lista<ItemComPosicao<T>> lista = new Lista<ItemComPosicao<T>>();
         int cont = 0;
 
-        for(T item : this){
-            lista.adicionar(new ItemComPosicao<>(item,cont));
+        for (T item : this) {
+            lista.adicionar(new ItemComPosicao<>(item, cont));
             cont++;
         }
 
         return lista;
     }
 
-    public Lista<T> filtrar(Condicional<T> condicao, T valor){
+    public Lista<T> filtrar(Condicional<T> condicao, T valor) {
         Lista<T> lista = new Lista<>();
 
-        for (T item : this){
-            if(condicao.condicao(item,valor)){
+        for (T item : this) {
+            if (condicao.condicao(item, valor)) {
                 lista.adicionar(item);
             }
         }
@@ -216,11 +260,11 @@ public class Lista<T> implements Iterable<T>{
     }
 
 
-    public <T2> Lista<T> filtrar(CondicionalParametrizado<T,T2> condicao){
+    public <T2> Lista<T> filtrar(CondicionalParametrizado<T, T2> condicao) {
         Lista<T> lista = new Lista<>();
 
-        for (T item : this){
-            if(condicao.condicao(item)){
+        for (T item : this) {
+            if (condicao.condicao(item)) {
                 lista.adicionar(item);
             }
         }
@@ -228,18 +272,31 @@ public class Lista<T> implements Iterable<T>{
         return lista;
     }
 
-    public Lista<T> clonar(){
+    public Lista<T> clonar() {
         Lista<T> clone = new Lista<>();
 
-        for (T item : this){
+        for (T item : this) {
             clone.adicionar(item);
         }
         return clone;
     }
 
-    public void limpar(){
+    public void limpar() {
         inicio = null;
         fim = null;
         quantidade = 0;
+    }
+
+    public void exibirLista(){
+        if (!estaVazia()){
+            int posicaoCorrente = 0;
+            No<T> noCorrente = inicio;
+            while (posicaoCorrente < quantidade) {
+                fmt.println("Item {}: {}",posicaoCorrente,noCorrente.getValor());
+
+                posicaoCorrente++;
+                noCorrente = noCorrente.getProximo();
+            }
+        }
     }
 }
