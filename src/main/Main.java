@@ -5,10 +5,13 @@ import main.app.editor.AppEditorImagem;
 import main.app.futebol.AppFutebol;
 import main.app.teste.AppTeste;
 
+import static main.Estrutura.criarEstrutura;
+
 
 public class Main {
 
     public static void main(String[] args) {
+        criarEstrutura();
 
         if (args.length > 0) {
             String comando = args[0];
