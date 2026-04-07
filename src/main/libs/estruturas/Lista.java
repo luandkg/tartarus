@@ -56,6 +56,30 @@ public class Lista<T> implements Iterable<T> {
         }
     }
 
+    public void inserirDepois(int posicao, T valor) {
+        if (posicao < 0 || posicao > quantidade) return;
+
+        No<T> novoNO = new No<T>(valor);
+
+        if (estaVazia()) {
+            inicio = novoNO;
+            fim = novoNO;
+            quantidade++;
+        } else {
+            int posicaoCorrente = 0;
+            No<T> noCorrente = inicio;
+
+            while (posicaoCorrente < quantidade) {
+                if (posicaoCorrente == posicao) {
+                    break;
+                }
+                noCorrente = noCorrente.getProximo();
+                posicaoCorrente++;
+            }
+            condicaoParaAdicionarDepois(noCorrente, novoNO);
+        }
+    }
+
     public T get(int posicao) {
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
@@ -105,6 +129,17 @@ public class Lista<T> implements Iterable<T> {
             }
         }
         quantidade++;
+    }
+
+    private void condicaoParaAdicionarDepois(No<T> noCorrente, No<T> novoNO) {
+        if (noCorrente != null) {
+            novoNO.setProximo(noCorrente.getProximo());
+            noCorrente.setProximo(novoNO);
+            if (noCorrente == fim) {
+                fim = novoNO;
+            }
+            quantidade++;
+        }
     }
 
     private void condicaoParaRemover(No<T> noCorrente, No<T> noAnterior) {
@@ -287,12 +322,12 @@ public class Lista<T> implements Iterable<T> {
         quantidade = 0;
     }
 
-    public void exibirLista(){
-        if (!estaVazia()){
+    public void exibirLista() {
+        if (!estaVazia()) {
             int posicaoCorrente = 0;
             No<T> noCorrente = inicio;
             while (posicaoCorrente < quantidade) {
-                fmt.println("Item {}: {}",posicaoCorrente,noCorrente.getValor());
+                fmt.println("Item {}: {}", posicaoCorrente, noCorrente.getValor());
 
                 posicaoCorrente++;
                 noCorrente = noCorrente.getProximo();

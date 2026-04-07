@@ -399,4 +399,23 @@ public class TesteLista {
         //semana.exibirLista();
     }
 
+    @TesteCalebe
+    public static void Lista_Adicionar_Depois(TestandoCalebe teste){
+        Lista<String> semana = new Lista<>();
+
+        semana.adicionar("Segunda");
+        semana.adicionar("Terça");
+        semana.adicionar("Quarta");
+        semana.adicionar("Sexta");
+        teste.deveSerIgual(semana.get(3),"Sexta","Lista_Adicionar_Depois -> Teste_1");
+        teste.deveSerIgual(semana.getQuantidade(),4,"Lista_Adicionar_Depois -> Teste_2");
+
+        semana.inserirDepois(2,"Quinta");
+
+        teste.deveSerIgual(semana.get(3),"Quinta","Lista_Adicionar_Depois -> Teste_3");
+        teste.deveSerIgual(semana.getQuantidade(),5,"Lista_Adicionar_Depois -> Teste_4");
+
+        //semana.exibirLista();
+    }
+
 }
