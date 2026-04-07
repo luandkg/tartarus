@@ -77,15 +77,15 @@ public class TesteExecutor {
 
         String duracao=Tempo.formatarNanossegundos(fimTempo-inicioTempo);
 
-        TESTE_HISTORICO(testesRealizados, inicioData, fimData, inicioHorario, fimHorario,duracao);
+        //TESTE_HISTORICO(testesRealizados, inicioData, fimData, inicioHorario, fimHorario,duracao);
 
         EXIBIR_TESTES(testesRealizados);
-        SALVAR_RESULTADOS_DOS_TESTES(testesRealizados);
+        //SALVAR_RESULTADOS_DOS_TESTES(testesRealizados);
 
         fmt.println("\n\n");
 
         EXIBIR_ERROS(testesRealizados);
-        SALVAR_ERROS(testesRealizados);
+        //SALVAR_ERROS(testesRealizados);
     }
 
     public static void TESTAR_UNICO(Class<?> testandoClasse) {
