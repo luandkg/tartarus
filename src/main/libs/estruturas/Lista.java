@@ -8,12 +8,14 @@ import java.util.Iterator;
 
 public class Lista<T> implements Iterable<T> {
 
-    private No<T> inicio = null;
-    private No<T> fim = null;
-    private int quantidade = 0;
+    private No<T> inicio;
+    private No<T> fim;
+    private int quantidade;
 
     public Lista() {
         this.inicio = null;
+        this.fim = null;
+        this.quantidade = 0;
     }
 
     public void adicionar(T valor) {
@@ -31,7 +33,9 @@ public class Lista<T> implements Iterable<T> {
     }
 
     public void inserirAntes(int posicao, T valor) {
-        if (posicao < 0 || posicao > quantidade) return;
+        if (posicao < 0 || posicao > quantidade) {
+            throw new RuntimeException("Erro: Posicao nao encontrada!");
+        }
 
         No<T> novoNO = new No<T>(valor);
 
@@ -57,7 +61,9 @@ public class Lista<T> implements Iterable<T> {
     }
 
     public void inserirDepois(int posicao, T valor) {
-        if (posicao < 0 || posicao > quantidade) return;
+        if (posicao < 0 || posicao > quantidade) {
+            throw new RuntimeException("Erro: Posicao nao encontrada!");
+        }
 
         No<T> novoNO = new No<T>(valor);
 
@@ -90,7 +96,7 @@ public class Lista<T> implements Iterable<T> {
             posicaoCorrente++;
             noCorrente = noCorrente.getProximo();
         }
-        return null;
+        throw new RuntimeException("Erro: Posicao nao encontrada!");
     }
 
     public void set(int posicao, T valor) {
@@ -115,8 +121,8 @@ public class Lista<T> implements Iterable<T> {
         return quantidade == 0;
     }
 
-    private void condicaoParaAdicionarAntes(No<T> noAnterior, No<T> novoNO, No<T> noCorrente) {
-
+    private boolean condicaoParaAdicionarAntes(No<T> noAnterior, No<T> novoNO, No<T> noCorrente) {
+        boolean tudoOK = false;
         if (noAnterior == null) {
             novoNO.setProximo(inicio);
             inicio = novoNO;
@@ -129,9 +135,12 @@ public class Lista<T> implements Iterable<T> {
             }
         }
         quantidade++;
+        return tudoOK;
     }
 
-    private void condicaoParaAdicionarDepois(No<T> noCorrente, No<T> novoNO) {
+    private boolean condicaoParaAdicionarDepois(No<T> noCorrente, No<T> novoNO) {
+        boolean tudoOK = false;
+
         if (noCorrente != null) {
             novoNO.setProximo(noCorrente.getProximo());
             noCorrente.setProximo(novoNO);
@@ -139,45 +148,58 @@ public class Lista<T> implements Iterable<T> {
                 fim = novoNO;
             }
             quantidade++;
+            tudoOK = true;
         }
+        return tudoOK;
     }
 
-    private void condicaoParaRemover(No<T> noCorrente, No<T> noAnterior) {
+    private boolean condicaoParaRemover(No<T> noCorrente, No<T> noAnterior) {
+        boolean tudoOK = false;
+
         if (noCorrente == inicio && noCorrente == fim) {
             inicio = null;
             fim = null;
             quantidade--;
+            tudoOK = true;
         } else if (noCorrente == inicio) {
             inicio = noCorrente.getProximo();
             quantidade--;
+            tudoOK = true;
         } else if (noCorrente == fim) {
             if (noAnterior != null) {
                 noAnterior.setProximo(null);
                 fim = noAnterior;
             }
             quantidade--;
+            tudoOK = true;
         } else {
             if (noAnterior != null) {
                 noAnterior.setProximo(noCorrente.getProximo());
             }
             quantidade--;
+            tudoOK = true;
         }
+        return tudoOK;
     }
 
 
     public void remover(int posicao) {
+        if (posicao < 0 || posicao >= quantidade) { // Verificação antecipada
+            throw new RuntimeException("Erro: Posicao invalida!");
+        }
+
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
         No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
             if (posicaoCorrente == posicao) {
-                condicaoParaRemover(noCorrente, noAnterior);
                 break;
             }
             noAnterior = noCorrente;
             posicaoCorrente++;
             noCorrente = noCorrente.getProximo();
         }
+        condicaoParaRemover(noCorrente, noAnterior);
     }
 
     public void removerReferencia(T referencia) {
@@ -186,12 +208,16 @@ public class Lista<T> implements Iterable<T> {
         No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
             if (noCorrente.getValor() == referencia) {
-                condicaoParaRemover(noCorrente, noAnterior);
                 break;
             }
             noAnterior = noCorrente;
             posicaoCorrente++;
             noCorrente = noCorrente.getProximo();
+        }
+        if(posicaoCorrente<quantidade){
+            condicaoParaRemover(noCorrente, noAnterior);
+        }else{
+            throw new RuntimeException("Erro: Item nao encontrado!");
         }
     }
 
@@ -201,12 +227,17 @@ public class Lista<T> implements Iterable<T> {
         No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
             if (igualdade.igual(noCorrente.getValor(), valor)) {
-                condicaoParaRemover(noCorrente, noAnterior);
                 break;
             }
             noAnterior = noCorrente;
             posicaoCorrente++;
             noCorrente = noCorrente.getProximo();
+        }
+
+        if(posicaoCorrente<quantidade){
+            condicaoParaRemover(noCorrente, noAnterior);
+        }else{
+            throw new RuntimeException("Erro: Item nao encontrado!");
         }
     }
 
@@ -229,12 +260,10 @@ public class Lista<T> implements Iterable<T> {
         int contValor = 0;
         int posicaoCorrente = 0;
         No<T> noCorrente = inicio;
-        No<T> noAnterior = null;
         while (posicaoCorrente < quantidade) {
             if (igualdade.igual(noCorrente.getValor(), valor)) {
                 contValor++;
             }
-            noAnterior = noCorrente;
             posicaoCorrente++;
             noCorrente = noCorrente.getProximo();
         }
@@ -256,10 +285,13 @@ public class Lista<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                No<T> noTemporario = noCorrente;
+                if (!hasNext()) {
+                    throw new java.util.NoSuchElementException();
+                }
+                T valor = noCorrente.getValor();
                 noCorrente = noCorrente.getProximo();
                 posicaoCorrente++;
-                return noTemporario.getValor();
+                return valor;
             }
 
             @Override

@@ -21,6 +21,7 @@ public class AppTeste {
         testarClasses.adicionar(TesteTalvez.class);
         testarClasses.adicionar(TesteCalebeDocumento.class);
         testarClasses.adicionar(TesteEditorImagem.class);
+        testarClasses.adicionar(TestePilha.class);
 
 
         TesteExecutor.TESTAR(testarClasses);
