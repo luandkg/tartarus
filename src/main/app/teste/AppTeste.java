@@ -22,7 +22,7 @@ public class AppTeste {
         testarClasses.adicionar(TesteCalebeDocumento.class);
         testarClasses.adicionar(TesteEditorImagem.class);
         testarClasses.adicionar(TestePilha.class);
-
+        testarClasses.adicionar(TesteFila.class);
 
         TesteExecutor.TESTAR(testarClasses);
 
