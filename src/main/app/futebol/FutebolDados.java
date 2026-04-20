@@ -1,5 +1,6 @@
 package main.app.futebol;
 
+import main.libs.calebeDocumento.CalebeDocumento;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
 import main.libs.tempo.Tempo;
@@ -14,7 +15,7 @@ public class FutebolDados {
 
 
     public FutebolDados() {
-        this.arquivo = "arquivos/futebol/futebol.tsv";
+        this.arquivo = "arquivos/futebol/futebol";
 
         this.jogadores = new Lista<>();
         this.times = new Lista<>();
@@ -22,7 +23,7 @@ public class FutebolDados {
     }
 
     public void ler() {
-        String doc = Texto.ler(arquivo);
+        String doc = Texto.ler(arquivo+".tsv");
 
         Lista<String> linhas = Texto.dividirLinhas(doc);
 
@@ -37,7 +38,7 @@ public class FutebolDados {
                 Time t = new Time(Integer.parseInt(valores.get(1)), valores.get(2), Tempo.parseData(valores.get(3)), Tempo.parseData(valores.get(4)), Tempo.parseHorario(valores.get(5)), Tempo.parseHorario(valores.get(6)),Integer.parseInt(valores.get(7)));
                 times.adicionar(t);
             } else if (Texto.igual(valores.get(0), "UNIFORME")) {
-                Uniforme u = new Uniforme(Integer.parseInt(valores.get(1)), valores.get(2), Tempo.parseData(valores.get(3)), Tempo.parseData(valores.get(4)), Tempo.parseHorario(valores.get(5)), Tempo.parseHorario(valores.get(6)));
+                Uniforme u = new Uniforme(Integer.parseInt(valores.get(1)), valores.get(2), Tempo.parseData(valores.get(6)), Tempo.parseData(valores.get(7)), Tempo.parseHorario(valores.get(8)), Tempo.parseHorario(valores.get(9)));
                 u.adicionarCor(valores.get(3));
                 u.adicionarCor(valores.get(4));
                 u.adicionarCor(valores.get(5));
@@ -49,6 +50,11 @@ public class FutebolDados {
     }
 
     public void salvar() {
+        salvarTSV();
+        salvarDocumento();
+    }
+
+    public void salvarTSV() {
         String doc = "";
 
         for (Jogador jogador : jogadores) {
@@ -77,7 +83,15 @@ public class FutebolDados {
             doc += "UNIFORME\t" + uniforme.getId() + "\t" + uniforme.getNome() + "\t" + c1 + "\t" + c2 + "\t" + c3 + "\t" + uniforme.getDataCriada().toString() + "\t" + uniforme.getDataModificada().toString() + "\t" + uniforme.getHorarioCriado().toString() + "\t" + uniforme.getHorarioModificado().toString() + "\n";
         }
 
-        Texto.escrever(arquivo, doc);
+        Texto.escrever(arquivo+".tsv", doc);
+    }
+
+    public void salvarDocumento() {
+        CalebeDocumento cd = new CalebeDocumento();
+
+        cd.objetoUnico("Futebol");
+
+        cd.salvar(arquivo+".documento");
     }
 
     public Lista<Jogador> getJogadores() {

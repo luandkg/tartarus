@@ -79,7 +79,13 @@ public class Uniforme {
     }
 
     public void adicionarCor(String cor) {
-        cores.adicionar(cor);
+        if (validaCor(cor)){
+            cores.adicionar(cor);
+        }
+    }
+
+    public boolean validaCor(String cor) {
+        return cor != null;
     }
 
     public static Lista<String> possiveisCores() {
