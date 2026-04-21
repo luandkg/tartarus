@@ -79,10 +79,11 @@ public class CalebeDocumento {
 
         Lista<Token> tokens = dividirTokens(texto);
 
+        /*
         fmt.println("Lista de Tokens: Possui {} {}", tokens.getQuantidade(), "tokens.");
         for (Token tk : tokens) {
             fmt.println("Token: {}: {}", tk.getTipo().toString(), tk.getValor().toString());
-        }
+        }*/
         montaObjetos(tokens);
     }
 
@@ -90,10 +91,11 @@ public class CalebeDocumento {
 
         Lista<Token> tokens = dividirTokens(texto);
 
+        /*
         fmt.println("Lista de Tokens: Possui {} {}", tokens.getQuantidade(), "tokens.");
         for (Token tk : tokens) {
             fmt.println("Token: {}: {}", tk.getTipo().toString(), tk.getValor().toString());
-        }
+        }*/
         montaObjetos(tokens);
     }
 
@@ -107,7 +109,7 @@ public class CalebeDocumento {
         while (i < o) {
             String letra = String.valueOf(texto.charAt(i));
 
-            fmt.println("L{}= {}\t", i, letra);
+            //fmt.println("L{}= {}\t", i, letra);
 
             if (Texto.igual(letra, "!")) {
                 tokens.adicionar(new Token(TokenTipo.EXCLAMACAO, "!"));
@@ -125,7 +127,7 @@ public class CalebeDocumento {
                     }
                     i++;
                 }
-                fmt.println("Palavra: {}", obj);
+                //fmt.println("Palavra: {}", obj);
                 tokens.adicionar(new Token(TokenTipo.NOME, obj));
             } else if (Texto.igual(letra, "@")) {
                 tokens.adicionar(new Token(TokenTipo.ARROBA, "@"));
@@ -144,7 +146,7 @@ public class CalebeDocumento {
                     }
                     i++;
                 }
-                fmt.println("Palavra: {}", obj);
+                //fmt.println("Palavra: {}", obj);
                 tokens.adicionar(new Token(TokenTipo.NOME, obj));
 
 
@@ -165,7 +167,7 @@ public class CalebeDocumento {
                     }
                     i++;
                 }
-                fmt.println("Palavra: {}", obj);
+                //fmt.println("Palavra: {}", obj);
                 tokens.adicionar(new Token(TokenTipo.VALOR, obj));
 
             } else if (Texto.igual(letra, "[")) {

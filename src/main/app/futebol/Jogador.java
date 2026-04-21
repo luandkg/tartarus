@@ -11,7 +11,7 @@ public class Jogador {
 
     private String nome;
     private Data dataNascimento;
-    private int timeID;
+    private int id;
     private int uniforme;
     private String posicao;
 
@@ -19,9 +19,9 @@ public class Jogador {
     private Horario horarioCriado, horarioModificado;
 
     public Jogador(String nome, Data dataNascimento, int uniforme, String posicao, Data dataCriada, Data dataModificada, Horario horarioCriado, Horario horarioModificado) {
+        this.id = -1;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.timeID = -1;
         this.uniforme = uniforme;
         this.posicao = posicao;
         this.dataCriada = dataCriada;
@@ -51,8 +51,8 @@ public class Jogador {
         return posicao;
     }
 
-    public int getTimeID() {
-        return timeID;
+    public int getId() {
+        return id;
     }
 
     public Data getDataCriada() {
@@ -79,8 +79,8 @@ public class Jogador {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setTimeID(int timeID) {
-        this.timeID = timeID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setUniforme(int uniforme) {

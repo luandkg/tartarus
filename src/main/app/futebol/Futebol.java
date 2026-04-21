@@ -23,6 +23,7 @@ public class Futebol {
     public Futebol() {
         this.futebolDados = new FutebolDados();
         futebolDados.ler();
+        futebolDados.salvar();
 
         this.gerenciadorDeJogadores = new GerenciadorDeJogadores(futebolDados);
         this.gerenciadorDeTimes = new GerenciadorDeTimes(futebolDados);
@@ -108,12 +109,14 @@ public class Futebol {
                 case "3" -> removerTime();
                 case "4" -> verInformacoesDoTime();
                 case "5" -> selecionarTime();
+
                 case "6" -> cadastrarJogador();
                 case "7" -> listarJogadores();
                 case "8" -> removerJogador();
                 case "9" -> verInformacoesDoJogador();
                 case "10" -> listarJogadoresMaisVelhos();
                 case "11" -> listarJogadoresMaisNovos();
+
                 case "12" -> cadastrarUniforme();
                 case "13" -> listarUniformes();
                 case "14" -> removerUniforme();
@@ -188,7 +191,7 @@ public class Futebol {
         }
 
         Jogador jogador = new Jogador(nome, Tempo.parseData(dataNascimento), uniforme, posicao, Tempo.getDataHoje(), Tempo.getDataHoje(), Tempo.getHorarioAgora(), Tempo.getHorarioAgora());
-
+        jogador.setId(futebolDados.obterJogadorId());
         gerenciadorDeJogadores.criar(jogador);
 
         fmt.println("Jogador cadastrado com sucesso!");
@@ -202,19 +205,16 @@ public class Futebol {
             fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", "JOGADOR", "NOME", "IDADE", "UNIFORME", "POSICAO", "TIME");
             fmt.println(fmt.repete("-", 120));
 
-            int cont = 1;
-
             for (Jogador jogador : jogadores) {
                 String time;
 
-                if (jogador.getTimeID() != -1) {
-                    time = gerenciadorDeTimes.obter(jogador.getTimeID());
+                if (jogador.getId() != -1) {
+                    time = gerenciadorDeTimes.obter(jogador.getId());
                 } else {
                     time = "";
                 }
 
-                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", cont, jogador.getNome(), jogador.getIdade(), jogador.getUniforme(), jogador.getPosicao(), time);
-                cont++;
+                fmt.println("| {esquerda_15} | {esquerda_25} | {esquerda_15} | {esquerda_15} | {esquerda_15} | {esquerda_16} |", jogador.getId(), jogador.getNome(), jogador.getIdade(), jogador.getUniforme(), jogador.getPosicao(), time);
             }
             fmt.println(fmt.repete("-", 120));
         } else {
@@ -275,7 +275,8 @@ public class Futebol {
             return;
         }
 
-        Time time = new Time(gerenciadorDeTimes.listar().getQuantidade(), nome, Tempo.getDataHoje(), Tempo.getDataHoje(), Tempo.getHorarioAgora(), Tempo.getHorarioAgora(), -1);
+        Time time = new Time(futebolDados.obterTimeId(), nome, Tempo.getDataHoje(), Tempo.getDataHoje(), Tempo.getHorarioAgora(), Tempo.getHorarioAgora(), -1);
+
 
         gerenciadorDeTimes.criar(time);
 
@@ -410,7 +411,7 @@ public class Futebol {
         Talvez<Jogador> talvezJogador = gerenciadorDeJogadores.obter(nome);
 
         if (talvezJogador.temValor()) {
-            talvezJogador.getValor().setTimeID(time.getId());
+            talvezJogador.getValor().setId(time.getId());
 
             talvezJogador.getValor().setDataModificada(Tempo.getDataHoje());
             talvezJogador.getValor().setHorarioModificado(Tempo.getHorarioAgora());
@@ -430,7 +431,7 @@ public class Futebol {
         Talvez<Jogador> talvezJogador = gerenciadorDeJogadores.obter(nome);
 
         if (talvezJogador.temValor()) {
-            talvezJogador.getValor().setTimeID(-1);
+            talvezJogador.getValor().setId(-1);
 
             talvezJogador.getValor().setDataModificada(Tempo.getDataHoje());
             talvezJogador.getValor().setHorarioModificado(Tempo.getHorarioAgora());
@@ -588,7 +589,7 @@ public class Futebol {
             return;
         }
 
-        Uniforme uniforme = new Uniforme(gerenciadorDeUniformes.listar().getQuantidade(), nome, Tempo.getDataHoje(), Tempo.getDataHoje(),Tempo.getHorarioAgora(), Tempo.getHorarioAgora());
+        Uniforme uniforme = new Uniforme(futebolDados.obterUniformeId(), nome, Tempo.getDataHoje(), Tempo.getDataHoje(), Tempo.getHorarioAgora(), Tempo.getHorarioAgora());
 
         while (uniforme.getCores().getQuantidade() < 3) {
             fmt.print(">> Digite uma cor: ");
@@ -788,16 +789,16 @@ public class Futebol {
         }
     }
 
-    public void listarPossiveisCores(){
+    public void listarPossiveisCores() {
         fmt.println(fmt.repete("-", 36));
         fmt.println("|{centraliza_35}|", "lista de Possiveis Cores");
         fmt.println(fmt.repete("-", 36));
-        fmt.println("|{centraliza_11}  | {centraliza_20}|","ID", "COR ");
+        fmt.println("|{centraliza_11}  | {centraliza_20}|", "ID", "COR ");
         fmt.println(fmt.repete("-", 36));
 
         int cont = 1;
-        for(String cor : Uniforme.possiveisCores()){
-            fmt.println("| {esquerda_10} | {esquerda_19} |",cont, cor);
+        for (String cor : Uniforme.possiveisCores()) {
+            fmt.println("| {esquerda_10} | {esquerda_19} |", cont, cor);
             cont++;
         }
         fmt.println(fmt.repete("-", 36));

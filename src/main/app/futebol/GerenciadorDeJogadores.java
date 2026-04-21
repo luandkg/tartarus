@@ -50,7 +50,7 @@ public class GerenciadorDeJogadores {
         Lista<Jogador> jogadoresDoTime = new Lista<>();
 
         for (Jogador jogador : futebolDados.getJogadores()) {
-            if (jogador.getTimeID()==timeID) {
+            if (jogador.getId()==timeID) {
                 jogadoresDoTime.adicionar(jogador);
             }
         }
