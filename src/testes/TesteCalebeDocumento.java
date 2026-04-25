@@ -1,7 +1,7 @@
 package testes;
 
-import main.libs.calebeDocumento.CalebeDocumento;
-import main.libs.calebeDocumento.Objeto;
+import main.libs.arquivo.calebeDocumento.CalebeDocumento;
+import main.libs.arquivo.calebeDocumento.Objeto;
 import main.libs.teste.TestandoCalebe;
 import main.libs.teste.TesteCalebe;
 import main.libs.teste.TesteClasseCalebe;

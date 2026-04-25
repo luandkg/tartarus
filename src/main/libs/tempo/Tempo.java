@@ -65,14 +65,14 @@ public class Tempo {
     }
 
     public static Data parseData(String dataString){
-        Lista<String> valores = Texto.dividirPorSimbolo(dataString,"/");
+        Lista<String> valores = Texto.dividirPorSimbolo(dataString,'/');
 
         Data data = new Data(Integer.parseInt(valores.get(0)),Integer.parseInt(valores.get(1)),Integer.parseInt(valores.get(2)));
         return data;
     }
 
     public static Horario parseHorario(String dataString){
-        Lista<String> valores = Texto.dividirPorSimbolo(dataString,":");
+        Lista<String> valores = Texto.dividirPorSimbolo(dataString,':');
 
         Horario horario = new Horario(Integer.parseInt(valores.get(0)),Integer.parseInt(valores.get(1)),Integer.parseInt(valores.get(2)));
         return horario;

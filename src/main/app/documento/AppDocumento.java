@@ -1,7 +1,7 @@
 package main.app.documento;
 
-import main.libs.calebeDocumento.CalebeDocumento;
-import main.libs.calebeDocumento.Objeto;
+import main.libs.arquivo.calebeDocumento.CalebeDocumento;
+import main.libs.arquivo.calebeDocumento.Objeto;
 import main.libs.estruturas.Texto;
 import main.libs.estruturas.fmt;
 

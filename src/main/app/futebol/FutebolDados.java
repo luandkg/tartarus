@@ -1,8 +1,7 @@
 package main.app.futebol;
 
-import main.app.editor.Cor;
-import main.libs.calebeDocumento.CalebeDocumento;
-import main.libs.calebeDocumento.Objeto;
+import main.libs.arquivo.calebeDocumento.CalebeDocumento;
+import main.libs.arquivo.calebeDocumento.Objeto;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
 import main.libs.tempo.Data;
@@ -100,7 +99,7 @@ public class FutebolDados {
         Lista<String> linhas = Texto.dividirLinhas(doc);
 
         for (String linha : linhas) {
-            Lista<String> valores = Texto.dividirPorSimbolo(linha, "\t");
+            Lista<String> valores = Texto.dividirPorSimbolo(linha, '\t');
 
             if (Texto.igual(valores.get(0), "JOGADOR")) {
                 Jogador j = new Jogador(valores.get(1), Tempo.parseData(valores.get(2)), Integer.parseInt(valores.get(4)), valores.get(5), Tempo.parseData(valores.get(6)), Tempo.parseData(valores.get(7)), Tempo.parseHorario(valores.get(8)), Tempo.parseHorario(valores.get(9)));

@@ -1,4 +1,4 @@
-package main.libs.calebeDocumento;
+package main.libs.arquivo.calebeDocumento;
 
 public class Atributo {
 

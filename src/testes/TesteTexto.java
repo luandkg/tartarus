@@ -60,4 +60,29 @@ public class TesteTexto {
         teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "la"),"Texto_compara_se_termina_com -> Teste_4");
         teste.deveSerFalso(Texto.terminaCom("Ola mundo!", "UNDO!"),"Texto_compara_se_termina_com -> Teste_5");
     }
+
+    @TesteCalebe
+    public static void Texto_remove_String(TestandoCalebe teste){
+        String t = "[ ( Textando : Luan ) ]";
+        t = Texto.removeString(t,"[ ( ");
+        teste.deveSerVerdadeiro(Texto.terminaCom("Textando : Luan ) ]", t),"Texto_remove_String -> Teste_1");
+
+        t = Texto.removeString(t," )");
+        teste.deveSerVerdadeiro(Texto.terminaCom("Textando : Luan ]", t),"Texto_remove_String -> Teste_2");
+
+        t = Texto.removeString(t," ]");
+        teste.deveSerVerdadeiro(Texto.terminaCom("Textando : Luan", t),"Texto_remove_String -> Teste_3");
+    }
+
+    @TesteCalebe
+    public static void Texto_existe_String(TestandoCalebe teste){
+        String t = "[ ( Textando : Luan ) ]";
+        teste.deveSerVerdadeiro(Texto.existeString(t,"Textando"),"Texto_existe_String -> Teste_1");
+
+        teste.deveSerVerdadeiro(Texto.existeString(t,"Luan"),"Texto_existe_String -> Teste_2");
+
+        teste.deveSerVerdadeiro(Texto.existeString(t,"]"),"Texto_existe_String -> Teste_3");
+
+    }
+
 }

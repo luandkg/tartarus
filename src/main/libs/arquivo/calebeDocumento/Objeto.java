@@ -1,4 +1,4 @@
-package main.libs.calebeDocumento;
+package main.libs.arquivo.calebeDocumento;
 
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;

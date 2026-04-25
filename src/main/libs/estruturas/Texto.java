@@ -52,7 +52,7 @@ public class Texto {
         return linhas;
     }
 
-    public static Lista<String> dividirPorSimbolo(String linha, String simbolo) {
+    public static Lista<String> dividirPorSimbolo(String linha, char simbolo) {
         Lista<String> linhas = new Lista<>();
 
         int i = 0;
@@ -60,9 +60,9 @@ public class Texto {
         String celula = "";
 
         while (i < o) {
-            String letra = String.valueOf(linha.charAt(i));
+            char letra = linha.charAt(i);
 
-            if (letra.contentEquals(simbolo)) {
+            if (letra == simbolo) {
                 linhas.adicionar(celula);
                 celula = "";
             } else {
@@ -167,5 +167,71 @@ public class Texto {
 
         return false;
 
+    }
+
+    public static String removeLetra(String texto, char excluir){
+        int i = 0;
+        int o = texto.length();
+        String nTexto = "";
+
+        while (i < o) {
+            char letra = texto.charAt(i);
+
+            if (letra != excluir){
+                nTexto +=letra;
+            }
+
+            i++;
+        }
+
+        return nTexto;
+    }
+
+    public static String removeString(String texto, String excluir){
+        int i = 0;
+        int o = texto.length();
+        String nTexto = "";
+
+        while (i < o) {
+            char letra = texto.charAt(i);
+            String ex = "";
+
+            for (int j = 0; j < excluir.length() && (i+j)<o ; j++) {
+                char letra2 = texto.charAt(i+j);
+                ex += letra2;
+            }
+
+            if(igual(excluir,ex)){
+                i+=excluir.length();
+            }else{
+                nTexto +=letra;
+                i++;
+            }
+        }
+
+        return nTexto;
+    }
+
+    public static Boolean existeString(String texto, String existe){
+        int i = 0;
+        int o = texto.length();
+        boolean confirmado = false;
+
+        while (i < o) {
+            String ex = "";
+
+            for (int j = 0; j < existe.length() && (i+j)<o ; j++) {
+                char letra = texto.charAt(i+j);
+                ex += letra;
+            }
+
+            if(igual(existe,ex)){
+                return true;
+            }else{
+                i++;
+            }
+        }
+
+        return confirmado;
     }
 }

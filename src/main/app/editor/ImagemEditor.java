@@ -5,8 +5,10 @@ import main.app.editor.Geometria.Retangulo;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.awt.image.ImagingOpException;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 public class ImagemEditor {
 
@@ -16,10 +18,19 @@ public class ImagemEditor {
 
     private int[] pixels;
 
-    public ImagemEditor(int altura, int largura) {
+    public ImagemEditor(int largura, int altura) {
         this.altura = altura;
         this.largura = largura;
         this.imagem = new BufferedImage(largura, altura, BufferedImage.TYPE_INT_RGB);
+
+        // pega referência direta ao array interno do BufferedImage
+        this.pixels = ((DataBufferInt) imagem.getRaster().getDataBuffer()).getData();
+    }
+
+    public ImagemEditor(BufferedImage img) {
+        this.altura = img.getHeight();
+        this.largura = img.getWidth();
+        this.imagem = img;
 
         // pega referência direta ao array interno do BufferedImage
         this.pixels = ((DataBufferInt) imagem.getRaster().getDataBuffer()).getData();
@@ -35,6 +46,16 @@ public class ImagemEditor {
         return cor;
     }
 
+    public BufferedImage getImagem(){return imagem;}
+
+    public int getLargura(){
+        return largura;
+    }
+
+    public int getAltura(){
+        return altura;
+    }
+
     public void setPixel(int posX, int posY, int cor) {
         pixels[(posY * largura) + posX] = cor;
     }
@@ -45,11 +66,8 @@ public class ImagemEditor {
 
     public void salvar(String arquivo) {
         try {
-            // Cria o objeto File com o nome do arquivo
-            File outputfile = new File(arquivo);
-
             // ImageIO.write recebe a imagem, o formato ("png") e o arquivo de destino
-            ImageIO.write(imagem, "png", outputfile);
+            ImageIO.write(imagem, "png", new File(arquivo));
 
         } catch (IOException e) {
             throw new RuntimeException("Erro ao salvar a imagem: " + e.getMessage());

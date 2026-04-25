@@ -1,9 +1,8 @@
-package main.libs.calebeDocumento;
+package main.libs.arquivo.calebeDocumento;
 
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
 import main.libs.estruturas.TextoDocumento;
-import main.libs.estruturas.fmt;
 
 public class CalebeDocumento {
 
