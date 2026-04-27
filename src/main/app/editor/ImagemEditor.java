@@ -74,6 +74,11 @@ public class ImagemEditor {
         }
     }
 
+    public String criar(String arquivo) {
+        salvar(arquivo);
+        return arquivo;
+    }
+
     public void pintarRetangulo(int posX, int posY, int largura, int altura, int cor) {
         for (int y = posY; y < (posY + altura); y++) {
             for (int x = posX; x < (posX + largura); x++) {

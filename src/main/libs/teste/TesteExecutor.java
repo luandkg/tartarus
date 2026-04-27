@@ -155,12 +155,12 @@ public class TesteExecutor {
         for (ItemComPosicao<TestandoCalebe> teste : testesRealizados.getItensComPosicao()) {
             resultado += fmt.formatar("{}\t{}\t{}\t{}\t{}\n", teste.getPosicao() + 1, teste.getItem().getNome(), teste.getItem().getTotal(), teste.getItem().getSucesso(), teste.getItem().getFalhou());
         }
-        Texto.escrever("arquivos/testes/Testes_Resultados.tsv", resultado);
+        Texto.escrever("arquivosDeTestes/testes/Testes_Resultados.tsv", resultado);
     }
 
     public static void TESTE_HISTORICO(Lista<TestandoCalebe> testesRealizados, Data inicioData, Data fimData, Horario inicioHorario, Horario fimHorario,String duracao) {
 
-        final String arquivo = "arquivos/testes/Teste_Historico.tsv";
+        final String arquivo = "arquivosDeTestes/testes/Teste_Historico.tsv";
 
         File registro = new File(arquivo);
 
@@ -247,11 +247,11 @@ public class TesteExecutor {
                     }
                 }
             }
-            Texto.escrever("arquivos/testes/Testes_Com_Erros.tsv", resultado);
-            Texto.escrever("arquivos/testes/Teste_Resultado_Status.txt", "PROBLEMA");
+            Texto.escrever("arquivosDeTestes/testes/Testes_Com_Erros.tsv", resultado);
+            Texto.escrever("arquivosDeTestes/testes/Teste_Resultado_Status.txt", "PROBLEMA");
 
         } else {
-            Texto.escrever("arquivos/testes/Teste_Resultado_Status.txt", "SUCESSO");
+            Texto.escrever("arquivosDeTestes/testes/Teste_Resultado_Status.txt", "SUCESSO");
         }
     }
 }

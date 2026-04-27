@@ -16,7 +16,7 @@ import java.io.IOException;
 public class CalebeImagem {
 
 
-    public static BufferedImage abrir(String arquivo) {
+    public static BufferedImage criarImagem(String arquivo) {
         String dados = Texto.ler(arquivo);
 
         Lista<String> linhas = Texto.dividirLinhas(dados);
@@ -86,7 +86,7 @@ public class CalebeImagem {
         return editor.getImagem();
     }
 
-    public static BufferedImage abrirPNG(String caminho) {
+    public static BufferedImage criarImagemPNG(String caminho) {
         try {
             // 1. Carrega a imagem original (pode vir como DataBufferByte)
             BufferedImage original = ImageIO.read(new File(caminho));
@@ -113,7 +113,7 @@ public class CalebeImagem {
         }
     }
 
-    public static void salvar(BufferedImage imagem, String arquivo) {
+    public static void gerarDados(BufferedImage imagem, String arquivo) {
         int largura = imagem.getWidth();
         int altura = imagem.getHeight();
         TextoDocumento dados = new TextoDocumento();
@@ -135,8 +135,8 @@ public class CalebeImagem {
     }
 
     public static boolean validadorVersao(String arquivo, String versao){
-        if(!Texto.existeString(arquivo,".imagem")){
-            fmt.println("Erro: Imagem no formato invalido (.imagem)");
+        if(!Texto.existeString(arquivo,".calebeImagem")){
+            fmt.println("Erro: Imagem no formato invalido (.calebeImagem)");
             return false;
         }
 

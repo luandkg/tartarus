@@ -3,46 +3,48 @@ package main.app.editor;
 import main.libs.arquivo.calebeImagem.CalebeImagem;
 import main.libs.estruturas.fmt;
 
-import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class AppEditorImagem {
 
     public static void executar() {
-
         fmt.println("----------------------------- EDITOR DE IMAGEM ---------------------------------");
-        ImagemEditor imagem = new ImagemEditor(34, 34);
+        ImagemEditor imagem1 = new ImagemEditor(34, 34);
+        imagem1.salvar("arquivos/editorDeImagem/criadas/tipoPNG/blocoPreto.png");
+
+        ImagemEditor clone1 = imagem1;
         Cor cor = new Cor(-12488223);
-        cor.exibeCores();
+        clone1.desenharRetangulo(1, 1, 10, 10, cor.getValor());
+        clone1.desenharRetangulo(23, 1, 32, 10, cor.getValor());
+        clone1.desenharRetangulo(12, 12, 21, 22, cor.getValor());
+        clone1.salvar("arquivos/editorDeImagem/clonadas/blocoPretoComQuadrados.png");
 
-        imagem.salvar("arquivos/imagens/img_1.png");
+        String caminhoDados1 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_blocoPretoComQuadrados.calebeImagem";
+        CalebeImagem.gerarDados(clone1.getImagem(), caminhoDados1);
 
-        imagem.desenharRetangulo(1, 1, 10, 10, cor.getValor());
-        imagem.desenharRetangulo(23, 1, 32, 10, cor.getValor());
-        imagem.desenharRetangulo(12, 12, 21, 22, cor.getValor());
-
-
-        imagem.salvar("arquivos/imagens/img_1.png");
-        String arquivo1 = "arquivos/imagens/img_1.imagem";
-        CalebeImagem.salvar(imagem.getImagem(), arquivo1);
         boolean tudoOk = false;
-        if (CalebeImagem.validadorVersao(arquivo1, "v1")) {
-            BufferedImage imagemTexto = CalebeImagem.abrir(arquivo1);
-            ImagemEditor imagem2 = new ImagemEditor(imagemTexto);
-            imagem2.salvar("arquivos/imagens/img_2.png");
+        if (CalebeImagem.validadorVersao(caminhoDados1, "v1")) {
+
+            ImagemEditor imagemDoTextoDoClone1 = new ImagemEditor(CalebeImagem.criarImagem(caminhoDados1));
+            imagemDoTextoDoClone1.salvar("arquivos/editorDeImagem/clonadas/imagemDados-blocoComQuadrados.png");
             tudoOk = true;
         }
         boolean tudoOk2 = false;
 
-        BufferedImage imagemTexto3 = CalebeImagem.abrirPNG("arquivos/imagens/imagem.png");
-        String arquivo2 = "arquivos/imagens/imagem2.imagem";
-        if (CalebeImagem.validadorVersao(arquivo2, "v1")) {
-            ImagemEditor imagem3 = new ImagemEditor(imagemTexto3);
-            CalebeImagem.salvar(imagem3.getImagem(), arquivo2);
+        String caminhoGatinho = "arquivos/editorDeImagem/originais/gatinho.png";
 
-            BufferedImage imagemTexto2 = CalebeImagem.abrir(arquivo2);
+        ImagemEditor imagemGatinho = new ImagemEditor(CalebeImagem.criarImagemPNG(caminhoGatinho));
 
-            ImagemEditor imagem22 = new ImagemEditor(imagemTexto2);
-            imagem22.salvar("arquivos/imagens/imagem2v.png");
+        String caminhoDodosGatinho = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_gatinho.calebeImagem";
+        CalebeImagem.gerarDados(imagemGatinho.getImagem(), caminhoDodosGatinho);
+
+        if (CalebeImagem.validadorVersao(caminhoDodosGatinho, "v1")) {
+
+            ImagemEditor gatinhoClone = new ImagemEditor(CalebeImagem.criarImagem(caminhoDodosGatinho));
+
+            gatinhoClone.salvar("arquivos/editorDeImagem/clonadas/imagemDados-gatinho.png");
             tudoOk2 = true;
         }
 
