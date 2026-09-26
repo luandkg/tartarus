@@ -1,5 +1,6 @@
 package main.libs.estruturas;
 
+import main.app.ordenar.Comparador;
 import main.libs.utils.Condicional;
 import main.libs.utils.CondicionalParametrizado;
 import main.libs.utils.Igualdade;
@@ -390,4 +391,44 @@ public class Lista<T> implements Iterable<T> {
 
         return true;
     }
+
+    public boolean ordenar(Comparador<T> comparar){
+        if (this.getQuantidade() == 1){
+            return true;
+        }
+
+        for (int i = 0; i < this.getQuantidade(); i++){
+            for (int j = i+1; j < this.getQuantidade(); j++){
+                if (comparar.compare(this.get(i), this.get(j))){
+                    //System.out.println("-------------");
+                    //System.out.println("Trocando valor da posicao ["+ i +"] = "+ numeros.get(i) + " com o valor da posicao [" + j +"] = "+ numeros.get(j));
+                    T chave = this.get(i);
+                    this.set(i, this.get(j));
+                    this.set(j, chave);
+                    //numeros.exibirLista();
+                    //System.out.println("-------------");
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean estaOrdenada(Comparador<T> comparar){
+
+        if (this.getQuantidade() == 1){
+            return true;
+        }
+
+        for (int i = 0; i < this.getQuantidade(); i++){
+            for (int j = i+1; j < this.getQuantidade(); j++){
+                if (comparar.compare(this.get(i), this.get(j))){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
 }

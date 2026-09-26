@@ -1,5 +1,7 @@
 package main.libs.estruturas;
 
+import main.app.ordenar.Comparador;
+import main.app.ordenar.Pessoa;
 import main.libs.utils.CondicionalParametrizado;
 
 public class Inteiros {
@@ -84,6 +86,24 @@ public class Inteiros {
             @Override
             public boolean condicao(Integer a) {
                 return a<=getValor();
+            }
+        };
+    }
+
+    public static Comparador<Integer> compararMaior() {
+        return new Comparador<Integer>() {
+            @Override
+            public boolean compare(Integer n1, Integer n2) {
+                return n1 > n2;
+            }
+        };
+    }
+
+    public static Comparador<Integer> compararMenor() {
+        return new Comparador<Integer>() {
+            @Override
+            public boolean compare(Integer n1, Integer n2) {
+                return n1 < n2;
             }
         };
     }
