@@ -3,6 +3,7 @@ package main;
 import main.app.documento.AppDocumento;
 import main.app.editor.AppEditorImagem;
 import main.app.futebol.AppFutebol;
+import main.app.ordenar.AppOrdenar;
 import main.app.teste.AppTeste;
 
 import static main.Estrutura.criarEstrutura;
@@ -31,6 +32,10 @@ public class Main {
                 case "-editorDeImagem":
                     System.out.println("Carregando Editor de Imagem...");
                     AppEditorImagem.executar();
+                    break;
+                case "-ordenar":
+                    System.out.println("Carregando Ordenador de Listas...");
+                    AppOrdenar.executar();
                     break;
                 default:
                     System.out.println("Comando desconhecido: " + comando);

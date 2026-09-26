@@ -366,4 +366,28 @@ public class Lista<T> implements Iterable<T> {
             }
         }
     }
+
+    public boolean inverter(){
+        if (this.getQuantidade() == 1){
+            return true;
+        }
+
+        int j = this.getQuantidade()-1;
+
+        for (int i = 0; i < this.getQuantidade()/2; i++){
+            if(i==j || i>j){
+                break;
+            }
+            //System.out.println("-------------");
+            //System.out.println("Trocando valor da posicao ["+ i +"] = "+ numeros.get(i) + " com o valor da posicao [" + j +"] = "+ numeros.get(j));
+            T chave = this.get(i);
+            this.set(i, this.get(j));
+            this.set(j, chave);
+            //numeros.exibirLista();
+            j--;
+            //System.out.println("-------------");
+        }
+
+        return true;
+    }
 }
