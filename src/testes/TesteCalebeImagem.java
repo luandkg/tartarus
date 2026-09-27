@@ -18,7 +18,7 @@ public class TesteCalebeImagem {
     @TesteCalebe
     public static void Teste_Set_Cor(TestandoCalebe teste) {
         ImagemEditor nImagem = new ImagemEditor(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/pintar.png"));
-        CalebeImagem.gerarDadosV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/pintar.png"),"arquivosDeTestes/imagens/calebeImagem/dados1-pintar.calebeImagem");
+        CalebeImagem.salvarV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/pintar.png"),"arquivosDeTestes/imagens/calebeImagem/dados1-pintar.calebeImagem");
 
         for (int i = 0; i < nImagem.getLargura(); i++) {
             for (int j = 0; j < nImagem.getAltura(); j++) {
@@ -34,7 +34,7 @@ public class TesteCalebeImagem {
     @TesteCalebe
     public static void Teste_Pintar_Retangulo(TestandoCalebe teste) {
         ImagemEditor nImagem = new ImagemEditor(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/pintarRetangulo1.png"));
-        CalebeImagem.gerarDadosV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/pintarRetangulo1.png"),"arquivosDeTestes/imagens/calebeImagem/dados1-pintarRetangulo1.calebeImagem");
+        CalebeImagem.salvarV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/pintarRetangulo1.png"),"arquivosDeTestes/imagens/calebeImagem/dados1-pintarRetangulo1.calebeImagem");
 
         nImagem.pintarRetangulo(1,1,8,8, Color.RED.getRGB());
 
@@ -46,7 +46,7 @@ public class TesteCalebeImagem {
     @TesteCalebe
     public static void Teste_Desenhar_Retangulo(TestandoCalebe teste) {
         ImagemEditor nImagem = new ImagemEditor(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/desenharRetanguloColorido1.png"));
-        CalebeImagem.gerarDadosV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/desenharRetanguloColorido1.png"),"arquivosDeTestes/imagens/calebeImagem/dados1-desenharRetanguloColorido1.calebeImagem");
+        CalebeImagem.salvarV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/editorImagem/desenharRetanguloColorido1.png"),"arquivosDeTestes/imagens/calebeImagem/dados1-desenharRetanguloColorido1.calebeImagem");
 
         nImagem.desenharRetangulo(1,1,8,8, Color.RED.getRGB());
 
@@ -65,7 +65,7 @@ public class TesteCalebeImagem {
         nImagem.desenharRetangulo(1,1,8,8, cor.getValor());
 
         nImagem.salvar("arquivosDeTestes/imagens/calebeImagem/desenharRetanguloColorido2.png");
-        CalebeImagem.gerarDadosV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/calebeImagem/desenharRetanguloColorido2.png"),"arquivosDeTestes/imagens/calebeImagem/dados2-desenharRetanguloColorido2.calebeImagem");
+        CalebeImagem.salvarV1(Imagem.criarImagemPNG("arquivosDeTestes/imagens/calebeImagem/desenharRetanguloColorido2.png"),"arquivosDeTestes/imagens/calebeImagem/dados2-desenharRetanguloColorido2.calebeImagem");
 
         teste.deveSerVerdadeiro(verificaArquivo("arquivosDeTestes/imagens/calebeImagem/desenharRetanguloColorido2.png"),"Teste_Desenhar_Retangulo_Com_Cor -> Teste_1");
         teste.deveSerVerdadeiro(verificaArquivo("arquivosDeTestes/imagens/calebeImagem/dados2-desenharRetanguloColorido2.png"),"Teste_Desenhar_Retangulo_Com_Cor -> Teste_2");

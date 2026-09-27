@@ -8,7 +8,7 @@ import main.libs.estruturas.TextoDocumento;
 
 import java.awt.image.BufferedImage;
 
-public class CalebeImagemV3 {
+public class CalebeImagemV4 {
 
     public static void ler(Lista<String> linhas, ImagemEditor editor) {
         Lista<String> historico = new Lista<String>();
@@ -40,6 +40,18 @@ public class CalebeImagemV3 {
         }
     }
 
+    public static String toNumero(int componente){
+        String c = String.valueOf(componente);
+
+        if(c.length()==1){
+            c ="00"+c;
+        }else if(c.length()==2){
+            c ="0"+c;
+        }
+
+        return c;
+    }
+
     public static void salvar(BufferedImage imagem, String arquivo) {
         Lista<String> historico = new Lista<String>();
         int largura = imagem.getWidth();
@@ -47,13 +59,13 @@ public class CalebeImagemV3 {
         String linhaAnterior = "";
         TextoDocumento dados = new TextoDocumento();
 
-        dados.adicionarLinha("!Imagem " + CalebeImagem.V3 + " :: " + largura + "x" + altura + "\n");
+        dados.adicionarLinha("!Imagem " + CalebeImagem.V4 + " :: " + largura + "x" + altura + "\n");
 
         for (int y = 0; y < altura; y++) {
             String linha = "[";
             for (int x = 0; x < largura; x++) {
                 Cor cor = new Cor(imagem.getRGB(x, y));
-                String rgba = cor.getRed() + " " + cor.getGreen() + " " + cor.getBlue() + " " + cor.getAlpha();
+                String rgba = toNumero(cor.getRed()) + " " + toNumero(cor.getGreen()) + " " + toNumero(cor.getBlue()) + " " + toNumero(cor.getAlpha());
                 linha += " (" + rgba + ")";
             }
 

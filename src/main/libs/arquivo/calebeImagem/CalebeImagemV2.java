@@ -5,15 +5,13 @@ import main.app.editor.ImagemEditor;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
 import main.libs.estruturas.TextoDocumento;
-import main.libs.estruturas.fmt;
 
 import java.awt.image.BufferedImage;
 
 public class CalebeImagemV2 {
 
 
-
-    public static void lerImagemV2(Lista<String> linhas, ImagemEditor editor) {
+    public static void ler(Lista<String> linhas, ImagemEditor editor) {
         int y = 0;
         String linhaAnterior = "";
 
@@ -25,7 +23,7 @@ public class CalebeImagemV2 {
                 CalebeImagem.transformaLinha(y, linha, editor);
                 linhaAnterior = linha;
                 y++;
-            }else if (Texto.comecaCom(linha, "#")){
+            } else if (Texto.comecaCom(linha, "#")) {
                 //fmt.println("Cheguei na edição do #: ");
                 CalebeImagem.transformaLinha(y, linhaAnterior, editor);
                 y++;
@@ -35,13 +33,13 @@ public class CalebeImagemV2 {
         }
     }
 
-    public static void gerarDadosV2(BufferedImage imagem, String arquivo) {
+    public static void salvar(BufferedImage imagem, String arquivo) {
         int largura = imagem.getWidth();
         int altura = imagem.getHeight();
         String linhaAnterior = "";
         TextoDocumento dados = new TextoDocumento();
 
-        dados.adicionarLinha("!Imagem v2 :: " + largura + "x" + altura + "\n");
+        dados.adicionarLinha("!Imagem " + CalebeImagem.V2 + " :: " + largura + "x" + altura + "\n");
 
         for (int y = 0; y < altura; y++) {
             String linha = "[";

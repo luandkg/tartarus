@@ -10,126 +10,82 @@ import java.awt.image.BufferedImage;
 
 public class CalebeImagem {
 
-    public static BufferedImage criarImagem(String arquivo) {
-        String dados = Texto.ler(arquivo);
-        String versao = "";
+    public static final String V1 = "v1";
+    public static final String V2 = "v2";
+    public static final String V3 = "v3";
+    public static final String V4 = "v4";
 
-        Lista<String> linhas = Texto.dividirLinhas(dados);
+    public static BufferedImage ler(String caminho) {
+        ProcessandoImagem imagem = ProcessandoImagem.obterCabecalho(caminho);
 
-        ImagemEditor editor = new ImagemEditor(1, 1);
-        int Y = 0;
-        for (String linha : linhas) {
-            if (Texto.comecaCom(linha, "!")) {
-                Lista<String> imagem = Texto.dividirPorSimbolo(linha, ' ');
-                imagem.exibirLista();
-                versao = imagem.get(1);
-                Lista<String> tamanhos = Texto.dividirPorSimbolo(imagem.get(imagem.getQuantidade() - 1), 'x');
-                tamanhos.exibirLista();
-                editor = new ImagemEditor(Integer.parseInt(tamanhos.get(0)), Integer.parseInt(tamanhos.get(1)));
-                break;
-            }
+        if (Texto.igual(V1, imagem.versao())) {
+            CalebeImagemV1.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V2, imagem.versao())) {
+            CalebeImagemV2.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V3, imagem.versao())) {
+            CalebeImagemV3.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V4, imagem.versao())) {
+            CalebeImagemV4.ler(imagem.linhas(), imagem.editor());
+        } else {
+            throw new RuntimeException("Erro: Versao (" + imagem.versao() + ") nao encontrada!");
         }
-
-        if (Texto.igual("v1", versao)) {
-            CalebeImagemV1.lerImagemV1(linhas, editor);
-        } else if (Texto.igual("v2", versao)) {
-            CalebeImagemV2.lerImagemV2(linhas, editor);
-        } else if (Texto.igual("v3", versao)) {
-            CalebeImagemV3 v3 = new CalebeImagemV3();
-            v3.lerImagemV3(linhas, editor);
-        }
-
-
-        return editor.getImagem();
+        return imagem.editor().getImagem();
     }
 
-    public static BufferedImage criarImagemV1(String arquivo) {
-        String dados = Texto.ler(arquivo);
-        String versao = "";
+    public static BufferedImage lerImagemV1(String caminho) {
+        ProcessandoImagem imagem = ProcessandoImagem.obterCabecalho(caminho);
 
-        Lista<String> linhas = Texto.dividirLinhas(dados);
-
-        ImagemEditor editor = new ImagemEditor(1, 1);
-        int Y = 0;
-        for (String linha : linhas) {
-            if (Texto.comecaCom(linha, "!")) {
-                Lista<String> imagem = Texto.dividirPorSimbolo(linha, ' ');
-                imagem.exibirLista();
-                versao = imagem.get(1);
-                Lista<String> tamanhos = Texto.dividirPorSimbolo(imagem.get(imagem.getQuantidade() - 1), 'x');
-                tamanhos.exibirLista();
-                editor = new ImagemEditor(Integer.parseInt(tamanhos.get(0)), Integer.parseInt(tamanhos.get(1)));
-                break;
-            }
+        if (Texto.igual(V1, imagem.versao())) {
+            CalebeImagemV1.ler(imagem.linhas(), imagem.editor());
+        } else {
+            throw new RuntimeException("Erro: Versao (" + imagem.versao() + ") nao encontrada!");
         }
-
-        if (Texto.igual("v1", versao)) {
-            CalebeImagemV1.lerImagemV1(linhas, editor);
-        } else if (Texto.igual("v2", versao)) {
-            throw new RuntimeException("Erro: So e suportada versao v1!");
-        }
-
-
-        return editor.getImagem();
+        return imagem.editor().getImagem();
     }
 
-    public static BufferedImage criarImagemV2(String arquivo) {
-        String dados = Texto.ler(arquivo);
-        String versao = "";
+    public static BufferedImage lerImagemV2(String caminho) {
+        ProcessandoImagem imagem = ProcessandoImagem.obterCabecalho(caminho);
 
-        Lista<String> linhas = Texto.dividirLinhas(dados);
-
-        ImagemEditor editor = new ImagemEditor(1, 1);
-        int Y = 0;
-        for (String linha : linhas) {
-            if (Texto.comecaCom(linha, "!")) {
-                Lista<String> imagem = Texto.dividirPorSimbolo(linha, ' ');
-                imagem.exibirLista();
-                versao = imagem.get(1);
-                Lista<String> tamanhos = Texto.dividirPorSimbolo(imagem.get(imagem.getQuantidade() - 1), 'x');
-                tamanhos.exibirLista();
-                editor = new ImagemEditor(Integer.parseInt(tamanhos.get(0)), Integer.parseInt(tamanhos.get(1)));
-                break;
-            }
+        if (Texto.igual(V1, imagem.versao())) {
+            CalebeImagemV1.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V2, imagem.versao())) {
+            CalebeImagemV2.ler(imagem.linhas(), imagem.editor());
+        } else {
+            throw new RuntimeException("Erro: Versao (" + imagem.versao() + ") nao encontrada!");
         }
-
-        if (Texto.igual("v1", versao)) {
-            throw new RuntimeException("Erro: So e suportada versao v2!");
-        } else if (Texto.igual("v2", versao)) {
-            CalebeImagemV2.lerImagemV2(linhas, editor);
-        }
-        return editor.getImagem();
+        return imagem.editor().getImagem();
     }
 
-    public static BufferedImage criarImagemV3(String arquivo) {
-        String dados = Texto.ler(arquivo);
-        String versao = "";
+    public static BufferedImage lerImagemV3(String caminho) {
+        ProcessandoImagem imagem = ProcessandoImagem.obterCabecalho(caminho);
 
-        Lista<String> linhas = Texto.dividirLinhas(dados);
-
-        ImagemEditor editor = new ImagemEditor(1, 1);
-        int Y = 0;
-        for (String linha : linhas) {
-            if (Texto.comecaCom(linha, "!")) {
-                Lista<String> imagem = Texto.dividirPorSimbolo(linha, ' ');
-                imagem.exibirLista();
-                versao = imagem.get(1);
-                Lista<String> tamanhos = Texto.dividirPorSimbolo(imagem.get(imagem.getQuantidade() - 1), 'x');
-                tamanhos.exibirLista();
-                editor = new ImagemEditor(Integer.parseInt(tamanhos.get(0)), Integer.parseInt(tamanhos.get(1)));
-                break;
-            }
+        if (Texto.igual(V1, imagem.versao())) {
+            CalebeImagemV1.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V2, imagem.versao())) {
+            CalebeImagemV2.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V3, imagem.versao())) {
+            CalebeImagemV3.ler(imagem.linhas(), imagem.editor());
+        } else {
+            throw new RuntimeException("Erro: Versao (" + imagem.versao() + ") nao encontrada!");
         }
+        return imagem.editor().getImagem();
+    }
 
-        if (Texto.igual("v1", versao)) {
-            throw new RuntimeException("Erro: So e suportada versao v2!");
-        } else if (Texto.igual("v2", versao)) {
-            CalebeImagemV2.lerImagemV2(linhas, editor);
-        } else if (Texto.igual("v3", versao)) {
-            CalebeImagemV3 v3 = new CalebeImagemV3();
-            v3.lerImagemV3(linhas, editor);
+    public static BufferedImage lerImagemV4(String caminho) {
+        ProcessandoImagem imagem = ProcessandoImagem.obterCabecalho(caminho);
+
+        if (Texto.igual(V1, imagem.versao())) {
+            CalebeImagemV1.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V2, imagem.versao())) {
+            CalebeImagemV2.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V3, imagem.versao())) {
+            CalebeImagemV3.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V4, imagem.versao())) {
+            CalebeImagemV4.ler(imagem.linhas(), imagem.editor());
+        } else {
+            throw new RuntimeException("Erro: Versao (" + imagem.versao() + ") nao encontrada!");
         }
-        return editor.getImagem();
+        return imagem.editor().getImagem();
     }
 
     public static void transformaLinha(int Y, String linha, ImagemEditor editor) {
@@ -206,30 +162,35 @@ public class CalebeImagem {
         return true;
     }
 
-    public static void gerarDados(BufferedImage imagem, String arquivo) {
-        CalebeImagemV2.gerarDadosV2(imagem, arquivo);
+    public static void salvar(BufferedImage imagem, String arquivo) {
+        salvar(imagem, arquivo, Formato.V4);
     }
 
-    public static void gerarDados(BufferedImage imagem, String arquivo, Formato versao) {
-        switch (versao){
-            case V1 -> CalebeImagemV1.gerarDadosV1(imagem, arquivo);
-            case V2 -> CalebeImagemV2.gerarDadosV2(imagem, arquivo);
-            case V3 -> CalebeImagemV3.gerarDadosV3(imagem, arquivo);
+    public static void salvar(BufferedImage imagem, String arquivo, Formato versao) {
+        switch (versao) {
+            case V1 -> CalebeImagemV1.salvar(imagem, arquivo);
+            case V2 -> CalebeImagemV2.salvar(imagem, arquivo);
+            case V3 -> CalebeImagemV3.salvar(imagem, arquivo);
+            case V4 -> CalebeImagemV4.salvar(imagem, arquivo);
             default -> throw new RuntimeException("Erro: Formato desconhecido!");
         }
     }
 
-    public static void gerarDadosV1(BufferedImage imagem, String arquivo) {
-        CalebeImagemV1.gerarDadosV1(imagem, arquivo);
+    public static void salvarV1(BufferedImage imagem, String arquivo) {
+        CalebeImagemV1.salvar(imagem, arquivo);
 
     }
 
-    public static void gerarDadosV2(BufferedImage imagem, String arquivo) {
-        CalebeImagemV2.gerarDadosV2(imagem, arquivo);
+    public static void salvarV2(BufferedImage imagem, String arquivo) {
+        CalebeImagemV2.salvar(imagem, arquivo);
     }
 
-    public static void gerarDadosV3(BufferedImage imagem, String arquivo) {
-        CalebeImagemV3.gerarDadosV3(imagem, arquivo);
+    public static void salvarV3(BufferedImage imagem, String arquivo) {
+        CalebeImagemV3.salvar(imagem, arquivo);
+    }
+
+    public static void salvarV4(BufferedImage imagem, String arquivo) {
+        CalebeImagemV4.salvar(imagem, arquivo);
     }
 }
 
