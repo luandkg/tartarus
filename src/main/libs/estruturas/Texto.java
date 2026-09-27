@@ -187,6 +187,37 @@ public class Texto {
         return nTexto;
     }
 
+    public static String limpandoCaracteres(String texto){
+        Lista<Character> numeros = new Lista<Character>();
+        numeros.adicionar('0');
+        numeros.adicionar('1');
+        numeros.adicionar('2');
+        numeros.adicionar('3');
+        numeros.adicionar('4');
+        numeros.adicionar('5');
+        numeros.adicionar('6');
+        numeros.adicionar('7');
+        numeros.adicionar('8');
+        numeros.adicionar('9');
+
+        int i = 0;
+        int o = texto.length();
+        String nTexto = "";
+
+        while (i < o) {
+            char item = texto.charAt(i);
+
+            for (char numero : numeros){
+                if(item == numero){
+                    nTexto += item;
+                }
+            }
+            i++;
+        }
+
+        return nTexto;
+    }
+
     public static String removeString(String texto, String excluir){
         int i = 0;
         int o = texto.length();

@@ -34,6 +34,9 @@ public class CalebeImagem {
             CalebeImagemV1.lerImagemV1(linhas, editor);
         } else if (Texto.igual("v2", versao)) {
             CalebeImagemV2.lerImagemV2(linhas, editor);
+        } else if (Texto.igual("v3", versao)) {
+            CalebeImagemV3 v3 = new CalebeImagemV3();
+            v3.lerImagemV3(linhas, editor);
         }
 
 
@@ -95,11 +98,39 @@ public class CalebeImagem {
         } else if (Texto.igual("v2", versao)) {
             CalebeImagemV2.lerImagemV2(linhas, editor);
         }
-
-
         return editor.getImagem();
     }
 
+    public static BufferedImage criarImagemV3(String arquivo) {
+        String dados = Texto.ler(arquivo);
+        String versao = "";
+
+        Lista<String> linhas = Texto.dividirLinhas(dados);
+
+        ImagemEditor editor = new ImagemEditor(1, 1);
+        int Y = 0;
+        for (String linha : linhas) {
+            if (Texto.comecaCom(linha, "!")) {
+                Lista<String> imagem = Texto.dividirPorSimbolo(linha, ' ');
+                imagem.exibirLista();
+                versao = imagem.get(1);
+                Lista<String> tamanhos = Texto.dividirPorSimbolo(imagem.get(imagem.getQuantidade() - 1), 'x');
+                tamanhos.exibirLista();
+                editor = new ImagemEditor(Integer.parseInt(tamanhos.get(0)), Integer.parseInt(tamanhos.get(1)));
+                break;
+            }
+        }
+
+        if (Texto.igual("v1", versao)) {
+            throw new RuntimeException("Erro: So e suportada versao v2!");
+        } else if (Texto.igual("v2", versao)) {
+            CalebeImagemV2.lerImagemV2(linhas, editor);
+        } else if (Texto.igual("v3", versao)) {
+            CalebeImagemV3 v3 = new CalebeImagemV3();
+            v3.lerImagemV3(linhas, editor);
+        }
+        return editor.getImagem();
+    }
 
     public static void transformaLinha(int Y, String linha, ImagemEditor editor) {
         //fmt.println("ANTES = |" + linha + "|");
@@ -183,6 +214,7 @@ public class CalebeImagem {
         switch (versao){
             case V1 -> CalebeImagemV1.gerarDadosV1(imagem, arquivo);
             case V2 -> CalebeImagemV2.gerarDadosV2(imagem, arquivo);
+            case V3 -> CalebeImagemV3.gerarDadosV3(imagem, arquivo);
             default -> throw new RuntimeException("Erro: Formato desconhecido!");
         }
     }
@@ -194,6 +226,10 @@ public class CalebeImagem {
 
     public static void gerarDadosV2(BufferedImage imagem, String arquivo) {
         CalebeImagemV2.gerarDadosV2(imagem, arquivo);
+    }
+
+    public static void gerarDadosV3(BufferedImage imagem, String arquivo) {
+        CalebeImagemV3.gerarDadosV3(imagem, arquivo);
     }
 }
 

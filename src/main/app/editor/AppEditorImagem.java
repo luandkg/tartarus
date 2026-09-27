@@ -8,85 +8,166 @@ import main.libs.estruturas.fmt;
 public class AppEditorImagem {
 
     public static void executar() {
+        //testandoV1();
+        //testandoV2();
+        testandoV3();
+    }
 
-        fmt.println("------------------------------------------------- EDITOR DE IMAGEM -------------------------------------------------");
-        ImagemEditor imagem1 = new ImagemEditor(34, 34);
-        imagem1.salvar("arquivos/editorDeImagem/criadas/tipoPNG/blocoPreto.png");
+    public static ImagemEditor criaImagem(){
+        ImagemEditor imagem = new ImagemEditor(100, 100);
+        imagem.salvar("arquivos/editorDeImagem/criadas/tipoPNG/blocoPreto.png");
 
-        ImagemEditor clone1 = imagem1;
         Cor cor = new Cor(-12488223);
-        clone1.desenharRetangulo(1, 1, 10, 10, cor.getValor());
-        clone1.desenharRetangulo(23, 1, 32, 10, cor.getValor());
-        clone1.desenharRetangulo(12, 12, 21, 22, cor.getValor());
-        clone1.salvar("arquivos/editorDeImagem/clonadas/blocoPretoComQuadrados.png");
+
+        imagem.desenharRetangulo(0, 0, 99, 99, new Cor(255,255,255,255).getValor());
+
+        imagem.desenharRetangulo(5, 5, 15, 15, cor.getValor());
+        imagem.desenharRetangulo(23, 5, 32, 15, cor.getValor());
+        imagem.desenharRetangulo(12, 20, 21, 30, cor.getValor());
+
+        imagem.desenharRetangulo(5, 35, 15, 45, cor.getValor());
+        imagem.desenharRetangulo(23, 35, 32, 45, cor.getValor());
+
+        imagem.pintarRetangulo(30, 20, 5, 10, new Cor(0,255,255,0).getValor());
+        imagem.pintarRetangulo(40, 20, 5, 10, new Cor(0,255,0,0).getValor());
+
+        imagem.pintarRetangulo(10, 70, 10, 10, new Cor(0,255,255,0).getValor());
+        imagem.pintarRetangulo(30, 70, 10, 10, new Cor(0,100,200,50).getValor());
+        imagem.pintarRetangulo(50, 70, 10, 10, new Cor(0,150,200,150).getValor());
+        imagem.pintarRetangulo(70, 70, 10, 10, new Cor(0,200,150,0).getValor());
+
+        imagem.pintarRetangulo(10, 85, 10, 10, new Cor(0,0,255,0).getValor());
+        imagem.pintarRetangulo(30, 85, 10, 10, new Cor(0,100,50,20).getValor());
+        imagem.pintarRetangulo(50, 85, 10, 10, new Cor(0,150,190,0).getValor());
+        imagem.pintarRetangulo(70, 85, 10, 10, new Cor(0,255,0,0).getValor());
+
+        imagem.pintarRetangulo(0, 55, 100, 2, new Cor(0,0,0,255).getValor());
+
+        imagem.pintarRetangulo(0, 60, 100, 2, new Cor(0,255,0,0).getValor());
+
+        imagem.pintarRetangulo(50, 65, 50, 2, new Cor(0,100,50,200).getValor());
+        imagem.pintarRetangulo(0, 65, 50, 2, new Cor(0,0,0,200).getValor());
+
+        imagem.salvar("arquivos/editorDeImagem/clonadas/blocoPretoComQuadrados.png");
+
+        return imagem;
+    }
+    public static void testandoV1(){
+        fmt.println("------------------------------------------------- EDITOR DE IMAGEM -------------------------------------------------");
+        boolean parte_a_status = false;
+        boolean parte_b_status = false;
 
         String caminhoDados1 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_blocoPretoComQuadrados-V1.calebeImagem";
-        String caminhoDados2 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_blocoPretoComQuadrados-V2.calebeImagem";
         fmt.println(">> Salvando imagem :: " + caminhoDados1);
-        fmt.println(">> Salvando imagem :: " + caminhoDados2);
 
-        CalebeImagem.gerarDadosV1(clone1.getImagem(), caminhoDados1);
-        CalebeImagem.gerarDadosV2(clone1.getImagem(), caminhoDados2);
+        CalebeImagem.gerarDadosV1(criaImagem().getImagem(), caminhoDados1);
 
-        boolean parte_a_status = false;
-        if (CalebeImagem.validarVersao(caminhoDados1, "v1")) {
-
-            ImagemEditor imagemDoTextoDoClone1 = new ImagemEditor(CalebeImagem.criarImagemV1(caminhoDados1));
-            imagemDoTextoDoClone1.salvar("arquivos/editorDeImagem/clonadas/imagemDados-blocoComQuadrados-v1.png");
-            parte_a_status = true;
+        if (validaVersao(caminhoDados1, "v1", "arquivos/editorDeImagem/clonadas/imagemDados-blocoComQuadrados-v1.png")){
+            parte_b_status = true;
         }
-        if (CalebeImagem.validarVersao(caminhoDados2, "v2")) {
-
-            ImagemEditor imagemDoTextoDoClone2 = new ImagemEditor(CalebeImagem.criarImagemV2(caminhoDados2));
-            imagemDoTextoDoClone2.salvar("arquivos/editorDeImagem/clonadas/imagemDados-blocoComQuadrados-v2.png");
-            parte_a_status = true;
-        }
-
-
-        boolean parte_b_status = false;
 
         String caminhoGatinho = "arquivos/editorDeImagem/originais/gatinho.png";
 
         ImagemEditor imagemGatinho = new ImagemEditor(Imagem.criarImagemPNG(caminhoGatinho));
 
         String caminhoDodosGatinho1 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_gatinho-v1.calebeImagem";
-        String caminhoDodosGatinho2 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_gatinho-v2.calebeImagem";
 
         CalebeImagem.gerarDadosV1(imagemGatinho.getImagem(), caminhoDodosGatinho1);
-        CalebeImagem.gerarDadosV2(imagemGatinho.getImagem(), caminhoDodosGatinho2);
 
         fmt.println(">> Salvando imagem :: "+caminhoDodosGatinho1);
-        fmt.println(">> Salvando imagem :: "+caminhoDodosGatinho2);
 
-        compararVersoes(caminhoDodosGatinho1, caminhoDodosGatinho2);
-
-        if (CalebeImagem.validarVersao(caminhoDodosGatinho1, "v1")) {
-
-            ImagemEditor gatinhoClone1 = new ImagemEditor(CalebeImagem.criarImagem(caminhoDodosGatinho1));
-
-            gatinhoClone1.salvar("arquivos/editorDeImagem/clonadas/imagemDados-gatinho-v1.png");
+        if (validaVersao(caminhoDodosGatinho1, "v1", "arquivos/editorDeImagem/clonadas/imagemDados-gatinho-v1.png")){
             parte_b_status = true;
         }
-        if (CalebeImagem.validarVersao(caminhoDodosGatinho2, "v2")) {
-
-            ImagemEditor gatinhoClone2 = new ImagemEditor(CalebeImagem.criarImagem(caminhoDodosGatinho2));
-
-            gatinhoClone2.salvar("arquivos/editorDeImagem/clonadas/imagemDados-gatinho-v2.png");
-            parte_b_status = true;
-        }
-
 
 
         fmt.println("");
         if (parte_a_status && parte_b_status) {
             fmt.println("Imagens TUDO OK !");
         }
-
-
         fmt.println("-------------------------------------------------------------------------------------------------------------------");
-
     }
 
+    public static void testandoV2(){
+        fmt.println("------------------------------------------------- EDITOR DE IMAGEM -------------------------------------------------");
+        boolean parte_a_status = false;
+        boolean parte_b_status = false;
+
+        String caminhoDados2 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_blocoPretoComQuadrados-V2.calebeImagem";
+        fmt.println(">> Salvando imagem :: " + caminhoDados2);
+
+        CalebeImagem.gerarDadosV2(criaImagem().getImagem(), caminhoDados2);
+
+        if (validaVersao(caminhoDados2, "v2", "arquivos/editorDeImagem/clonadas/imagemDados-blocoComQuadrados-v2.png")){
+            parte_a_status = true;
+        }
+
+        String caminhoGatinho = "arquivos/editorDeImagem/originais/gatinho.png";
+
+        ImagemEditor imagemGatinho = new ImagemEditor(Imagem.criarImagemPNG(caminhoGatinho));
+
+        String caminhoDodosGatinho2 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_gatinho-v2.calebeImagem";
+
+        CalebeImagem.gerarDadosV2(imagemGatinho.getImagem(), caminhoDodosGatinho2);
+
+        fmt.println(">> Salvando imagem :: "+caminhoDodosGatinho2);
+
+        if (validaVersao(caminhoDodosGatinho2, "v2", "arquivos/editorDeImagem/clonadas/imagemDados-gatinho-v2.png")){
+            parte_b_status = true;
+        }
+
+        fmt.println("");
+        if (parte_a_status && parte_b_status) {
+            fmt.println("Imagens TUDO OK !");
+        }
+        fmt.println("-------------------------------------------------------------------------------------------------------------------");
+    }
+
+    public static void testandoV3(){
+        fmt.println("------------------------------------------------- EDITOR DE IMAGEM -------------------------------------------------");
+        boolean parte_a_status = false;
+        boolean parte_b_status = false;
+
+        String caminhoDados3 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_blocoPretoComQuadrados-V3.calebeImagem";
+        fmt.println(">> Salvando imagem :: " + caminhoDados3);
+
+        CalebeImagem.gerarDadosV3(criaImagem().getImagem(), caminhoDados3);
+
+        if (validaVersao(caminhoDados3, "v3", "arquivos/editorDeImagem/clonadas/imagemDados-blocoComQuadrados-v3.png")){
+            parte_a_status = true;
+        }
+
+
+        String caminhoGatinho = "arquivos/editorDeImagem/originais/gatinho.png";
+
+        ImagemEditor imagemGatinho = new ImagemEditor(Imagem.criarImagemPNG(caminhoGatinho));
+
+        String caminhoDodosGatinho3 = "arquivos/editorDeImagem/criadas/tipoCalebeImagem/dados_gatinho-v3.calebeImagem";
+
+        CalebeImagem.gerarDadosV3(imagemGatinho.getImagem(), caminhoDodosGatinho3);
+
+        fmt.println(">> Salvando imagem :: "+caminhoDodosGatinho3);
+
+        if (validaVersao(caminhoDodosGatinho3, "v3", "arquivos/editorDeImagem/clonadas/imagemDados-gatinho-v3.png")){
+            parte_b_status = true;
+        }
+
+        fmt.println("");
+        if (parte_a_status && parte_b_status) {
+            fmt.println("Imagens TUDO OK !");
+        }
+        fmt.println("-------------------------------------------------------------------------------------------------------------------");
+    }
+
+    public static boolean validaVersao(String caminhoDados, String versao, String arquivo){
+        if (CalebeImagem.validarVersao(caminhoDados, versao)) {
+
+            ImagemEditor imagemDoTextoDoClone = new ImagemEditor(CalebeImagem.criarImagem(caminhoDados));
+            imagemDoTextoDoClone.salvar(arquivo);
+            return true;
+        }
+        return false;
+    }
 
     public static void testandoComparador() {
 
