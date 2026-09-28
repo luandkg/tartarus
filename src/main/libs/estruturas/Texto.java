@@ -187,6 +187,26 @@ public class Texto {
         return nTexto;
     }
 
+    public static String alteraLetra(String texto, char antiga, String nova){
+        int i = 0;
+        int o = texto.length();
+        String nTexto = "";
+
+        while (i < o) {
+            char letra = texto.charAt(i);
+
+            if (letra != antiga){
+                nTexto +=letra;
+            }else if (letra == antiga){
+                nTexto+=nova;
+            }
+
+            i++;
+        }
+
+        return nTexto;
+    }
+
     public static String limpandoCaracteres(String texto){
         Lista<Character> numeros = new Lista<Character>();
         numeros.adicionar('0');
@@ -240,6 +260,31 @@ public class Texto {
             }
         }
 
+        return nTexto;
+    }
+
+    public static String obterEntre(String texto, String p1, String p2){
+        int i = 0;
+        int o = texto.length();
+        String nTexto = "";
+        boolean valendo = false;
+
+        while (i < o) {
+            char letra = texto.charAt(i);
+            String ex = "";
+
+            if(igual(String.valueOf(letra), p1)){
+                valendo = true;
+            }else {
+                if(valendo){
+                    if (igual(String.valueOf(letra), p2)){
+                        return nTexto;
+                    }
+                    nTexto+=letra;
+                }
+            }
+            i++;
+        }
         return nTexto;
     }
 

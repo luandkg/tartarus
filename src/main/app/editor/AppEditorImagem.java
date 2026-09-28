@@ -53,13 +53,14 @@ public class AppEditorImagem {
     public static void executar() {
 
         limpar(getPastas());
-        testandoV1();
-        testandoV2();
-        testandoV3();
-        testandoV4();
+        //testandoV1();
+        //testandoV2();
+        //testandoV3();
+        //testandoV4();
+        testandoV5();
     }
 
-    public static ImagemEditor criaImagem() {
+    public static ImagemEditor criaImagemGrande() {
         ImagemEditor imagem = new ImagemEditor(100, 100);
         imagem.salvar("arquivos/editorDeImagem/criadas/tipoPNG/imagemCriada.png");
 
@@ -99,6 +100,22 @@ public class AppEditorImagem {
         return imagem;
     }
 
+
+    public static ImagemEditor criaImagemPequena() {
+        ImagemEditor imagem = new ImagemEditor(5, 5);
+        imagem.salvar("arquivos/editorDeImagem/criadas/tipoPNG/imagemCriada.png");
+
+        Cor cor = new Cor(0, 0, 0, 255);
+
+        imagem.desenharRetangulo(0, 0, 4, 4, new Cor(255, 255, 255, 255).getValor());
+
+
+
+        imagem.salvar("arquivos/editorDeImagem/clonadas/imagemCriadaEditada.png");
+
+        return imagem;
+    }
+
     public static String caminhoOriginais(String nome) {
         return "arquivos/editorDeImagem/originais/" + nome + ".png";
     }
@@ -112,7 +129,7 @@ public class AppEditorImagem {
     }
 
     public static void gerarDadosApartirDeImagemExemplo(String caminhoDados, Formato versao) {
-        BufferedImage imagem = criaImagem().getImagem();
+        BufferedImage imagem = criaImagemGrande().getImagem();
         fmt.println(">> Gerando dados :: " + caminhoDados);
 
         CalebeImagem.salvar(imagem, caminhoDados, versao);
@@ -208,6 +225,22 @@ public class AppEditorImagem {
             fmt.println("Imagens TUDO OK !");
         }
         fmt.println("------------------------------------------------- Concluido V4 -------------------------------------------------");
+
+    }
+
+    public static void testandoV5() {
+        fmt.println("------------------------------------------------- Testando V5 -------------------------------------------------");
+
+        boolean statusV1 = publicarVersao(V1);
+        boolean statusV2 = publicarVersao(V2);
+        boolean statusV3 = publicarVersao(Formato.V3);
+        boolean statusV4 = publicarVersao(Formato.V4);
+        boolean statusV5 = publicarVersao(Formato.V5);
+
+        if (statusV1 && statusV2 && statusV3 && statusV4 && statusV5) {
+            fmt.println("Imagens TUDO OK !");
+        }
+        fmt.println("------------------------------------------------- Concluido V5 -------------------------------------------------");
 
     }
 

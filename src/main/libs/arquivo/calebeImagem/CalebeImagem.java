@@ -2,6 +2,7 @@ package main.libs.arquivo.calebeImagem;
 
 import main.app.editor.Cor;
 import main.app.editor.ImagemEditor;
+import main.libs.arquivo.calebeImagem.utils.ProcessandoImagem;
 import main.libs.estruturas.Lista;
 import main.libs.estruturas.Texto;
 import main.libs.estruturas.fmt;
@@ -14,6 +15,7 @@ public class CalebeImagem {
     public static final String V2 = "v2";
     public static final String V3 = "v3";
     public static final String V4 = "v4";
+    public static final String V5 = "v5";
 
     public static BufferedImage ler(String caminho) {
         ProcessandoImagem imagem = ProcessandoImagem.obterCabecalho(caminho);
@@ -26,6 +28,8 @@ public class CalebeImagem {
             CalebeImagemV3.ler(imagem.linhas(), imagem.editor());
         } else if (Texto.igual(V4, imagem.versao())) {
             CalebeImagemV4.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V5, imagem.versao())) {
+            CalebeImagemV5.ler(imagem.linhas(), imagem.editor());
         } else {
             throw new RuntimeException("Erro: Versao (" + imagem.versao() + ") nao encontrada!");
         }
@@ -88,60 +92,24 @@ public class CalebeImagem {
         return imagem.editor().getImagem();
     }
 
-    public static void transformaLinha(int Y, String linha, ImagemEditor editor) {
-        //fmt.println("ANTES = |" + linha + "|");
-        linha = Texto.removeString(linha, "[ ");
-        linha = Texto.removeString(linha, " ]");
-        linha = Texto.removeString(linha, ") ");
-        linha = Texto.removeLetra(linha, ')');
+    public static BufferedImage lerImagemV5(String caminho) {
+        ProcessandoImagem imagem = ProcessandoImagem.obterCabecalho(caminho);
 
-        //fmt.println("DEPOIS = |" + linha + "|>");
-
-        Lista<String> sCores = Texto.dividirPorSimbolo(linha, '(');
-
-        int X = 0;
-
-        for (String sCor : sCores) {
-            if (sCor.length() > 0) {
-                Lista<String> rgba = Texto.dividirPorSimbolo(sCor, ' ');
-
-                // rgba.removerValor(" ", new StringIgualdade());
-                String ccc = "";
-                for (int i = 0; i < rgba.getQuantidade(); i++) {
-                    ccc += i + ":" + rgba.get(i) + " ";
-                }
-                //fmt.println("|" + ccc + "|" + sCor.length());
-
-                boolean tudoOk = true;
-                if (rgba.getQuantidade() == 4) {
-                    for (int i = 0; i < 4; i++) {
-                        if (rgba.get(i).length() == 0 || rgba.get(i) == null) {
-                            tudoOk = false;
-                        }
-                    }
-                    if (!tudoOk) {
-                        break;
-                    }
-
-                    int r = Integer.parseInt(rgba.get(0));
-                    int g = Integer.parseInt(rgba.get(1));
-                    int b = Integer.parseInt(rgba.get(2));
-                    int a = Integer.parseInt(rgba.get(3));
-
-                    Cor cor = new Cor(a, r, g, b);
-                    if (X >= editor.getLargura() || Y >= editor.getAltura()) {
-                        break;
-                    }
-                    //fmt.println("x:{} y:{} | r:{} g:{} b:{} a:{}", X, Y, r, g, b, a);
-                    editor.setPixelCor(X, Y, cor);
-                }
-                X++;
-            }
+        if (Texto.igual(V1, imagem.versao())) {
+            CalebeImagemV1.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V2, imagem.versao())) {
+            CalebeImagemV2.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V3, imagem.versao())) {
+            CalebeImagemV3.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V4, imagem.versao())) {
+            CalebeImagemV4.ler(imagem.linhas(), imagem.editor());
+        } else if (Texto.igual(V5, imagem.versao())) {
+            CalebeImagemV5.ler(imagem.linhas(), imagem.editor());
+        } else {
+            throw new RuntimeException("Erro: Versao (" + imagem.versao() + ") nao encontrada!");
         }
-        //Y++;
-        //fmt.println("Transformei a linha: " + Y);
+        return imagem.editor().getImagem();
     }
-
 
     public static boolean validarVersao(String arquivo, String versao) {
         if (!Texto.existeString(arquivo, ".calebeImagem")) {
@@ -163,7 +131,7 @@ public class CalebeImagem {
     }
 
     public static void salvar(BufferedImage imagem, String arquivo) {
-        salvar(imagem, arquivo, Formato.V4);
+        salvar(imagem, arquivo, Formato.V5);
     }
 
     public static void salvar(BufferedImage imagem, String arquivo, Formato versao) {
@@ -172,6 +140,7 @@ public class CalebeImagem {
             case V2 -> CalebeImagemV2.salvar(imagem, arquivo);
             case V3 -> CalebeImagemV3.salvar(imagem, arquivo);
             case V4 -> CalebeImagemV4.salvar(imagem, arquivo);
+            case V5 -> CalebeImagemV5.salvar(imagem, arquivo);
             default -> throw new RuntimeException("Erro: Formato desconhecido!");
         }
     }
@@ -192,5 +161,10 @@ public class CalebeImagem {
     public static void salvarV4(BufferedImage imagem, String arquivo) {
         CalebeImagemV4.salvar(imagem, arquivo);
     }
+
+    public static void salvarV5(BufferedImage imagem, String arquivo) {
+        CalebeImagemV5.salvar(imagem, arquivo);
+    }
+
 }
 

@@ -1,4 +1,4 @@
-package main.libs.arquivo.calebeImagem;
+package main.libs.arquivo.calebeImagem.utils;
 
 import main.app.editor.ImagemEditor;
 import main.libs.estruturas.Lista;

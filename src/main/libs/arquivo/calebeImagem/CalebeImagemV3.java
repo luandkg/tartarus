@@ -20,7 +20,7 @@ public class CalebeImagemV3 {
             //fmt.println("Lendo linha: " + y);
             if (Texto.comecaCom(linha, "[")) {
                 historico.inserirAntes(0, linha);
-                CalebeImagem.transformaLinha(y, linha, editor);
+                transformaLinhaV2(y, linha, editor);
                 y++;
             } else if (Texto.comecaCom(linha, "#")) {
                 //fmt.println("Cheguei na edição do #: ");
@@ -32,7 +32,7 @@ public class CalebeImagemV3 {
                 String linhaHistorico = historico.get(Integer.parseInt(nLinha) - 1);
                 //fmt.println("linhaHistorico: " + linhaHistorico);
 
-                CalebeImagem.transformaLinha(y, linhaHistorico, editor);
+                transformaLinhaV2(y, linhaHistorico, editor);
                 y++;
             }
 
@@ -83,5 +83,64 @@ public class CalebeImagemV3 {
         }
 
         Texto.escrever(arquivo, dados.toString());
+    }
+
+    private static Lista<String> listaDeCoresV2(String linha){
+        //fmt.println("ANTES = |" + linha + "|");
+        linha = Texto.removeString(linha, "[ ");
+        linha = Texto.removeString(linha, " ]");
+        linha = Texto.removeString(linha, ") ");
+        linha = Texto.removeLetra(linha, ')');
+
+        //fmt.println("DEPOIS = |" + linha + "|>");
+
+        Lista<String> sCores = Texto.dividirPorSimbolo(linha, '(');
+
+        return sCores;
+    }
+
+    private static void transformaLinhaV2(int Y, String linha, ImagemEditor editor) {
+
+        int X = 0;
+
+        for (String sCor : listaDeCoresV2(linha)) {
+            if (sCor.length() > 0) {
+                Lista<String> rgba = Texto.dividirPorSimbolo(sCor, ' ');
+
+                // rgba.removerValor(" ", new StringIgualdade());
+                String ccc = "";
+                for (int i = 0; i < rgba.getQuantidade(); i++) {
+                    ccc += i + ":" + rgba.get(i) + " ";
+                }
+                //fmt.println("|" + ccc + "|" + sCor.length());
+
+                boolean tudoOk = true;
+                if (rgba.getQuantidade() == 4) {
+                    for (int i = 0; i < 4; i++) {
+                        if (rgba.get(i).length() == 0 || rgba.get(i) == null) {
+                            tudoOk = false;
+                        }
+                    }
+                    if (!tudoOk) {
+                        break;
+                    }
+
+                    int r = Integer.parseInt(rgba.get(0));
+                    int g = Integer.parseInt(rgba.get(1));
+                    int b = Integer.parseInt(rgba.get(2));
+                    int a = Integer.parseInt(rgba.get(3));
+
+                    Cor cor = new Cor(a, r, g, b);
+                    if (X >= editor.getLargura() || Y >= editor.getAltura()) {
+                        break;
+                    }
+                    //fmt.println("x:{} y:{} | r:{} g:{} b:{} a:{}", X, Y, r, g, b, a);
+                    editor.setPixelCor(X, Y, cor);
+                }
+                X++;
+            }
+        }
+        //Y++;
+        //fmt.println("Transformei a linha: " + Y);
     }
 }
